@@ -1,56 +1,83 @@
 "use client";
 
-import React, { useState } from "react";
-import { useParams,useRouter } from "next/navigation";
-
-const steps = [
-  {
-    question: "Kaç odalı ev eşyası taşınacak?",
-    options: ["1+1", "2+1", "3+1", "4+1", "5+1", "Daha fazla", "Sadece birkaç eşya"],
-  },
-  {
-    question: "Taşınma tarihi ne zaman?",
-    options: ["Bu hafta", "1-2 hafta içinde", "1 ay içinde", "Belirsiz"],
-  },
-  {
-    question: "Taşınacak şehir nedir?",
-    options: ["İstanbul", "Ankara", "İzmir", "Diğer"],
-  },
-];
+import React, { useState, useEffect } from "react";
+import { useParams, useRouter } from "next/navigation";
+import axios from "axios";
 
 export default function Page() {
   const params = useParams();
   const { id } = params;
-const router=useRouter();
+  const router = useRouter();
+
   const [currentStep, setCurrentStep] = useState(0);
-  const [answers, setAnswers] = useState({});
+  const [answers, setAnswers] = useState([]);
   const [showExitModal, setShowExitModal] = useState(false);
+  const [steps, setSteps] = useState(null); 
+  const [item, setItem] = useState(""); 
+  useEffect(() => {
+    if (id) {
+      axios
+        .get(`http://localhost:5233/tadilat/${id}`)
+        .then((res) => {
+          const data = res.data[0]; 
+          setSteps(data.adimlar); 
+          setItem(data); 
+        })
+        .catch((err) => console.error("Veri çekilemedi:", err));
+    }
+  }, [id]);
+
+  if (!steps) return <p className="text-center font-bold">Yükleniyor...</p>;
+
+  const progressPercent = ((currentStep + 1) / steps.length) * 100;
 
   const handleNext = () => {
     if (currentStep < steps.length - 1) {
       setCurrentStep((prev) => prev + 1);
     } else {
-        localStorage.setItem("item", JSON.stringify(answers));
-        router.push("/ana-sayfa");
+      localStorage.setItem("item", JSON.stringify(answers));
+      router.push("/ana-sayfa");
     }
   };
 
   const handleBack = () => {
-    if (currentStep > 0) {
-      setCurrentStep((prev) => prev - 1);
-    }
+    if (currentStep > 0) setCurrentStep((prev) => prev - 1);
   };
+  const PostData = async (item) => {
+    try {
+      await axios.post("http://localhost:5233/aktifTadilat", item);
+    } catch (err) {
+      console.error("Post işlemi başarısız:", err);
+    }
+  }; 
 
   const handleAnswer = (option) => {
-    setAnswers({ ...answers, [currentStep]: option });
+
+   const anaBaslik=item.kategori.isim
+    setAnswers((prev) => {
+      const updated = [...prev];
+      updated[currentStep] = {
+        anaBaslik:anaBaslik,
+        kategoriIsim: steps[currentStep].baslik,
+        secenekler: steps[currentStep].secenekler,
+        secilen: option
+   
+      };
+  
+
+      localStorage.setItem("item", JSON.stringify(updated));
+      PostData(updated)
+      return updated;
+    });
   };
-
-
-  const progressPercent = ((currentStep + 1) / steps.length) * 100;
+  
 
   return (
     <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded shadow">
-      <h2 className="text-xl font-semibold text-center mb-4">Evden Eve Nakliyat (ID: {id})</h2>
+      <h2 className="text-xl font-semibold text-center mb-4">
+        {item.kategori.isim}
+      </h2>
+
 
 
       <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
@@ -61,21 +88,29 @@ const router=useRouter();
       </div>
 
 
-      <h3 className="text-lg font-medium mb-2">{steps[currentStep].question}</h3>
+      <h3 className="text-lg font-medium mb-2">
+        {steps[currentStep].baslik}
+      </h3>
+
+
       <div className="space-y-2">
-        {steps[currentStep].options.map((option) => (
-          <label key={option} className="flex items-center space-x-2 cursor-pointer">
-            <input
-              type="radio"
-              name={`step-${currentStep}`}
-              className="form-radio text-green-600"
-              checked={answers[currentStep] === option}
-              onChange={() => handleAnswer(option)}
-            />
-            <span>{option}</span>
-          </label>
-        ))}
-      </div>
+  {steps[currentStep].secenekler.map((option) => (
+    <label
+      key={option}
+      className="flex items-center space-x-2 cursor-pointer"
+    >
+      <input
+        type="radio"
+        name={`step-${currentStep}`}
+        className="form-radio text-green-600"
+        checked={answers[currentStep]?.secilen === option}
+        onChange={() => handleAnswer(option)}
+      />
+      <span>{option}</span>
+    </label>
+  ))}
+</div>
+
 
 
       <div className="mt-6 flex justify-between">
@@ -123,7 +158,7 @@ const router=useRouter();
               <button
                 onClick={() => {
                   setShowExitModal(false);
-                  router.push("/ana-sayfa")
+                  router.push("/ana-sayfa");
                 }}
                 className="w-full bg-amber-600 text-white py-2 rounded hover:bg-amber-700"
               >

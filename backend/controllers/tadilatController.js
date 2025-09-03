@@ -1,41 +1,51 @@
-
+import mongoose from "mongoose";
 import Tadilat from "../models/TadilatModel.js";
-
+import Kategori from "../models/Kategori.js";
 //! Post 
-export const CreateTadilat = async (req, res) => {
-    try {
-      const { kategori, islem1, islem2, islem3, tarih, bitirmeTarihi } = req.body;
+
+export const createTadilat = async (req, res) => {
+  try {
+    const { kategori, adimlar,  bitirmeTarihi } = req.body;
+
   
-      if (!kategori || !islem1 || !islem2 || !islem3 || !bitirmeTarihi) {
-        return res.status(400).json({ message: "Tüm alanlar zorunludur!" });
-      }
-  
-      // Otomatik durum belirleme
-      const bugun = new Date();
-      const bitirme = new Date(bitirmeTarihi);
-      let durum = "aktif";
-      if (bitirme < bugun.setHours(0,0,0,0)) {
-        durum = "pasif";
-      }
-  
-      const yeniTadilat = new Tadilat({
-        kategori,
-        islem1,
-        islem2,
-        islem3,
-        tarih: tarih || new Date(),
-        bitirmeTarihi,
-        durum
-      });
-  
-      const kayit = await yeniTadilat.save();
-      res.status(201).json(kayit);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Tadilat eklenirken bir hata oluştu." });
+    const kategoriDoc = await Kategori.findById(kategori);
+    if (!kategoriDoc) {
+      return res.status(404).json({ message: "Kategori bulunamadı!" });
     }
-  };
+
+    let durum = "aktif";
+    if (bitirmeTarihi && new Date(bitirmeTarihi) < new Date()) {
+      durum = "pasif";
+    }
+
   
+    const yeniTadilat = new Tadilat({
+      kategori,
+      adimlar,
+
+      bitirmeTarihi,
+      durum
+    });
+
+    const kayit = await yeniTadilat.save();
+
+    
+    res.status(201).json({
+      _id: kayit._id,
+      kategori: kategoriDoc.isim,
+      adimlar: kayit.adimlar,
+    
+      bitirmeTarihi: kayit.bitirmeTarihi,
+      durum: kayit.durum
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Tadilat eklenirken hata oluştu." });
+  }
+};
+
+
   // !LİST APİSİ
   export const listTadilat = async (req, res) => {
     try {
@@ -50,18 +60,22 @@ export const CreateTadilat = async (req, res) => {
 //! GET APİSİ
   export const getTadilatById = async (req, res) => {
     try {
-      const { id } = req.params;
+      const { kategoriId } = req.params;
   
-      const tadilat = await Tadilat.findById(id).populate("kategori");
-  
-      if (!tadilat) {
-        return res.status(404).json({ message: "Tadilat bulunamadı." });
+      if (!mongoose.Types.ObjectId.isValid(kategoriId)) {
+        return res.status(400).json({ message: "Geçersiz kategoriId" });
       }
   
-      res.status(200).json(tadilat);
+      const tadilatlar = await Tadilat.find({ kategori: kategoriId }).populate("kategori");
+  
+      if (!tadilatlar || tadilatlar.length === 0) {
+        return res.status(404).json({ message: "Bu kategoriye ait tadilat bulunamadı." });
+      }
+  
+      res.status(200).json(tadilatlar);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: "Tadilat alınamadı." });
+      res.status(500).json({ message: "Tadilatlar alınamadı." });
     }
   };
   //!güncelleme 

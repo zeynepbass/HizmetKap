@@ -8,4 +8,4 @@ const kategoriSchema = new mongoose.Schema({
 
 const Kategori = mongoose.model("Kategori", kategoriSchema);
 
-export default Kategori; // ✅ default export
+export default Kategori; 

@@ -22,4 +22,15 @@ export const createKategori = async (req, res) => {
     res.status(500).json({ message: "Kategori eklenirken hata oluştu." });
   }
 };
+export const getKategori=async(req,res)=>{
 
+    try {
+      const kategoriler = await Kategori.find(); 
+     
+      res.status(200).json(kategoriler);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "kategoriler alınamadı." });
+    }
+  
+}

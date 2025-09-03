@@ -107,7 +107,7 @@ const Home = () => {
           <div className=" flex-col w-[100%]">
             <p className='font-bold text-black text-left p-4 cursor-pointer'>Talebini Aldık</p>
             <p className=' text-gray-300 text-left pl-3'>İstek aldığında e-postana bildirim gelicek.</p>
-            <Link href="/hizmet/1" className="font-bold hover:underline p-4 underline ">
+            <Link href="/hizmet" className="font-bold hover:underline p-4 underline ">
               Detaylara bak
             </Link>
 
