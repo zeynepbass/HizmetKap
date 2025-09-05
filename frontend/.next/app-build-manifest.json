@@ -6,20 +6,20 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/detay/[id]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/detay/[id]/page.js"
-    ],
     "/ana-sayfa/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/ana-sayfa/page.js"
     ],
-    "/hizmet/page": [
+    "/hizmet/[id]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/hizmet/page.js"
+      "static/chunks/app/hizmet/[id]/page.js"
+    ],
+    "/detay/[id]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/detay/[id]/page.js"
     ],
     "/_not-found/page": [
       "static/chunks/webpack.js",

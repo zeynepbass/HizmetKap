@@ -56,14 +56,14 @@ export default function ThreePerViewCarousel({ slides }) {
 
       <button
         onClick={prev}
-        className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 p-2 rounded-full shadow hover:bg-white z-10"
+        className="absolute right-20 top-5 -translate-y-1/2 bg-white/90 p-2 rounded-full shadow hover:bg-white z-10"
       >
         ◀
       </button>
 
       <button
         onClick={next}
-        className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 p-2 rounded-full shadow hover:bg-white z-10"
+        className="absolute right-10 top-5 -translate-y-1/2 bg-white/90 p-2 rounded-full shadow hover:bg-white z-10"
       >
         ▶
       </button>

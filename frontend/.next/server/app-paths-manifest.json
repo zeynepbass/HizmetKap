@@ -1,6 +1,6 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
+  "/hizmet/[id]/page": "app/hizmet/[id]/page.js",
   "/detay/[id]/page": "app/detay/[id]/page.js",
-  "/ana-sayfa/page": "app/ana-sayfa/page.js",
-  "/hizmet/page": "app/hizmet/page.js"
+  "/ana-sayfa/page": "app/ana-sayfa/page.js"
 }

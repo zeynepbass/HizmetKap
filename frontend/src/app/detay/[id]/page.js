@@ -3,25 +3,26 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
-
+import Link from "next/link";
 export default function Page() {
   const params = useParams();
   const { id } = params;
+  const storedData = localStorage.getItem("item");
   const router = useRouter();
-
+  const [open, setOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [showExitModal, setShowExitModal] = useState(false);
-  const [steps, setSteps] = useState(null); 
-  const [item, setItem] = useState(""); 
+  const [steps, setSteps] = useState(null);
+  const [item, setItem] = useState("");
   useEffect(() => {
     if (id) {
       axios
         .get(`http://localhost:5233/tadilat/${id}`)
         .then((res) => {
-          const data = res.data[0]; 
-          setSteps(data.adimlar); 
-          setItem(data); 
+          const data = res.data[0];
+          setSteps(data.adimlar);
+          setItem(data);
         })
         .catch((err) => console.error("Veri çekilemedi:", err));
     }
@@ -35,8 +36,10 @@ export default function Page() {
     if (currentStep < steps.length - 1) {
       setCurrentStep((prev) => prev + 1);
     } else {
-      localStorage.setItem("item", JSON.stringify(answers));
-      router.push("/ana-sayfa");
+
+      setOpen(true)
+
+
     }
   };
 
@@ -45,100 +48,144 @@ export default function Page() {
   };
   const PostData = async (item) => {
     try {
-      await axios.post("http://localhost:5233/aktifTadilat", item);
+      const response = await axios.post("http://localhost:5233/aktifTadilat", item);
+      localStorage.setItem("item", response.data.primaryKey);
     } catch (err) {
       console.error("Post işlemi başarısız:", err);
     }
-  }; 
+  };
 
   const handleAnswer = (option) => {
+    const anaBaslik = item.kategori.isim;
+    const durum = "aktif";
 
-   const anaBaslik=item.kategori.isim
     setAnswers((prev) => {
       const updated = [...prev];
       updated[currentStep] = {
-        anaBaslik:anaBaslik,
         kategoriIsim: steps[currentStep].baslik,
         secenekler: steps[currentStep].secenekler,
         secilen: option
-   
       };
-  
 
-      localStorage.setItem("item", JSON.stringify(updated));
-      PostData(updated)
+
+
+
+      const dataToSend = {
+        primaryKey: id,
+        anaBaslik,
+        durum,
+        telefonNo: null,
+        konum: null,
+        veriler: updated.map(item => ({
+          kategoriIsim: item.kategoriIsim,
+          secenekler: Array.isArray(item.secenekler)
+            ? item.secenekler
+            : typeof item.secenekler === "string"
+              ? item.secenekler.split(",").map(opt => opt.trim())
+              : [],
+          secilen: item.secilen
+        }))
+      };
+
+      PostData(dataToSend);
+
       return updated;
     });
   };
-  
+
 
   return (
-    <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded shadow">
-      <h2 className="text-xl font-semibold text-center mb-4">
-        {item.kategori.isim}
-      </h2>
+    <div className="w-full justify-center">
+
+      {open ?
+        <div className="w-full  justify-center mt-10 p-6 bg-white rounded shadow">
+
+
+            <p className='font-bold text-black text-left p-4 cursor-pointer'>Talebini Aldık</p>
+            <p className=' text-gray-300 text-left pl-3'>İstek aldığında e-postana bildirim gelicek.</p>
+
+            <Link href={`/hizmet/${storedData}`} className="font-bold hover:underline p-4 underline">
+              Detaylara bak
+            </Link>
 
 
 
-      <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
-        <div
-          className="bg-green-500 h-2.5 rounded-full transition-all"
-          style={{ width: `${progressPercent}%` }}
-        ></div>
-      </div>
+            <img src="/siparis.jpg" width="30%" height="30%" className='m-auto' />
+            <div className='flex justify-center gap-1 p-5'>
 
+              <button className=' p-3 text-red-600 rounded-md' onClick={() => setOpen(true)}>Talebi iptal et</button>
+              <button className='bg-amber-500 pl-4 pr-4 rounded-md text-white cursor-pointer' onClick={() => router.push("/ana-sayfa")}>İşlerime git</button>
+            </div>
+          </div>   
+ :
+        <div className="w-1/2 mx-auto">
 
-      <h3 className="text-lg font-medium mb-2">
-        {steps[currentStep].baslik}
-      </h3>
-
-
-      <div className="space-y-2">
-  {steps[currentStep].secenekler.map((option) => (
-    <label
-      key={option}
-      className="flex items-center space-x-2 cursor-pointer"
-    >
-      <input
-        type="radio"
-        name={`step-${currentStep}`}
-        className="form-radio text-green-600"
-        checked={answers[currentStep]?.secilen === option}
-        onChange={() => handleAnswer(option)}
-      />
-      <span>{option}</span>
-    </label>
-  ))}
-</div>
+          <h2 className="text-xl font-semibold text-center mb-4">
+            {item.kategori.isim}
+          </h2>
 
 
 
-      <div className="mt-6 flex justify-between">
-        <button
-          onClick={() => setShowExitModal(true)}
-          className="bg-amber-600 text-white px-4 py-2 rounded hover:bg-amber-700"
-        >
-          Çık
-        </button>
+          <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+            <div
+              className="bg-green-500 h-2.5 rounded-full transition-all"
+              style={{ width: `${progressPercent}%` }}
+            ></div>
+          </div>
 
-        <div className="space-x-2">
-          {currentStep > 0 && (
+
+          <h3 className="text-lg font-medium mb-2">
+            {steps[currentStep].baslik}
+          </h3>
+
+
+          <div className="space-y-2">
+            {steps[currentStep].secenekler.map((option) => (
+              <label
+                key={option}
+                className="flex items-center space-x-2 cursor-pointer"
+              >
+                <input
+                  type="radio"
+                  name={`step-${currentStep}`}
+                  className="form-radio text-green-600"
+                  checked={answers[currentStep]?.secilen === option}
+                  onChange={() => handleAnswer(option)}
+                />
+                <span>{option}</span>
+              </label>
+            ))}
+          </div>
+
+
+
+          <div className="mt-6 flex justify-between">
             <button
-              onClick={handleBack}
-              className="border border-gray-400 px-4 py-2 rounded hover:bg-gray-100"
+              onClick={() => setShowExitModal(true)}
+              className="bg-amber-600 text-white px-4 py-2 rounded hover:bg-amber-700"
             >
-              Geri
+              Çık
             </button>
-          )}
-          <button
-            onClick={handleNext}
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-            disabled={!answers[currentStep]}
-          >
-            Devam
-          </button>
-        </div>
-      </div>
+
+            <div className="space-x-2">
+              {currentStep > 0 && (
+                <button
+                  onClick={handleBack}
+                  className="border border-gray-400 px-4 py-2 rounded hover:bg-gray-100"
+                >
+                  Geri
+                </button>
+              )}
+              <button
+                onClick={handleNext}
+                className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                disabled={!answers[currentStep]}
+              >
+                Devam
+              </button>
+            </div>
+          </div>   </div>
+      }
 
 
       {showExitModal && (

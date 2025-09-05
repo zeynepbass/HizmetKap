@@ -1,161 +1,185 @@
-"use client"
-import React, { useState, useEffect } from 'react'
-import Slider from "../../components/Slider"
-import Link from "next/link"
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+"use client";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import Slider from "../../components/Slider";
+import ToggleOnIcon from "@mui/icons-material/ToggleOn";
+import ToggleOffIcon from "@mui/icons-material/ToggleOff";
+import Link from "next/link";
 const Home = () => {
+  const router = useRouter();
+
+  const [itemsAktif, setItemsAktif] = useState([]);
+  const [showText, setShowText] = useState({});
   const [openIndex, setOpenIndex] = useState(0);
 
-  const items = [
-    { title: "Aktif işlerim", image: "pngwing.com.png", content: "Aktif işin yok. Hemen arama çubuğuna isteğini yaz, ihtiyacın olan hizmete kolayca ulaş." },
-    { title: "Pasif işlerim", image: "Kanepe Döşeme", content: "content", button: "Teklif gelmedi" }
+  const tabs = [
+    {
+      title: "Aktif işlerim",
+      image: "pngwing.com.png",
+      content:
+        "Aktif işin yok. Hemen arama çubuğuna isteğini yaz, ihtiyacın olan hizmete kolayca ulaş.",
+    },
+    {
+      title: "Pasif işlerim",
+      image: "Kanepe Döşeme",
+      content: "content",
+      button: "Teklif gelmedi",
+    },
   ];
 
-  const toggle = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
+  const getApiAktif = async () => {
+    try {
+      const response = await axios.get("http://localhost:5233/aktifTadilat");
+      setItemsAktif(response.data || []);
+    } catch (error) {
+      console.error("Veri çekme hatası:", error);
+    }
   };
-
-  const [control, setControl] = useState({});
 
   useEffect(() => {
-    const storedData = localStorage.getItem("item");
-    if (storedData) setControl(JSON.parse(storedData));
+    getApiAktif();
   }, []);
 
-  const Clear = () => {
-    localStorage.clear();
-    setControl({});
-  };
-  const [open, setOpen] = useState(false)
-  const [answers, setAnswers] = useState("");
-  const steps = [
-    { question: "Çok zaman harcıyorum." },
-    { question: "Aradığım hizmete ulaşamıyorum." },
-    { question: "Diğer" },
-  ];
+  useEffect(() => {
+    const initialState = {};
+    itemsAktif.forEach((item) => {
+      initialState[item._id] = item.durum === "aktif";
+    });
+    setShowText(initialState);
+  }, [itemsAktif]);
 
-  const handleChange = (value) => {
-    setAnswers(value);
+  const handleSubmit = async (e, id) => {
+    console.log(id)
+    e.preventDefault();
+    const newDurum = showText[id] ? "pasif" : "aktif";
+    try {
+      await axios.put(`http://localhost:5233/aktifTadilat/durum/${id}`, {
+        durum: newDurum,
+      });
+      setShowText((prev) => ({
+        ...prev,
+        [id]: !prev[id],
+      }));
+
+      setItemsAktif((prev) =>
+        prev.map((item) =>
+          item._id === id ? { ...item, durum: newDurum } : item
+        )
+      );
+    } catch (error) {
+      console.error("Durum güncellenemedi:", error);
+    }
   };
+
+
+  const aktifIsler = itemsAktif.filter((item) => item.durum === "aktif");
+  const pasifIsler = itemsAktif.filter((item) => item.durum === "pasif");
+
+  const aktifMi = openIndex === 0;
+  const seciliIsler = aktifMi ? aktifIsler : pasifIsler;
+  const storedData = localStorage.getItem("item")
+  const Clear = () => {
+    window.location.reload();
+  }
+  
   return (
     <>
-      <div>
 
-        <Dialog open={open} onClose={setOpen} className="relative z-10">
-          <DialogBackdrop
-            transition
-            className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
-          />
+      <div className="flex gap-4 mb-4 justify-center">
+        {tabs.map((item, index) => (
+          <button
+            key={index}
+            className={`py-3 px-2 font-semibold rounded-md ${openIndex === index ? "border-b-2 border-amber-300" : ""
+              }`}
+            onClick={() => setOpenIndex(index)}
+          >
+            {item.title}
+          </button>
+        ))}
+      </div>
+   
+       
 
-          <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-              <DialogPanel
-                transition
-                className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
-              >
-                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                  <div className="sm:flex sm:items-start">
-                    <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-amber-100 sm:mx-0 sm:size-10">
-                      <ExclamationTriangleIcon aria-hidden="true" className="size-6 text-amber-600" />
+        
+        <div className="p-4">
+          {seciliIsler.length === 0 ? (
+            <div className="flex justify-center items-center bg-gray-50 h-[50vh] flex-col w-full">
+              <img src={tabs[openIndex].image} width="40%" />
+              <p className="font-bold text-gray-400 mt-4">{tabs[openIndex].content}</p>
+              {tabs[openIndex].button && (
+                <button className="bg-gray-100 p-3 rounded-md font-bold mt-2">
+                  {tabs[openIndex].button}
+                </button>
+              )}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {seciliIsler.map((item) => (
+                <div
+                  key={item._id}
+                  className="flex flex-col justify-between h-full p-4 bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                >
+                  <form onSubmit={(e) => handleSubmit(e, item._id)}>
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-lg font-bold text-slate-800">
+                        {item.anaBaslik}
+                      </h3>
+                      <button type="submit">
+                        {showText[item._id] ? (
+                          <ToggleOnIcon className="text-green-500" />
+                        ) : (
+                          <ToggleOffIcon className="text-amber-500" />
+
+                        )}
+                      </button>
                     </div>
-                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                      <DialogTitle as="h3" className="text-base font-semibold text-gray-900">
-                        Talebi neden iptal etmek istiyorsun?
-                      </DialogTitle>
-                      <div className="mt-2">
-                        {steps.map((option, index) => (
-                          <label
-                            key={index}
-                            className="flex items-center space-x-2 cursor-pointer"
-                          >
-                            <input
-                              type="radio"
-                              name="survey"
-                              value={option.question}
-                              className="form-radio text-amber-600"
-                              checked={answers === option.question}
-                              onChange={() => handleChange(option.question)}
-                            />
-                            <span className='text-gray-600'>{option.question}</span>
-                          </label>
-                        ))}
+                  </form>
 
 
+                  {item.veriler &&
+                    item.veriler.map((veri, i) => (
+                      <div
+                        key={i}
+                        className="mb-3 cursor-pointer"
+                        onClick={() =>
+                          router.push(`/hizmet/${item.primaryKey}`)
+                        }
+                      >
+                        <p className="font-semibold text-gray-700">
+                          {veri.kategoriIsim}: {veri.secilen}
+                        </p>
+                        <p className="text-sm text-gray-500 mt-1">
+                          <span className="font-medium text-amber-400">
+                            Seçenekler:
+                          </span>{" "}
+                          {veri.secenekler.join(", ")}
+                        </p>
                       </div>
-                    </div>
+                    ))}
+
+                  <div className="mt-4 pt-2 border-t text-sm text-gray-500">
+                    <p>
+                      <span className="font-medium text-gray-700">Telefon:</span>{" "}
+                      {item.telefonNo || "Belirtilmemiş"}
+                    </p>
+                    <p>
+                      <span className="font-medium text-gray-700">Konum:</span>{" "}
+                      {item.konum || "Belirtilmemiş"}
+                    </p>
                   </div>
                 </div>
-                <div className="bg-gray-10 px-4 py-3 sm:px-6 flex justify-center">
-
-                  <button
-                    type="button"
-                    data-autofocus
-                    onClick={() => setOpen(false)}
-                    className="mt-3 inline-flex text-white  rounded-md bg-amber-400 px-3 py-2 text-sm font-semibold text-white-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-amber-50 sm:mt-0 sm:w-auto hover:text-gray-500"
-                  >
-                    Talebi iptal et
-                  </button>
-                </div>
-              </DialogPanel>
+              ))}
             </div>
-          </div>
-        </Dialog>
-      </div>
-      <div className="col-span-12 flex flex-col items-center gap-4">
-        {Object.keys(control).length > 0 ? (
-          <div className=" flex-col w-[100%]">
-            <p className='font-bold text-black text-left p-4 cursor-pointer'>Talebini Aldık</p>
-            <p className=' text-gray-300 text-left pl-3'>İstek aldığında e-postana bildirim gelicek.</p>
-            <Link href="/hizmet" className="font-bold hover:underline p-4 underline ">
-              Detaylara bak
-            </Link>
+          )}
+        </div>
+      
 
-            <img src="siparis.jpg" width="30%" height="30%" className='m-auto' />
-            <div className='flex justify-center gap-1 p-5'>
-
-              <button className=' p-3 text-red-600 rounded-md' onClick={() => setOpen(true)}>Talebi iptal et</button>
-              <button className='bg-amber-500 pl-4 pr-4 rounded-md text-white cursor-pointer' onClick={Clear}>İşlerime git</button>
-            </div>
-          </div>
-        ) :
-          (
-            <>
-
-              <div className="flex gap-4 mb-4">
-                {items.map((item, index) => (
-                  <button
-                    key={index}
-                    className={`py-3 px-0 font-semibold rounded-md  ${openIndex === index ? "border-b-2 border-amber-300" : ""
-                      }`}
-                    onClick={() => toggle(index)}
-                  >
-                    {item.title}
-                  </button>
-                ))}
-              </div>
-
-
-              {openIndex !== null && items[openIndex] && (
-                <div className="flex justify-center items-center bg-gray-50 h-[50vh] flex-col w-[100%]">
-                  <img src={items[openIndex].image} width="50%" height="30%" />
-                  <p className='font-bold text-gray-200'>{items[openIndex].content}</p>
-                  <button className='bg-gray-100 p-3 rounded-md font-bold'>{items[openIndex].button}</button>
-                </div>
-              )}</>
-          )
-
-        }
-
-
-      </div>
-
-      <div className='col-span-12 min-h-screen pt-5 border-t-1  border-t-gray-100 '>
-
+      <div className="col-span-12 min-h-screen pt-5 border-t border-t-gray-100">
         <Slider />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
