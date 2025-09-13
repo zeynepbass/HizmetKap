@@ -7,11 +7,7 @@ import ChatRoom from "../../components/ChatRoom"
 const Page = () => {
     const params = useParams();
     const { id } = params;
-    return (
-        <>
-            <ChatRoom id={id} /></>
-
-    )
+    return <ChatRoom id={id} />
 }
 
 export default Page

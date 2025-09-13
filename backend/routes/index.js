@@ -35,6 +35,7 @@ router.delete("/hesapSil/:id", kayit.kullaniciSil);
 //! message
 router.get('/mesajlar/:gonderenId/:aliciId',message.getMessage);
 router.post('/mesajlar',message.postMessage);
+
 router.get('/konusmalar/:userId', message.getConversations); 
 
 router.delete('/:gonderenId/:aliciId',message.deleteMessagesBetweenUsers);

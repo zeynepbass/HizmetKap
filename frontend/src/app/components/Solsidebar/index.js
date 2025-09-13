@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import SavedSearchIcon from '@mui/icons-material/SavedSearch';
 import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
+import TextsmsIcon from '@mui/icons-material/Textsms';
 import HesapDetails from "../../components/HesapDetails"
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -20,6 +21,8 @@ const Index = () => {
       console.log(error)
     }
   }
+
+  const [storedData, setStoredData] = useState(null);
   const toSlug = (text) => {
     return text
       .toLowerCase()
@@ -35,9 +38,17 @@ const Index = () => {
   };
   useEffect(() => {
     fetchCtegory()
+    const data=JSON.parse(localStorage.getItem("kullanici"))
+    setStoredData(data)
   }, [])
+  const handleClick = (id) => {
 
-
+    setActive(id)
+  }
+  const sidebar = [
+    { id: 1, text: "İşlerim", icon: <HomeRepairServiceIcon />, href: "/ana-sayfa" },
+    { id: 2, text: "Mesaj Kutusu", icon: <TextsmsIcon />, href: `/mesaj-kutusu/${storedData?.kullanici.id}` }
+  ];
   return (
     <div className="relative p-4 border-r border-none top-0 h-screen overflow-y-auto bg-white">
 
@@ -96,15 +107,20 @@ const Index = () => {
         )}
 
         <ul className="pt-5">
-          <li
-            onClick={() => setActive(!active)}
-            className={`flex items-center gap-2 pt-3 rounded-3xl ${active ? "bg-amber-400 text-white" : "bg-white text-gray-600"
-              } p-3`}
-          >
-            <HomeRepairServiceIcon className="text-xl" />
-            <span>İşlerim</span>
-          </li>
+          {sidebar.map((item) => (
+            <li
+              key={item.id}
+              onClick={()=>handleClick(item.id)}
+              className={`flex items-center gap-2 pt-3 rounded-3xl p-3 cursor-pointer m-2
+        ${active === item.id ? "bg-amber-400 text-white" : "bg-white text-gray-600"}`}
+            >
+              {item.icon}
+             <Link href={item.href} ><span>{item.text}</span></Link>
+            </li>
+          ))}
+
         </ul>
+
 
       </div>
 
