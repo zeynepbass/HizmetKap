@@ -14,7 +14,7 @@ const Page = () => {
         <Button />
         <div className="flex flex-col items-center mx-auto gap-6">
         <div className="w-full max-w-xlg text-center">
-            <h1 className="text-3xl font-bold mb-4">Detaylar</h1>
+            <h1 className="text-md font-bold mb-4 text-gray-600">İletişim Bilgilerini ve Konumunu Eklemek İster misin?</h1>
             <Details id={id} />
         </div>
     </div></>

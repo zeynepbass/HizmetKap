@@ -22,7 +22,7 @@ const Index = () => {
     setKullaniciAdi(adStored);
 
     if (stored) {
-      fetchData(stored?.kullanici._id || stored?.kullanici.id );
+      fetchData(stored?.kullanici._id || stored?.kullanici.id);
     }
   }, []);
 
@@ -38,21 +38,29 @@ const Index = () => {
 
 
   return (
-    <Card sx={{ position: "absolute", bottom: "10px", display: "flex", boxShadow: 2,width:"70%", borderRadius: 2, p: 1, alignItems: "center", gap: 2 }}>
+    <Card sx={{ position: "absolute", bottom: "60px", left: "20%", display: "flex", boxShadow: 2, width: "70%", borderRadius: 2, p: 1, alignItems: "center", gap: 2 }}>
       {kullaniciAdi ? (
-        <div className="w-6 h-6 flex items-center justify-center rounded-full bg-[rgb(255,190,60)] text-white uppercase font-bold">
+        <div className="w-6 h-6 flex items-center justify-center rounded-full bg-[rgb(255,190,60)] text-[rgb(242,247,250)] uppercase font-bold">
           {kullaniciAdi?.kullaniciAdi[0]}
         </div>
-      ) : 
-      <CardMedia
-        component="img"
-        sx={{ width: 50, height: 50, borderRadius: "50%" }}
-        image={data.resim ? `http://localhost:5233/uploads/${data.resim}` : "/profile.jpg"}
-        alt="kullanıcı resmi"
-      />}
+      ) :
+        <>
+
+          {data.resim ?
+
+            <CardMedia
+              component="img"
+              sx={{ width: 50, height: 50, borderRadius: "50%" }}
+              image={`http://localhost:5233/uploads/${data.resim}`}
+              alt="kullanıcı resmi"
+            />
+
+            : null}      </>}
 
       <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <Typography component="div" variant="subtitle1" sx={{ fontWeight: "bold" }}>
+        <Typography component="div" variant="subtitle1" sx={{ fontWeight: "bold", color: "gray" }}>
+
+
           {data.ad} {data.soyad}  {kullaniciAdi?.kullaniciAdi}
         </Typography>
         <Typography component="div" variant="body2" sx={{ color: "gray", fontSize: 12 }}>
@@ -60,7 +68,7 @@ const Index = () => {
         </Typography>
         <span
           onClick={() => router.push("/hesap-bilgilerim")}
-          className="underline text-[rgb(255,200,60)] cursor-pointer text-sm"
+          className="underline text-[rgb(255,176,73)] cursor-pointer text-sm "
         >
           Ayarlar
         </span>

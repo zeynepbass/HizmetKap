@@ -1,0 +1,7 @@
+{
+  "/sifre-degistir/page": "app/sifre-degistir/page.js",
+  "/sifremi-unuttum/page": "app/sifremi-unuttum/page.js",
+  "/ana-sayfa/page": "app/ana-sayfa/page.js",
+  "/hesap-bilgilerim/page": "app/hesap-bilgilerim/page.js",
+  "/mesaj-kutusu/[id]/page": "app/mesaj-kutusu/[id]/page.js"
+}

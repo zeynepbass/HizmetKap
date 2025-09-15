@@ -72,7 +72,7 @@ export default function KategoriPage() {
 
 
                   <div className="p-5 border-b border-gray-100">
-                    <p className="text-md text-gray-600 mb-2">
+                    <p className="text-md text-gray-400 mb-2">
                       <span className="font-semibold">Yayınlayan:</span> {slide.ad}
                       {slide.telefonNo && ` | ${slide.telefonNo}`}
                       {slide.konum && ` | ${slide.konum}`}
@@ -87,7 +87,7 @@ export default function KategoriPage() {
                       <span className="font-semibold">Kategoriler:</span> {slide.kategoriIsim}
                     </p>
 
-                    <p className="text-sm text-gray-400 text-center mb-4">
+                    <p className="text-sm text-[rgb(242,247,250)] text-center mb-4">
                       <span className="font-semibold">İlan tarihi:</span>{" "}
                       {slide.baslangicTarihi && slide.bitisTarihi
                         ? `${new Date(slide.baslangicTarihi).toLocaleDateString("tr-TR")} - ${new Date(slide.bitisTarihi).toLocaleDateString("tr-TR")}`
@@ -112,7 +112,7 @@ export default function KategoriPage() {
                       <button
                         onClick={() => router.push(`/mesaj-kutusu/${slide.kullaniciId}`)}
                         type="button"
-                        className="px-6 py-2 bg-gradient-to-r from-yellow-400 to-yellow-300 hover:from-yellow-300 hover:to-yellow-400 text-white font-semibold rounded-full shadow-md hover:shadow-lg transition"
+                        className="px-6 py-2 bg-gradient-to-r from-yellow-400 to-yellow-300 hover:from-yellow-300 hover:to-yellow-400 text-[rgb(242,247,250)] font-semibold rounded-full shadow-md hover:shadow-lg transition"
                       >
                         Mesaj At
                       </button>
@@ -125,7 +125,7 @@ export default function KategoriPage() {
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-400 mt-16 text-lg font-medium">
+          <p className="text-center text-[rgb(242,247,250)] mt-16 text-lg font-medium">
             Bu kategoriye ait tadilat bulunamadı.
           </p>
         )}

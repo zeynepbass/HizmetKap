@@ -82,125 +82,115 @@ const storedData=JSON.parse(localStorage.getItem("kullanici"))
   const seciliIsler = aktifMi ? aktifIsler : pasifIsler;
   const filteredData=seciliIsler.filter((item)=>item.email === storedData?.kullanici?.email)
   return (
-    <>
-
-      <div className="flex gap-4 mb-4 justify-center">
-        {tabs.map((item, index) => (
-          <button
-            key={index}
-            className={`py-3 px-2 font-semibold rounded-md ${openIndex === index ? "border-b-2 border-[rgb(255,200,60)]" : ""
-              }`}
-            onClick={() => setOpenIndex(index)}
-          >
-            {item.title}
-          </button>
-        ))}
-      </div>
+    <div className="min-h-screen flex flex-col ">
 
 
+    <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center mb-4 px-4 sm:px-0">
+      {tabs.map((item, index) => (
+        <button
+          key={index}
+          className={`py-3 px-2 font-semibold text-gray-600 rounded-md ${openIndex === index ? "border-b-2 border-[rgb(255,200,60)]" : ""
+            }`}
+          onClick={() => setOpenIndex(index)}
+        >
+          {item.title}
+        </button>
+      ))}
+    </div>
+  
 
-
-      <div className="p-4">
-        {filteredData.length === 0 ? (
-          <div className="flex justify-center items-center bg-gray-50 h-[50vh] flex-col w-full">
-            <img src={tabs[openIndex].image} width="40%" />
-            <p className="font-bold text-gray-400 mt-4">{tabs[openIndex].content}</p>
-            {tabs[openIndex].button && (
-              <button className="bg-gray-100 p-3 rounded-md font-bold mt-2">
-                {tabs[openIndex].button}
-              </button>
-            )}
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredData.map((item) => (
-              <div
-                key={item._id}
-                className="flex flex-col justify-between h-full p-4 bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
-              >
-                <form onSubmit={(e) => handleSubmit(e, item._id)}>
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-lg font-bold text-slate-800">
-                      {item.anaBaslik}
-                    </h3>
-                    <button type="submit">
-                      {showText[item._id] ? (
-                        <ToggleOnIcon className="text-green-500" />
-                      ) : (
-                        <ToggleOffIcon className="text-[rgb(255,200,60)]" />
-
-                      )}
-                    </button>
-                  </div>
-                </form>
-
-
-                {item.veriler &&
-                  item.veriler.map((veri, i) => (
-                    <div
-                      key={i}
-                      className="mb-3 cursor-pointer"
-                      onClick={() =>
-                        router.push(`/hizmet/${item.primaryKey}`)
-                      }
-                    >
-                      <p className="font-semibold text-gray-700">
-                        {veri.kategoriIsim}: {veri.secilen}
-                      </p>
-                      <p className="text-sm text-gray-500 mt-1">
-                        <span className="font-medium text-[rgb(255,200,60)]">
-                          Seçenekler:
-                        </span>{" "}
-                        {veri.secenekler.join(", ")}
-                      </p>
-                    </div>
-                  ))}
-
-                <div className="mt-4 pt-2 border-t text-sm text-gray-500">
-                  <p>
-                    <span className="font-medium text-gray-700">Telefon:</span>{" "}
-                    {item.telefonNo || "Belirtilmemiş"}
-                  </p>
-                  <p>
-                    <span className="font-medium text-gray-700">Konum:</span>{" "}
-                    {item.konum || "Belirtilmemiş"}
-                  </p>
-                  <p>
-                    <span className="font-medium text-gray-700">Durumu:</span>{" "}
-                    <span
-                      className={
-                        item.durum === "iptal"
-                          ? "text-red-600 font-semibold"
-                          : item.durum === "aktif"
-                            ? "text-green-600 font-semibold"
-                            : item.durum === "pasif"
-                              ? "text-[[rgb(255,127,58)]] font-semibold"
-                              : "text-gray-500 italic"
-                      }
-                    >
-                      {item.durum || "Belirtilmemiş"}
-                    </span>
-                    <p>
-                      <span className="font-medium text-gray-700">Süre:</span>{" "}
-                      {item.baslangicTarihi && item.bitisTarihi
-                        ? `${new Date(item.baslangicTarihi).toLocaleDateString("tr-TR")} - ${new Date(item.bitisTarihi).toLocaleDateString("tr-TR")}`
-                        : "süresiz"}
-                    </p>
-
-                  </p>
-
+    <div className="flex-1 overflow-auto ">
+      {filteredData.length === 0 ? (
+        <div className="flex flex-col items-center justify-center pb-4 bg-gray-50 w-full text-center">
+          {tabs[openIndex].image && (
+            <img src={tabs[openIndex].image} className="w-3/4 sm:w-2/5 mb-4" />
+          )}
+          <p className="font-bold text-[rgb(242,247,250)] mb-2">{tabs[openIndex].content}</p>
+          {tabs[openIndex].button && (
+            <button className="text-gray-500 p-3 rounded-md font-bold mt-2">
+              {tabs[openIndex].button}
+            </button>
+          )}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-4 h-[40vh] scrollbar scrollbar-thumb-gray-50 scrollbar-track-gray-50">
+          {filteredData.map((item) => (
+            <div
+              key={item._id}
+              className="flex flex-col justify-between p-4 bg-white border border-gray-50 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+            >
+              <form onSubmit={(e) => handleSubmit(e, item._id)}>
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-lg font-bold text-gray-600">{item.anaBaslik}</h3>
+                  <button type="submit">
+                    {showText[item._id] ? (
+                      <ToggleOnIcon className="text-[rgb(255,176,73)]" />
+                    ) : (
+                      <ToggleOffIcon className="text-[rgb(242,247,250)]" />
+                    )}
+                  </button>
                 </div>
+              </form>
+  
+              {item.veriler &&
+                item.veriler.map((veri, i) => (
+                  <div
+                    key={i}
+                    className="mb-3 cursor-pointer"
+                    onClick={() => router.push(`/hizmet/${item.primaryKey}`)}
+                  >
+                    <p className="font-bold text-gray-700">
+                      {veri.kategoriIsim}: {veri.secilen}
+                    </p>
+                    <p className="text-sm text-gray-600 mt-1">
+                      <span className="font-medium text-[rgb(78,36,77)]">Seçenekler:</span>{" "}
+                      {veri.secenekler.join(", ")}
+                    </p>
+                  </div>
+                ))}
+  
+              <div className="mt-4 pt-2 border-t border-gray-200 text-sm text-gray-600 space-y-1">
+                <p>
+                  <span className="font-medium text-gray-700">Telefon:</span> {item.telefonNo || "Belirtilmemiş"}
+                </p>
+                <p>
+                  <span className="font-medium text-gray-700">Konum:</span> {item.konum || "Belirtilmemiş"}
+                </p>
+                <p>
+                  <span className="font-medium text-gray-700">Durumu:</span>{" "}
+                  <span
+                    className={
+                      item.durum === "iptal"
+                        ? "text-red-600 font-semibold"
+                        : item.durum === "aktif"
+                        ? "text-[rgb(255,176,73)] font-semibold"
+                        : item.durum === "pasif"
+                        ? "text-[rgb(255,176,73)]  "
+                        : "text-gray-400"
+                    }
+                  >
+                    {item.durum || "Belirtilmemiş"}
+                  </span>
+                </p>
+                <p>
+                  <span className="font-medium text-gray-700">Süre:</span>{" "}
+                  {item.baslangicTarihi && item.bitisTarihi
+                    ? `${new Date(item.baslangicTarihi).toLocaleDateString("tr-TR")} - ${new Date(item.bitisTarihi).toLocaleDateString("tr-TR")}`
+                    : "süresiz"}
+                </p>
               </div>
-            ))}
-          </div>
-        )}
-      </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  
 
-
-      <div className="col-span-12 min-h-screen pt-5 border-t border-t-gray-100">
-        <Slider />
-      </div>
-    </>
+    <div className="w-full pt-5 border-t border-gray-100">
+      <Slider />
+    </div>
+  </div>
+  
   );
 };
 

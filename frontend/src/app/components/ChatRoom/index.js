@@ -15,7 +15,7 @@ const ChatUI = ({ id }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
-  const localId = storedData?.kullanici?.id; 
+  const localId = storedData?.kullanici?.id;
   const gonderenId = localId;
 
 
@@ -49,7 +49,7 @@ const ChatUI = ({ id }) => {
       try {
         const res = await axios.get(`${baseUrl}/konusmalar/${aliciIdStored}`);
         setData(res.data);
-        
+
       } catch (error) {
         console.error("Mesaj çekme hatası:", error);
       }
@@ -98,13 +98,13 @@ const ChatUI = ({ id }) => {
       (kon.aliciId === user._id && kon.gonderenId === gonderenId)
     )
   );
-  
+
 
   return (
-    <div className="flex h-[82vh] bg-gray-100">
-     
-      <div className="w-1/4 bg-white border-r p-4 overflow-y-auto">
-        <h2 className="text-xl font-semibold mb-4">Kullanıcılar</h2>
+    <div className="flex h-[80vh] bg-gray-100">
+
+      <div className="w-1/4 bg-white border-r border-gray-200 overflow-y-auto">
+        <h2 className="text-xl font-semibold mb-4 text-center text-[rgb(237,203,206)] pt-5">Kullanıcılar</h2>
         {filteredData.length > 0 ? (
           filteredData.map((item) => (
             <div
@@ -113,9 +113,9 @@ const ChatUI = ({ id }) => {
                 setSelectedUser(item._id);
                 fetchMessages(item._id);
               }}
-              className="cursor-pointer mb-2 hover:bg-gray-100 p-2 rounded"
+              className="cursor-pointer pl-10 text-gray-600 font-bold  mb-2 hover:bg-gray-100 p-2 rounded"
             >
-              {item.email}
+      
               {`${item.ad.charAt(0).toUpperCase() + item.ad.slice(1)} ${item.soyad.charAt(0).toUpperCase() + item.soyad.slice(1)}`}
             </div>
           ))
@@ -128,7 +128,7 @@ const ChatUI = ({ id }) => {
       <div className="flex-1 flex flex-col p-4 bg-gray-50">
         <div className="flex-1 overflow-y-auto mb-4">
           {messages.length === 0 ? (
-            <p className="text-gray-500">Henüz mesaj yok</p>
+            <p className="text-gray-400 flex justify-center">Henüz mesaj yok</p>
           ) : (
             messages.map((msg, idx) => (
               <div
@@ -136,14 +136,15 @@ const ChatUI = ({ id }) => {
                 className={`flex mb-2 ${msg.gonderenId === gonderenId ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`px-4 py-2 rounded-lg max-w-xs ${
-                    msg.gonderenId === gonderenId
-                      ? "bg-[rgb(255,190,60)] text-white"
-                      : "bg-gray-200 text-gray-900"
-                  }`}
+                  className={`px-4 py-2 rounded-lg max-w-xs ${msg.gonderenId === gonderenId
+                      ? "bg-[rgb(255,176,73)] text-[rgb(242,247,250)]"
+                      : "bg-gray-200 text-gray-500"
+                    }`}
                 >
                   {msg.text}
-                  <div className="text-xs opacity-50 mt-1">
+                  <div
+  className={`text-xs ${msg.gonderenId === gonderenId ? "text-right" : "text-left"} opacity-50 mt-1`}
+>
                     {new Date(msg.time).toLocaleTimeString()}
                   </div>
                 </div>
@@ -157,12 +158,12 @@ const ChatUI = ({ id }) => {
             type="text"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            className="flex-1 border border-amber-500 rounded px-3 py-2 focus:outline-none"
+            className="flex-1 border border-gray-200 rounded-xl p-2 focus:outline-none"
             placeholder="Mesaj yazın..."
           />
           <button
             type="submit"
-            className="bg-[rgb(255,127,58)] cursor-pointer text-white px-4 py-2 rounded"
+            className="w-[20%] rounded-xl  mx-auto p-3 cursor-pointer  bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:text-gray-50 hover:bg-[rgb(255,127,60)] transition-colors duration-300 "
           >
             Gönder
           </button>

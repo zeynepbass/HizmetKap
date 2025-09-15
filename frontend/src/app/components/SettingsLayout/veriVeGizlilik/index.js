@@ -7,8 +7,8 @@ import axios from "axios"
 const Index = () => {
 
     const items = [
-        { title: "Hesabı dondur", image: "39617587.jpg", content: "Verilerini kaybetmeden hesabını geçici olarak dondurabilir, istediğin zaman giriş yaparak tekrar aktifleştirebilirsin..", baslik: "Araya mı ihtiyacın var?", paragraf: "Hesabını devre dışı bıraktığında hesabın dondurulacak ve platformdan çıkış yapacaksın. Hesap dondurma işlemi geri alınabilir. İstediğin zaman giriş yaparak hesabını tekrar aktifleştirebilirsin ve bilgilerine tekrar erişebilirsin. Kişisel verilerin hakkında bilgi edinmek istiyorsan Aydınlatma Metnimize göz atabilirsin.", button: "Hesabımı dondur" },
-        { title: "Hesabımı sil", image: "28033346.jpg", content: "Tüm verilerini kalıcı olarak silebilirsin. Unutma, silmiş olduğun hesabına tekrar ulaşamazsın.", baslik: "Hesabını silmek istemene üzüldük...", paragraf: "Hesabını devre dışı bıraktığında hesabın dondurulacak ve platformdan çıkış yapacaksın. Hesap dondurma işlemi geri alınabilir. İstediğin zaman giriş yaparak hesabını tekrar aktifleştirebilirsin ve bilgilerine tekrar erişebilirsin. Kişisel verilerin hakkında bilgi edinmek istiyorsan Aydınlatma Metnimize göz atabilirsin.", button: "Hesabımı sil" },
+        { title: "Hesabı dondur", image: "9318694.jpg", content: "Verilerini kaybetmeden hesabını geçici olarak dondurabilir, istediğin zaman giriş yaparak tekrar aktifleştirebilirsin..", baslik: "Araya mı ihtiyacın var?", paragraf: "Hesabını devre dışı bıraktığında hesabın dondurulacak ve platformdan çıkış yapacaksın. Hesap dondurma işlemi geri alınabilir. İstediğin zaman giriş yaparak hesabını tekrar aktifleştirebilirsin ve bilgilerine tekrar erişebilirsin. Kişisel verilerin hakkında bilgi edinmek istiyorsan Aydınlatma Metnimize göz atabilirsin.", button: "Hesabımı dondur" },
+        { title: "Hesabımı sil", image: "accound-deleted.jpg", content: "Tüm verilerini kalıcı olarak silebilirsin. Unutma, silmiş olduğun hesabına tekrar ulaşamazsın.", baslik: "Hesabını silmek istemene üzüldük...", paragraf: "Hesabını devre dışı bıraktığında hesabın dondurulacak ve platformdan çıkış yapacaksın. Hesap dondurma işlemi geri alınabilir. İstediğin zaman giriş yaparak hesabını tekrar aktifleştirebilirsin ve bilgilerine tekrar erişebilirsin. Kişisel verilerin hakkında bilgi edinmek istiyorsan Aydınlatma Metnimize göz atabilirsin.", button: "Hesabımı sil" },
     ];
     const [openIndex, setOpenIndex] = useState(null);
     const [icon, setIcon] = useState(false);
@@ -63,7 +63,7 @@ const Index = () => {
                         {items.map((item, index) => (
                             <>
                                 <h1
-                                    className="text-xl font-bold flex items-center justify-between cursor-pointer"
+                                    className="text-xl text-gray-600 font-bold flex items-center justify-between cursor-pointer"
                                     onClick={() => toggle(index)}
                                 >
                                     {item.title}
@@ -81,10 +81,10 @@ const Index = () => {
 
                     {openIndex !== null && items[openIndex] && (
                         <div className="flex justify-center items-center h-[50vh] flex-col w-[60%]">
-                            <h6 className="font-bold text-xl mr-auto">{items[openIndex].baslik} </h6>
+                            <h6 className="font-bold text-xl mr-auto text-gray-500">{items[openIndex].baslik} </h6>
 
                             <img src={items[openIndex].image} width="50%" height="30%" className="py-6" />
-                            <p className='font-bold text-gray-500 text-md'>{items[openIndex].paragraf}</p>
+                            <p className='font-bold text-gray-400 text-md'>{items[openIndex].paragraf}</p>
                             <button
                                 onClick={() => {
                                     if (openIndex === 0) {
@@ -93,7 +93,7 @@ const Index = () => {
                                         handleHesapSil();
                                     }
                                 }}
-                                className="p-3 rounded-md font-bold mt-5 text-[rgb(255,190,60)] mx-auto underline"
+                                className="p-3 rounded-md font-bold mt-5 text-[rgb(78,36,77)] mx-auto cursor-pointer underline hover:text-[rgb(255,176,73)]"
                             >
                                 {items[openIndex].button}
                             </button>

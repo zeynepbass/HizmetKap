@@ -26,76 +26,86 @@ const Index = () => {
         e.preventDefault()
         try {
             const res = await axios.post("http://localhost:5233/kayit", formData)
-             toast.loading("Kayıt başarılı!", { position: "top-right", autoClose: 3000 })
-          const kullanici=localStorage.setItem("kullanici", JSON.stringify(res.data));
-         localStorage.removeItem("kullaniciAdi")
-               {kullanici ?  null : setTimeout(() => {
-                router.push("/")
-            }, 100) }
-           
+            toast.success("Kayıt başarılı!", { position: "top-right", autoClose: 3000 })
+            localStorage.setItem("kullanici", JSON.stringify(res.data))
+            setTimeout(() => router.push("/"), 100)
         } catch (error) {
             toast.error(error.response?.data?.message || "Bir hata oluştu", { position: "top-right", autoClose: 3000 })
         }
     }
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-white-50">
+        <div className="container mx-auto min-h-screen flex items-center justify-center">
             <ToastContainer />
-            <div className="flex items-center justify-center w-[70%] mb-50">
-                <form onSubmit={handleSubmit} className='w-[60%] h-[50%] flex shadow-md flex-col gap-1 border border-gray-100 rounded-lg p-10'>
-                    <h1 className='text-4xl font-bold p-4 text-center text-gray-600'>                   {kullaniciStorage ?    "Kayıt Ol" : "Kaydet"} </h1>
-                    
-                    <label className='text-gray-500 font-bold'>Ad*</label>
-                    <input
-                        type="text"
-                        name="ad"
-                        value={formData.ad}
-                        onChange={handleChange}
-                        placeholder="Adınızı giriniz"
-                        className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
-                    />
+            <div className="grid grid-cols-12 w-full max-w-6xl shadow-xl rounded-2xl overflow-hidden">
 
-                    <label className='text-gray-500 font-bold'>Soyad*</label>
-                    <input
-                        type="text"
-                        name="soyad"
-                        value={formData.soyad}
-                        onChange={handleChange}
-                        placeholder="Soyadınızı giriniz"
-                        className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
-                    />
+   
+                <div className="col-span-12 md:col-span-6 flex justify-center items-center bg-white p-8">
+                    <form onSubmit={handleSubmit} className='w-full flex flex-col gap-4'>
 
-                    <label className='text-gray-500 font-bold'>Email*</label>
-                    <input
-                        type="text"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="Email adresinizi giriniz"
-                        className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
-                    />
+                        <h1 className="text-4xl font-bold text-center text-gray-700">
+                            {kullaniciStorage ? "Kayıt Ol" : "Kaydet"}
+                        </h1>
 
-                    <label className='text-gray-500 font-bold'>Parola*</label>
-                    <input
-                        type="password"
-                        name="parola"
-                        value={formData.parola}
-                        onChange={handleChange}
-                        placeholder="Parolanızı giriniz"
-                        className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
-                    /> 
+                        <p className='text-[rgb(242,247,250)] text-center text-sm'>
+                            Kayıt olarak <span className="underline cursor-pointer">Gizlilik Politikası</span> ve <span className="underline cursor-pointer">Kullanım Şartlarını</span> kabul etmiş olursunuz.
+                        </p>
+
+                        <div className='flex flex-col md:flex-row gap-4'>
+                            <input
+                                type="text"
+                                name="ad"
+                                value={formData.ad}
+                                onChange={handleChange}
+                                placeholder="Adınız"
+                                className="flex-1 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
+                            />
+                            <input
+                                type="text"
+                                name="soyad"
+                                value={formData.soyad}
+                                onChange={handleChange}
+                                placeholder="Soyadınız"
+                                className="flex-1 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
+                            />
+                        </div>
+
+                        <input
+                            type="text"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="Email adresiniz"
+                            className="rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
+                        />
+
+                        <input
+                            type="password"
+                            name="parola"
+                            value={formData.parola}
+                            onChange={handleChange}
+                            placeholder="Parolanız"
+                            className="rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
+                        />
+
+                        <button
+                            type="submit"
+                            className="w-full rounded-full p-3 bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-4"
+                        >
+                            {kullaniciStorage ? "Kayıt Ol" : "Kaydet"}
+                        </button>
+
+                    </form>
+                </div>
 
 
+                <div className="col-span-12 md:col-span-6 relative flex items-center justify-center ">
+                    <div className="absolute inset-0 bg-[url('/kayit.jpg')] bg-cover bg-center"></div>
+
+                    <div className="absolute inset-0 bg-black/10"></div>
                    
+                </div>
 
-
-                    <button
-                        type="submit"
-                        className="w-full p-3 rounded-md bg-[rgb(255,190,60)] text-white hover:text-gray-50 hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-2"
-                    >
-                   {kullaniciStorage ?    "Kayıt Ol" : "Kaydet"} 
-                    </button>
-                </form>
             </div>
         </div>
     )

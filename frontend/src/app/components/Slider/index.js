@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import ThreePerViewCarousel from "../../components/ThreePerViewCarousel";
 
-export default function Page() {
+export default function xPage() {
   const [slides, setSlides] = useState([]);
 
   useEffect(() => {

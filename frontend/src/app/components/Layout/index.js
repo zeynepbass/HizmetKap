@@ -41,15 +41,21 @@ const Layout = ({ children }) => {
   if (isSettingsPage) return <><LayoutSettings />{children}</>;
 
   return (
-    <div className="container-fluid grid grid-cols-12">
-      <div className="col-span-3">
+    <div className="container-fluid grid grid-cols-12 h-[100vh]">
+
+      <div className="col-span-12 md:col-span-2 bg-gray-100 h-[100vh]">
         <SolSidebar />
       </div>
-      <div className="col-span-9">
+
+
+      <div className="col-span-12 md:col-span-10 h-[100vh]">
         <Header />
-        {children}
+        <main className="h-[100vh]">
+          {children}
+        </main>
       </div>
     </div>
+
   );
 };
 

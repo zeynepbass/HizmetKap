@@ -22,7 +22,7 @@ export default function ThreePerViewCarousel({ slides }) {
     <div className="relative p-5 w-[80%] mx-auto">
 
         <div className={`${userControl ? "opacity-50 pointer-events-none" : ""}`}>
-          <h6 className="font-bold pb-3">Trend Hizmetler</h6>
+          <h6 className="font-bold pb-3 text-gray-600">Trend Hizmetler</h6>
 
           <div className="overflow-hidden">
             <div
@@ -46,7 +46,7 @@ export default function ThreePerViewCarousel({ slides }) {
                       className="w-full h-40 object-cover"
                     />
                     <div className="p-3">
-                      <h3 className="text-sm font-semibold text-center">
+                      <h3 className="text-sm text-gray-600 font-semibold text-center">
                         {slide.isim}
                       </h3>
                     </div>
@@ -58,14 +58,14 @@ export default function ThreePerViewCarousel({ slides }) {
 
           <button
             onClick={prev}
-            className="absolute right-20 top-5 -translate-y-1/2 bg-white/90 p-2 rounded-full shadow hover:bg-white z-10"
+            className="absolute right-20 top-5 -translate-y-1/2 text-[rgb(237,203,206)] bg-white/90 p-2 rounded-full shadow hover:bg-white z-10"
           >
             ◀
           </button>
 
           <button
             onClick={next}
-            className="absolute right-10 top-5 -translate-y-1/2 bg-white/90 p-2 rounded-full shadow hover:bg-white z-10"
+            className="absolute right-10 top-5 -translate-y-1/2 text-[rgb(237,203,206)] bg-white/90 p-2 rounded-full shadow hover:bg-white z-10"
           >
             ▶
           </button>

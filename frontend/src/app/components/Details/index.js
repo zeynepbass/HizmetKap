@@ -83,16 +83,16 @@ const Index = ({ id }) => {
         <div className="max-w-3xl mx-auto p-4 space-y-6">
             <ul className="list-none space-y-4">
                 <form onSubmit={handleSubmit}>
-                    <li className="flex items-center justify-between bg-gray-100 p-4 rounded shadow mb-4">
+                    <li className="flex items-center justify-between bg-[rgb(242,247,250)] p-4 rounded shadow mb-4">
                         <div className="flex w-full items-center gap-2">
-                            <AddLocationAltIcon className="w-8 h-8 text-[rgb(255,200,60)]" />
+                            <AddLocationAltIcon className="w-8 h-8 text-[rgb(255,176,73)]" />
 
                             {location ? (
                                 <input
                                     type="text"
                                     value={location}
                                     readOnly
-                                    className="border w-full border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                    className="border w-full border-gray-100 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-[rgb(255,127,58)]"
                                     placeholder="Konumunuz"
                                 />
                             ) : (
@@ -105,22 +105,22 @@ const Index = ({ id }) => {
                             null : <button
                                 type="button"
                                 onClick={handleGetLocation}
-                                className="bg-[rgb(255,200,60)] w-1/2 text-white px-4 py-1 rounded hover:bg-[rgb(255,127,58)]"
+                                className="bg-[rgb(255,176,73)] w-1/2 text-[rgb(242,247,250)] px-4 py-1 rounded hover:bg-[rgb(255,127,58)]"
                             >
                                 Konum Al
                             </button>}
 
                     </li>
 
-                    <li className="flex items-center justify-between bg-gray-100 p-4 rounded shadow mb-4">
+                    <li className="flex items-center justify-between bg-[rgb(242,247,250)] p-4 rounded shadow mb-4">
                         <div className="flex items-center gap-2 w-full">
-                            <LocalPhoneIcon className="w-8 h-8 text-green-500" />
+                            <LocalPhoneIcon className="w-8 h-8 text-[rgb(78,36,77)]" />
                             {promptPhone ? (
                                 <input
                                     type="text"
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
-                                    className="border w-full border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-hover:bg-[rgb(255,127,58)]"
+                                    className="border w-full border-gray-100 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-hover:bg-[rgb(255,127,58)]"
                                     placeholder="Telefon numaranız"
                                 />
                             ) : (
@@ -131,15 +131,15 @@ const Index = ({ id }) => {
                             null : <button
                                 type="button"
                                 onClick={handleGetPhone}
-                                className="bg-green-500 w-1/2 text-white px-4 py-1 rounded hover:bg-green-600"
+                                className="bg-[rgb(78,36,77)] w-1/2 text-[rgb(242,247,250)] px-4 py-1 rounded hover:bg-[rgb(255,127,58)]"
                             >
                                 Telefon Ekle
                             </button>}
 
                     </li>
-                    <li className="flex items-center justify-between bg-gray-100 p-4 rounded shadow mb-4">
+                    <li className="flex items-center justify-between bg-[rgb(242,247,250)] p-4 rounded shadow mb-4">
                         <div className="flex w-full items-center gap-2">
-                            <ScheduleIcon className="w-8 h-8 text-[rgb(255,200,60)]" />
+                            <ScheduleIcon className="w-8 h-8 text-[rgb(236,203,206)]" />
 
                             {sure ? (
                                 <LocalizationProvider dateAdapter={AdapterDateFns} locale={trLocale}>
@@ -177,7 +177,7 @@ const Index = ({ id }) => {
                             null : <button
                                 type="button"
                                 onClick={handleGetCalendar}
-                                className="bg-[rgb(255,200,60)] w-1/2 text-white px-4 py-1 rounded hover:bg-[rgb(255,127,58)]"
+                                className="bg-[rgb(236,203,206)] w-1/2 text-[rgb(242,247,250)] px-4 py-1 rounded hover:bg-[rgb(255,127,58)]"
                             >
                                 Bitiş Tarihi Ekle
                             </button>}
@@ -186,7 +186,7 @@ const Index = ({ id }) => {
                     <div>
                         {promptPhone || location || sure ? <button
                             type="submit"
-                            className="bg-amber-600 w-full text-white px-4 py-2 rounded"
+                            className="bg-[rgb(255,176,73)] w-full text-[rgb(242,247,250)] px-4 py-2 rounded"
                         >
                             Tümünü Kaydet
                         </button> : null}
@@ -196,15 +196,15 @@ const Index = ({ id }) => {
 
             </ul>
 
-            <hr />
+            <hr  className="text-gray-100"/>
 
-            <h1 className="text-3xl font-bold text-center">Detaylar</h1>
-            <span className="mb-4 text-xl font-bold text-gray-800 text-left">
+            <h1 className="text-3xl font-bold text-center text-gray-600">Detaylar</h1>
+            <span className="mb-4 text-xl font-bold text-gray-600 text-left">
                 {storedData.anaBaslik}
             </span>
 
-            <div className="mb-4 text-xl font-bold text-gray-800 text-left">
-                <span className="text-sm text-gray-500">
+            <div className="mb-4 text-xl font-bold text-gray-600 text-left">
+                <span className="text-sm text-gray-400">
                     Durum: {storedData.durum}<br />
                     İlan Tarihi:{new Date(storedData.baslangicTarihi).toLocaleDateString("TR-tr")}
                     {storedData.bitisTarihi ?
@@ -237,7 +237,7 @@ const Index = ({ id }) => {
                                 >
                                     <div className="flex flex-col">
 
-                                        <span className="font-semibold text-gray-800">
+                                        <span className="font-semibold text-gray-600">
                                             {item.kategoriIsim || "Kategori belirtilmemiş"}
                                         </span>
 
@@ -249,7 +249,7 @@ const Index = ({ id }) => {
                                     </div>
 
                                     <div className="flex items-center gap-4 mt-2 md:mt-0">
-                                        <span className="font-medium text-green-600">
+                                        <span className="font-medium text-[rgb(78,36,77)]">
                                             Seçilen: {item.secilen || "Yok"}
                                         </span>
 
@@ -269,7 +269,7 @@ const Index = ({ id }) => {
             </ul>
 
             <div className="mt-6">
-                <span className="text-xl font-bold">Mesajlar</span>
+                <span className="text-xl font-bold text-gray-600">Mesajlar</span>
                 <Card sx={{ display: "flex", mt: 2, borderRadius: 2, boxShadow: 3 }}>
                     <CardMedia
                         component="img"

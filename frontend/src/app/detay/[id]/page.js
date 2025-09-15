@@ -31,7 +31,7 @@ export default function Page() {
     }
   }, [id]);
 
-  if (!steps) return <p className="text-center font-bold">Yükleniyor...</p>;
+  if (!steps) return <p className="text-center font-bold text-gray-600">Yükleniyor...</p>;
 
   const progressPercent = ((currentStep + 1) / steps.length) * 100;
   const PostData = async (item) => {
@@ -48,7 +48,7 @@ export default function Page() {
     if (currentStep < steps.length - 1) {
       setCurrentStep((prev) => prev + 1);
     } else {
-      // Son adıma gelindi, POST işlemi yap
+
       const dataToSend = {
         primaryKey: id,
         anaBaslik: item.kategori.isim,
@@ -66,8 +66,8 @@ export default function Page() {
         konum: stored.kullanici.konum || null
       };
   
-      PostData(dataToSend); // API'ye gönder
-      setOpen(true);         // Onay modalını aç
+      PostData(dataToSend); 
+      setOpen(true);        
     }
   };
   
@@ -122,40 +122,41 @@ export default function Page() {
             </Alert>
           </Snackbar>
 
-          <p className='font-bold text-black text-left p-4 cursor-pointer' >Talebini Aldık</p>
+          <p className='font-bold text-gray-600  text-left p-4 cursor-pointer' >Talebini Aldık</p>
           <p className=' text-gray-300 text-left pl-3'>İstek aldığında e-postana bildirim gelicek.</p>
 
-          <Link href={`/hizmet/${storedData}`} className="font-bold hover:underline p-4 underline">
+          <Link href={`/hizmet/${storedData}`} className="font-bold hover:underline text-gray-600 p-4 underline">
             Detaylara bak
           </Link>
 
 
 
-          <img src="/siparis.jpg" width="30%" height="30%" className='m-auto' />
+          <img src="/2769497.png" width="45%" height="30%" className='m-auto' />
           <div className='flex justify-center gap-1 p-5'>
 
-            <button className=' p-3 text-red-600 rounded-md cursor-pointer' onClick={handleClick}>Talebi iptal et</button>
-            <button className='bg-amber-500 pl-4 pr-4 rounded-md text-white cursor-pointer' onClick={() => router.push("/ana-sayfa")}>İşlerime git</button>
+            <button className=' p-3 text-[rgb(237,203,206)] rounded-md cursor-pointer' onClick={handleClick}>Talebi iptal et</button>
+            <button  className=" rounded-4xl  pl-4 pr-4 cursor-pointer  bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:text-gray-50 hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-2"
+                        onClick={() => router.push("/ana-sayfa")}>İşlerime git</button>
           </div>
         </div>
         :
         <div className="w-1/2 mx-auto border-2 border-gray-100 p-3 rounded-lg">
 
-          <h2 className="text-xl font-semibold text-center mb-4">
+          <h2 className="text-xl font-semibold text-center mb-4 text-gray-600">
             {item.kategori.isim}
           </h2>
 
 
 
-          <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+          <div className="w-full bg-gray-100 rounded-full h-2.5 mb-4">
             <div
-              className="bg-green-500 h-2.5 rounded-full transition-all"
+              className="bg-[rgb(237,203,206)]  h-2.5 rounded-full transition-all"
               style={{ width: `${progressPercent}%` }}
             ></div>
           </div>
 
 
-          <h3 className="text-lg font-medium mb-2">
+          <h3 className="text-lg font-medium mb-2 text-gray-600">
             {steps[currentStep].baslik}
           </h3>
 
@@ -164,12 +165,12 @@ export default function Page() {
             {steps[currentStep].secenekler.map((option) => (
               <label
                 key={option}
-                className="flex items-center space-x-2 cursor-pointer"
+                className="flex items-center space-x-2 cursor-pointer text-gray-600"
               >
                 <input
                   type="radio"
                   name={`step-${currentStep}`}
-                  className="form-radio text-green-600"
+                  className="form-radio text-gra-600"
                   checked={answers[currentStep]?.secilen === option}
                   onChange={() => handleAnswer(option)}
                 />
@@ -183,7 +184,7 @@ export default function Page() {
           <div className="mt-6 flex justify-between">
             <button
               onClick={() => setShowExitModal(true)}
-              className="bg-amber-600 text-white px-4 py-2 rounded hover:bg-amber-700"
+              className="bg-[rgb(255,176,73)] text-[rgb(242,247,250)] px-4 py-2 rounded  hover:opacity-85"
             >
               Çık
             </button>
@@ -192,14 +193,14 @@ export default function Page() {
               {currentStep > 0 && (
                 <button
                   onClick={handleBack}
-                  className="border border-gray-400 px-4 py-2 rounded hover:bg-gray-100"
+                  className="border text-gray-400 border-gray-200 px-4 py-2 rounded hover:bg-gray-100"
                 >
                   Geri
                 </button>
               )}
               <button
                 onClick={handleNext}
-                className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                className="bg-[rgb(78,36,77)] text-[rgb(242,247,250)] px-4 py-2 rounded hover:bg-[rgb(78,36,77)] hover:opacity-85"
                 disabled={!answers[currentStep]}
               >
                 Devam
@@ -210,27 +211,28 @@ export default function Page() {
 
 
       {showExitModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-[rgb(242,247,250)] bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg w-96 shadow-lg text-center">
-            <h2 className="text-lg font-semibold mb-2">Emin misin?</h2>
-            <p className="text-sm text-gray-600 mb-4">
+            <h2 className="text-lg font-semibold mb-2 text-gray-600">Emin misin?</h2>
+            <p className="text-sm text-[rgb(242,247,250) mb-4">
               Birkaç soruya daha cevap vererek ücretsiz teklif alabilirsin.
             </p>
             <div className="space-y-2">
-              <button
-                onClick={() => setShowExitModal(false)}
-                className="w-full border border-gray-300 py-2 rounded hover:bg-gray-100"
-              >
-                Devam et
-              </button>
+
               <button
                 onClick={() => {
                   setShowExitModal(false);
                   router.push("/ana-sayfa");
                 }}
-                className="w-full bg-amber-600 text-white py-2 rounded hover:bg-amber-700"
+                className="w-full bg-[rgb(255,176,73)] rounded-4xl text-[rgb(242,247,250)] py-2  hover:bg-[rgb(255,176,73)] hover:opacity-85"
               >
                 Çık
+              </button>
+              <button
+                onClick={() => setShowExitModal(false)}
+                                className="w-full  mx-auto p-3 cursor-pointer rounded-md border border-gray-100 text-gray-600 hover:text-[rgb(242,247,250)] transition-colors duration-300 mt-2"
+              >
+                Devam et
               </button>
             </div>
           </div>
