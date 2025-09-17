@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { SifremiUnuttum } from "@/app/services/api";
 import "react-toastify/dist/ReactToastify.css";
 
 const Index = () => {
@@ -23,14 +23,24 @@ const Index = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5233/sifremi-unuttum", formData);
-      toast.loading(res.data.message, { position: "top-right", autoClose: 3000 });
+      
+   await SifremiUnuttum(formData);
+      toast.success("Bilgiler başarıyla güncellendi!", {
+        position: "top-right",
+        autoClose: 3000
+      });
+    
 
       setTimeout(() => {
         router.push("/");
       }, 3000);
+      localStorage.clear();
     } catch (error) {
-      toast.error(error.response?.data?.message || "Bir hata oluştu", { position: "top-right", autoClose: 3000 });
+       console.error(err);
+           toast.error("Sunucu hatası veya güncelleme başarısız!", {
+             position: "top-right",
+             autoClose: 3000
+           });
     }
   };
 

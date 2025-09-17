@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
-import axios from "axios";
+import {fetchUsersGet,fetchKonusmalarGet,fetchMessagesGet,sendMessage} from "../../services/api"
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5233";
 const socket = io(baseUrl);
@@ -15,7 +15,7 @@ const ChatUI = ({ id }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
-  const localId = storedData?.kullanici?.id;
+  const localId = storedData?.kullanici.id;
   const gonderenId = localId;
 
 
@@ -37,18 +37,20 @@ const ChatUI = ({ id }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get(`${baseUrl}/kullanicilar`);
-        setUserList(res.data.kullanicilar);
+        const res = await fetchUsersGet();
+        setUserList(res); 
 
       } catch (error) {
         console.error("Kullanıcı çekme hatası:", error);
       }
     };
+    
 
     const fetchKonusmalar = async () => {
       try {
-        const res = await axios.get(`${baseUrl}/konusmalar/${aliciIdStored}`);
-        setData(res.data);
+        const res = await fetchKonusmalarGet(aliciIdStored);
+        setData(res);
+
 
       } catch (error) {
         console.error("Mesaj çekme hatası:", error);
@@ -61,15 +63,15 @@ const ChatUI = ({ id }) => {
     setStoredData(stored);
   }, [aliciIdStored]);
 
-  const fetchMessages = async (userId) => {
+  const fetchMessages = async (gonderenId, userId) => {
     try {
-      const res = await axios.get(`${baseUrl}/mesajlar/${gonderenId}/${userId}`);
-      setMessages(res.data);
+      const res = await fetchMessagesGet(gonderenId, userId);
+      setMessages(res);
     } catch (error) {
       console.error("Mesaj çekme hatası:", error);
     }
   };
-
+  
   const handleSend = async (e) => {
     e.preventDefault();
     if (!newMessage || !selectedUser) return;
@@ -82,8 +84,8 @@ const ChatUI = ({ id }) => {
     };
 
     try {
-      const res = await axios.post(`${baseUrl}/mesajlar`, msgData);
-      const savedMsg = res.data;
+      const res = await sendMessage(msgData);
+      const savedMsg = res;
       socket.emit("sendMessage", savedMsg);
       setMessages((prev) => [...prev, savedMsg]);
       setNewMessage("");
@@ -91,15 +93,15 @@ const ChatUI = ({ id }) => {
       console.error("Mesaj gönderme hatası:", err);
     }
   };
+
   const filteredData = userList.filter(user =>
-    user._id !== gonderenId &&
-    data.some(kon =>
+    user?._id !== gonderenId &&
+    data?.some(kon =>
       (kon.gonderenId === user._id && kon.aliciId === gonderenId) ||
       (kon.aliciId === user._id && kon.gonderenId === gonderenId)
     )
-  );
-
-
+  ) || [];
+  console.log(filteredData)
   return (
     <div className="flex h-[80vh] bg-gray-100">
 
@@ -111,7 +113,7 @@ const ChatUI = ({ id }) => {
               key={item._id}
               onClick={() => {
                 setSelectedUser(item._id);
-                fetchMessages(item._id);
+                fetchMessages(gonderenId, item._id); 
               }}
               className="cursor-pointer pl-10 text-gray-600 font-bold  mb-2 hover:bg-gray-100 p-2 rounded"
             >

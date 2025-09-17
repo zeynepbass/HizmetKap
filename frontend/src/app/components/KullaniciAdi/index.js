@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import axios from "axios"
+import {passwordSend} from "../../services/api"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -21,7 +21,8 @@ const Index = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const res = await axios.post("http://localhost:5233/sifre-gonder", formData)
+    
+            const res = passwordSend(formData)
             toast.loading("Kayıt başarılı!", { position: "top-right", autoClose: 3000 })
             localStorage.setItem("kullaniciAdi", JSON.stringify(res.data))
             setTimeout(() => {

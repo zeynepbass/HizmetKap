@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import axios from "axios";
+import {getTadilatById,postAktifTadilat} from "../../../app/services/api"
 import Link from "next/link";
 import {Snackbar, Alert } from '@mui/material';
 export default function Page() {
@@ -20,14 +20,12 @@ export default function Page() {
   const [item, setItem] = useState("");
   useEffect(() => {
     if (id) {
-      axios
-        .get(`http://localhost:5233/tadilat/${id}`)
-        .then((res) => {
-          const data = res.data[0];
+      getTadilatById(id).then((data) => {
+        if (data) {
           setSteps(data.adimlar);
           setItem(data);
-        })
-        .catch((err) => console.error("Veri çekilemedi:", err));
+        }
+      });
     }
   }, [id]);
 
@@ -36,9 +34,9 @@ export default function Page() {
   const progressPercent = ((currentStep + 1) / steps.length) * 100;
   const PostData = async (item) => {
     try {
-      const response = await axios.post("http://localhost:5233/aktifTadilat", item);
-      localStorage.setItem("item", response.data.primaryKey);
-      localStorage.setItem("itemDurum", response.data._id);
+      const response = await postAktifTadilat(item);
+      localStorage.setItem("item", response.primaryKey);
+      localStorage.setItem("itemDurum", response._id);
     } catch (err) {
       console.error("Post işlemi başarısız:", err);
     }
@@ -91,10 +89,8 @@ export default function Page() {
   const handleClick = async () => {
     const durumId = localStorage.getItem("itemDurum")
     const newDurum = "iptal"
+     await updateDurum(durumId, newDurum);
 
-    await axios.put(`http://localhost:5233/aktifTadilat/durum/${durumId}`, {
-      durum: newDurum,
-    });
     setOpenDialog(true);
 
 

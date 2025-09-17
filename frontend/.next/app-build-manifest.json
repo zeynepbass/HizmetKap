@@ -12,10 +12,20 @@
       "static/css/app/hizmet/[id]/page.css",
       "static/chunks/app/hizmet/[id]/page.js"
     ],
+    "/[isim]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[isim]/page.js"
+    ],
     "/ana-sayfa/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/ana-sayfa/page.js"
+    ],
+    "/mesaj-kutusu/[id]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/mesaj-kutusu/[id]/page.js"
     ],
     "/hesap-bilgilerim/page": [
       "static/chunks/webpack.js",
@@ -23,10 +33,11 @@
       "static/css/app/hesap-bilgilerim/page.css",
       "static/chunks/app/hesap-bilgilerim/page.js"
     ],
-    "/[isim]/page": [
+    "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/[isim]/page.js"
+      "static/css/app/page.css",
+      "static/chunks/app/page.js"
     ],
     "/sifre-degistir/page": [
       "static/chunks/webpack.js",
@@ -34,33 +45,10 @@
       "static/css/app/sifre-degistir/page.css",
       "static/chunks/app/sifre-degistir/page.js"
     ],
-    "/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/page.css",
-      "static/chunks/app/page.js"
-    ],
     "/veri-ve-gizlilik/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/veri-ve-gizlilik/page.js"
-    ],
-    "/kayit-ol/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/kayit-ol/page.css",
-      "static/chunks/app/kayit-ol/page.js"
-    ],
-    "/sifremi-unuttum/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/sifremi-unuttum/page.css",
-      "static/chunks/app/sifremi-unuttum/page.js"
-    ],
-    "/mesaj-kutusu/[id]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/mesaj-kutusu/[id]/page.js"
     ]
   }
 }

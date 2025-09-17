@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useRouter } from "next/navigation";
-import axios from "axios"
+import {accountDelete,updateAccount} from "../../../services/api"
 const Index = () => {
 
     const items = [
@@ -22,30 +22,26 @@ const Index = () => {
             setIcon(true);
         }
     };
-
     const handleDurumDegistir = async () => {
         try {
-
-            const kullanici = JSON.parse(localStorage.getItem("kullanici"));
-            const res = await axios.put(
-                `http://localhost:5233/hesap/${kullanici.kullanici._id}`,
-                { hesap: false }
-            );
-
-
+          const kullanici = JSON.parse(localStorage.getItem("kullanici"));
+          const result = await updateAccount(kullanici.kullanici.id, false);
+      
+          if (result.success) {
             localStorage.clear();
-            router.push("/")
-        } catch (error) {
+            router.push("/");
+          } else {
             alert("Hesap durumu güncellenemedi");
+          }
+        } catch (error) {
+          alert("Hesap durumu güncellenemedi");
         }
-    };
+      };
     const handleHesapSil = async () => {
         try {
 
             const kullanici = JSON.parse(localStorage.getItem("kullanici"));
-            const res = await axios.delete(
-                `http://localhost:5233/hesapSil/${kullanici.kullanici._id}`
-            );
+     await accountDelete(kullanici.kullanici.id)
 
             localStorage.clear();
             router.push("/")
@@ -59,7 +55,7 @@ const Index = () => {
                 <div className="w-full flex flex-col justify-center items-center">
 
 
-                    <div className="flex flex-col gap-4 mb-4">
+                    <div className="flex flex-col gap-4 p-4">
                         {items.map((item, index) => (
                             <>
                                 <h1
@@ -80,10 +76,11 @@ const Index = () => {
 
 
                     {openIndex !== null && items[openIndex] && (
-                        <div className="flex justify-center items-center h-[50vh] flex-col w-[60%]">
-                            <h6 className="font-bold text-xl mr-auto text-gray-500">{items[openIndex].baslik} </h6>
-
-                            <img src={items[openIndex].image} width="50%" height="30%" className="py-6" />
+                        <div className="flex justify-center items-center h-auto flex-col w-[60%]">
+                                 <br/>
+                            <h6 className="pb-4 font-bold text-xl m-auto text-gray-500">{items[openIndex].baslik} </h6>
+                       
+                            <img src={items[openIndex].image} width="50%" height="30%" className="" />
                             <p className='font-bold text-gray-400 text-md'>{items[openIndex].paragraf}</p>
                             <button
                                 onClick={() => {

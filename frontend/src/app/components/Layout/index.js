@@ -16,7 +16,6 @@ const Layout = ({ children }) => {
     if (stored) {
       setUser(JSON.parse(stored));
     } else {
-
       router.push("/");
     }
   }, [router]);
@@ -34,28 +33,23 @@ const Layout = ({ children }) => {
   ];
   const isSettingsPage = settingsPaths.includes(pathname);
 
-
-
   if (isLoginPage) return <>{children}</>;
-
   if (isSettingsPage) return <><LayoutSettings />{children}</>;
 
   return (
-    <div className="container-fluid grid grid-cols-12 h-[100vh]">
+    <div className="grid grid-cols-12 h-screen overflow-hidden">
 
-      <div className="col-span-12 md:col-span-2 bg-gray-100 h-[100vh]">
+      <div className="col-span-12 md:col-span-2 bg-gray-100 h-full overflow-auto">
         <SolSidebar />
       </div>
 
-
-      <div className="col-span-12 md:col-span-10 h-[100vh]">
+      <div className="col-span-12 md:col-span-10 flex flex-col h-full overflow-auto">
         <Header />
-        <main className="h-[100vh]">
+        <main className="flex-1 overflow-auto">
           {children}
         </main>
       </div>
     </div>
-
   );
 };
 

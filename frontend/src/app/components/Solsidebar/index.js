@@ -6,7 +6,7 @@ import TextsmsIcon from '@mui/icons-material/Textsms';
 import HesapDetails from "../../components/HesapDetails"
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import axios from "axios"
+import { getKategoriler } from "../../../app/services/api"
 const Index = () => {
   const [open, setOpen] = useState(false)
   const [category, setCategory] = useState([])
@@ -14,8 +14,8 @@ const Index = () => {
   const router = useRouter();
   const fetchCtegory = async () => {
     try {
-      await axios.get("http://localhost:5233/kategori")
-        .then((response) => setCategory(response.data))
+      const res = await getKategoriler()
+      setCategory(res)
 
     } catch (error) {
       console.log(error)
@@ -47,7 +47,7 @@ const Index = () => {
   }
   const sidebar = [
     { id: 1, text: "İşlerim", icon: <HomeRepairServiceIcon />, href: "/ana-sayfa" },
-    { id: 2, text: "Mesaj Kutusu", icon: <TextsmsIcon />, href: `/mesaj-kutusu/${storedData?.kullanici.id}` }
+    { id: 2, text: "Mesaj Kutusu", icon: <TextsmsIcon />, href: `/mesaj-kutusu/${storedData?.kullanici?.id}` }
   ];
   return (
     <div className="relative p-4 border-r border-none top-0 h-screen overflow-y-auto bg-white">
@@ -99,7 +99,7 @@ const Index = () => {
           <div className=" rounded-2xl p-4 mt-3 shadow-lg w-full bg-[rgb(78,36,77)]">
             <h6 className="text-gray-200 font-semibold mb-3">Popüler hizmetler</h6>
             <ul className="space-y-3">
-              {category.map((item) => (
+              {category?.map((item) => (
                 <li
                   key={item.isim}
                   className="flex items-center gap-3 p-2 rounded-lg cursor-pointer hover:bg-white hover:shadow transition-all duration-200"
@@ -119,14 +119,13 @@ const Index = () => {
           </div>
         )}
 
-
-        <ul className="pt-5 flex gap-3">
+{open ? null :  <ul className="pt-5 flex gap-3">
           {sidebar.map((item) => (
             <li
               key={item.id}
               onClick={() => handleClick(item.id)}
               className={`flex items-center gap-1 p-3 rounded-3xl cursor-pointer 
-                ${open ? "text-gray-600" : "text-gray-200"}
+            
         ${active === item.id ? " text-gray-200 hover:text-[rgb(255,176,73)]" : "text-gray-200"}`}
             >
               {item.icon}
@@ -135,7 +134,8 @@ const Index = () => {
               </Link>
             </li>
           ))}
-        </ul>
+        </ul>}
+       
 
 
       </div>

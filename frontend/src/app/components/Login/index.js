@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import axios from "axios"
+import {Login} from "../../services/api"
 const Index = () => {
     const router = useRouter()
     const [formData, setFormData] = useState({
@@ -22,11 +22,11 @@ const Index = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const res = await axios.post("http://localhost:5233/login", formData)
+            const res = await Login(formData)
             toast.loading("Giriş başarılı!", { position: "top-right", autoClose: 3000 })
             localStorage.setItem("kullanici", JSON.stringify(res.data))
-            if (res.data.token) {
-                document.cookie = `token=${res.data.token}; path=/; max-age=${60 * 60 * 24}`;
+            if (res.token) {
+                document.cookie = `token=${res.token}; path=/; max-age=${60 * 60 * 24}`;
             }
 
             setTimeout(() => {

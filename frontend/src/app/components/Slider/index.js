@@ -1,15 +1,16 @@
 "use client";
 import { useState, useEffect } from "react";
 import ThreePerViewCarousel from "../../components/ThreePerViewCarousel";
-
+import {getKategoriler} from "../../../app/services/api"
 export default function xPage() {
   const [slides, setSlides] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5233/kategori")
-      .then(res => res.json())
-      .then(data => setSlides(data))
-      .catch(err => console.error(err));
+    const fetchData = async () => {
+      const data = await getKategoriler();
+      setSlides(data);
+    };
+    fetchData();
   }, []);
 
   return (

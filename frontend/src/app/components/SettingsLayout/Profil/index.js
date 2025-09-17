@@ -4,13 +4,13 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from "axios";
 import KayitOl from "../../../components/KayitOl"
+import {updateHesap} from "../../../services/api"
 const Index = () => {
   const [form, setForm] = useState({ ad: "", soyad: "", email: "" });
   const [telefon, setTelefon] = useState("");
   const [resim, setResim] = useState(null);
-  const [preview, setPreview] = useState("/profile.jpg");
+  const [preview, setPreview] = useState(null);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -24,7 +24,7 @@ const Index = () => {
   };
 
   const kullaniciStorage = JSON.parse(localStorage.getItem("kullanici"));
-  const veri = kullaniciStorage.yeniKullanici || kullaniciStorage.kullanici
+  const id = kullaniciStorage.kullanici?.id
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -37,12 +37,8 @@ const Index = () => {
     if (resim) formData.append("resim", resim);
 
     try {
+      const res = await updateHesap(id, formData);
 
-      const res = await axios.put(
-        `http://localhost:5233/hesap/${veri._id}`,
-        formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
 
       toast.success("Bilgiler başarıyla güncellendi!", {
         position: "top-right",

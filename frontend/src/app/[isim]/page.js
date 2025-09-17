@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import axios from "axios";
+import {getAktifTadilat} from "../../app/services/api"
 
 export default function KategoriPage() {
   const params = useParams();
@@ -20,8 +20,8 @@ export default function KategoriPage() {
   }, []);
   const fetchTadilat = async () => {
     try {
-      const response = await axios.get("http://localhost:5233/aktifTadilat");
-      setCategory(response.data);
+      const response = await getAktifTadilat();
+      setCategory(response);
     } catch (error) {
       console.log(error);
     }
@@ -31,7 +31,8 @@ export default function KategoriPage() {
     fetchTadilat();
   }, []);
 
-  const toSlug = (text) => {
+
+  const toSlugUrl = (text) => {
     if (!text) return "";
     return text
       .toString()
@@ -42,22 +43,34 @@ export default function KategoriPage() {
       .replace(/ö/g, "o")
       .replace(/ş/g, "s")
       .replace(/ü/g, "u")
-      .replace(/[^a-z0-9\s-]/g, "")
+      .replace(/[^a-z0-9\s]/g, "") 
       .trim()
       .replace(/\s+/g, "-");
   };
+  
 
-  const filteredTadilat = category.filter((item) => 
-    toSlug(item?.anaBaslik) === isim &&
+  const toDisplay = (text) => {
+    if (!text) return "";
+    return text
+      .replace(/-/g, " ") 
+      .split(" ")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
+  };
+  
+
+  const filteredTadilat = category.filter((item) =>
+    toSlugUrl(item?.anaBaslik) === isim &&
     item?.durum === "aktif" &&
-    (storedKullaniciAdi || item?.email !== kullaniciStored?.kullanici.email)
+    (storedKullaniciAdi || item?.email !== kullaniciStored?.kullanici?.email)
   );
   
   return (
     <div className="p-6">
       <h1 className="text-2xl font-extrabold text-gray-700 mb-8 border-b-2 border-gray-200 pb-3">
-        Kategori: {filteredTadilat[0]?.anaBaslik || isim}
+      Kategori: {toDisplay(filteredTadilat[0]?.anaBaslik || isim)}
       </h1>
+    
 
       <div className="relative w-full mx-auto">
         {filteredTadilat.length > 0 ? (
@@ -125,7 +138,7 @@ export default function KategoriPage() {
             ))}
           </div>
         ) : (
-          <p className="text-center text-[rgb(242,247,250)] mt-16 text-lg font-medium">
+          <p className="text-center text-gray-400 mt-16 text-lg font-medium">
             Bu kategoriye ait tadilat bulunamadı.
           </p>
         )}

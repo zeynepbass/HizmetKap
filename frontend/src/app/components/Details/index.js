@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import Box from "@mui/material/Box";
@@ -14,28 +13,62 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import trLocale from 'date-fns/locale/tr';
 import KonumHarita from "../Konum";
-const Index = ({ id }) => {
+import { activeUpdated, getAktifTadilatDetails, fetchUsersGet, fetchKonusmalarGet } from "../../services/api"
 
+const Index = ({ paramsId }) => {
+    const id = paramsId;
 
     const [storedData, setStoredData] = useState({});
+    const [chat, setChat] = useState([]);
+
     const [location, setLocation] = useState("");
+    const [user, setUser] = useState([]);
     const [phone, setPhone] = useState("");
     const [sure, setSure] = useState("");
 
     const [promptPhone, setPromptPhone] = useState(false);
-    const fetchData = async () => {
-        if (!id) return;
-        try {
-          const res = await axios.get(`http://localhost:5233/aktifTadilat/${id}`);
-          setStoredData(res.data);
-        } catch (err) {
-          console.error("Veri çekilemedi:", err);
-        }
-      };
+    const fetchData = async (id) => {
 
-      useEffect(() => {
-        fetchData();
-      }, [id]);
+        try {
+            const res = await getAktifTadilatDetails(id);
+            setStoredData(res);
+
+        } catch (err) {
+            console.error("Veri çekilemedi:", err);
+        }
+    };
+    const fetchDataKonusmalar = async (id) => {
+        try {
+            const res = await fetchKonusmalarGet(id);
+            console.log("Konuşmalar API yanıtı:", res); 
+            setChat(res);
+        } catch (err) {
+            console.error("Veri çekilemedi:", err);
+        }
+    };
+
+    const fethUser = async () => {
+        try {
+            const res = await fetchUsersGet()
+            setUser(res)
+        } catch (error) {
+
+        }
+    }
+    useEffect(() => {
+        const storedData = JSON.parse(localStorage.getItem("kullanici") || "{}");
+        const getChat = storedData?.kullanici.id;
+        console.log("storedData", storedData.kullanici.id)
+        fetchData(id);
+        fethUser();
+
+        if (getChat) {
+            fetchDataKonusmalar(getChat);
+        } else {
+            console.warn("Kullanıcı ID bulunamadığı için chat fetch edilemiyor.");
+        }
+    }, [id]);
+
 
     const handleGetLocation = () => {
         if (navigator.geolocation) {
@@ -61,26 +94,29 @@ const Index = ({ id }) => {
         const formData = {
             konum: location,
             telefonNo: phone,
-            bitisTarihi: sure
+            bitisTarihi: sure ? sure.toISOString() : null
         };
 
         try {
 
-            await axios.put(
-                `http://localhost:5233/aktifUpdated/${id}`,
-                formData
-            );
+            await activeUpdated(id, formData)
             setLocation("");
-            setPromptPhone("");
-            setSure("");
-            fetchData(); 
+            setPromptPhone(false);
+            setSure(null);
+
+            fetchData(id);
+            fetchKonusmalarGet()
         } catch (error) {
             console.log(error);
         }
     };
+    const filteredData = user.filter(userItem =>
+        chat.some(chatItem => chatItem.gonderenId === userItem._id)
+    );
+
 
     return (
-        <div className="max-w-3xl mx-auto p-4 space-y-6">
+        <div className="max-w-3xl mx-auto p-4 space-y-6 ">
             <ul className="list-none space-y-4">
                 <form onSubmit={handleSubmit}>
                     <li className="flex items-center justify-between bg-[rgb(242,247,250)] p-4 rounded shadow mb-4">
@@ -120,7 +156,7 @@ const Index = ({ id }) => {
                                     type="text"
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
-                                    className="border w-full border-gray-100 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-hover:bg-[rgb(255,127,58)]"
+                                    className="border w-full border-gray-100 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-[rgb(255,127,58)]"
                                     placeholder="Telefon numaranız"
                                 />
                             ) : (
@@ -196,26 +232,26 @@ const Index = ({ id }) => {
 
             </ul>
 
-            <hr  className="text-gray-100"/>
+            <hr className="text-gray-100" />
 
             <h1 className="text-3xl font-bold text-center text-gray-600">Detaylar</h1>
             <span className="mb-4 text-xl font-bold text-gray-600 text-left">
-                {storedData.anaBaslik}
+                {storedData?.anaBaslik}
             </span>
 
             <div className="mb-4 text-xl font-bold text-gray-600 text-left">
                 <span className="text-sm text-gray-400">
-                    Durum: {storedData.durum}<br />
-                    İlan Tarihi:{new Date(storedData.baslangicTarihi).toLocaleDateString("TR-tr")}
-                    {storedData.bitisTarihi ?
+                    Durum: {storedData?.durum}<br />
+                    İlan Tarihi:{new Date(storedData?.baslangicTarihi).toLocaleDateString("TR-tr")}
+                    {storedData?.bitisTarihi ?
                         <>
-                            -{new Date(storedData.bitisTarihi).toLocaleDateString("TR-tr")}
+                            -{new Date(storedData?.bitisTarihi).toLocaleDateString("TR-tr")}
                         </>
                         : null}<br />
-                    {storedData.konum ? (
+                    {storedData?.konum ? (
                         <div>
                             <p className="font-medium text-gray-700 mb-2">Konum:</p>
-                            <KonumHarita konum={storedData.konum} />
+                            <KonumHarita konum={storedData?.konum} />
                         </div>
                     ) : null}
 
@@ -230,7 +266,7 @@ const Index = ({ id }) => {
                 <div className="flex flex-wrap gap-3">
 
                     <ul className="space-y-4 w-full">
-                        {storedData.veriler && storedData.veriler.map((item) => {
+                        {storedData?.veriler && storedData?.veriler.map((item) => {
                             return (
                                 <li key={item._id}
                                     className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white p-4 rounded-lg shadow hover:shadow-md transition w-full"
@@ -270,28 +306,42 @@ const Index = ({ id }) => {
 
             <div className="mt-6">
                 <span className="text-xl font-bold text-gray-600">Mesajlar</span>
-                <Card sx={{ display: "flex", mt: 2, borderRadius: 2, boxShadow: 3 }}>
-                    <CardMedia
-                        component="img"
-                        sx={{ width: 140 }}
-                        image="/static/images/cards/live-from-space.jpg"
-                        alt="Live from space album cover"
-                    />
-                    <Box sx={{ display: "flex", flexDirection: "column" }}>
-                        <CardContent sx={{ flex: "1 0 auto" }}>
-                            <Typography component="div" variant="h6">
-                                Live From Space
-                            </Typography>
-                            <Typography
-                                variant="subtitle1"
-                                component="div"
-                                sx={{ color: "text.secondary" }}
-                            >
-                                Mac Miller
-                            </Typography>
-                        </CardContent>
-                    </Box>
-                </Card>
+                <Box sx={{ display: "flex", gap: 2 }}>
+                    <Card sx={{ display: "flex", mt: 2, borderRadius: 2, boxShadow: 3 }}>
+                        {filteredData.map(item => {
+                            return (
+
+                                <>
+
+                                    {item.resim ? <CardMedia
+                                        component="img"
+                                        sx={{ width: 140 }}
+
+                                        image={item.resim}
+                                        alt=""
+                                    /> : null}
+
+                                    <CardContent key={item._id} sx={{ flex: "1 0 auto" }}>
+                                        <Typography component="div" variant="h6">
+                                            {item.ad.toUpperCase()} {item.soyad.toUpperCase()}
+                                        </Typography>
+                                        <Typography
+                                            variant="subtitle1"
+                                            component="div"
+                                            sx={{ color: "text.secondary" }}
+                                        >
+                                            {item.email}
+                                        </Typography>
+                                    </CardContent>
+
+
+                                </>
+                            )
+                        })
+                        }
+                    </Card>
+                </Box>
+
             </div>
         </div>
     );

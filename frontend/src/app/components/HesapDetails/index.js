@@ -12,28 +12,29 @@ const Index = () => {
   const [kullaniciStored, setKullaniciStored] = useState(null);
   const [kullaniciAdi, setKullaniciAdi] = useState(null);
   const router = useRouter();
-
-  useEffect(() => {
-
-    const stored = JSON.parse(localStorage.getItem("kullanici"));
-    const adStored = JSON.parse(localStorage.getItem("kullaniciAdi"));
-
-    setKullaniciStored(stored);
-    setKullaniciAdi(adStored);
-
-    if (stored) {
-      fetchData(stored?.kullanici._id || stored?.kullanici.id);
-    }
-  }, []);
-
   const fetchData = async (id) => {
     try {
       const res = await axios.get(`http://localhost:5233/kullanici/${id}`);
       setData(res.data);
+
     } catch (error) {
       console.error("Kullanıcı verisi alınamadı:", error);
     }
   }
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("kullanici"));
+    const adStored = JSON.parse(localStorage.getItem("kullaniciAdi"));
+  
+    setKullaniciStored(stored);
+    setKullaniciAdi(adStored);
+  
+    if (stored) { 
+      fetchData(stored?.kullanici._id || stored?.kullanici.id);
+    }
+  }, []);
+  
+
+
 
 
 

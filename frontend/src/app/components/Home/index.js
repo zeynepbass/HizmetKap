@@ -1,18 +1,16 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import Slider from "../../components/Slider";
 import ToggleOnIcon from "@mui/icons-material/ToggleOn";
 import ToggleOffIcon from "@mui/icons-material/ToggleOff";
-
-const Home = () => {
+import {updateDurum} from "../../services/api"
+const Home = ({itemsAktif: initialItems}) => {
   const router = useRouter();
-
-  const [itemsAktif, setItemsAktif] = useState([]);
+const [itemsAktif,setItemsAktif]=useState(initialItems)
   const [showText, setShowText] = useState({});
   const [openIndex, setOpenIndex] = useState(0);
-
+  const [storedData, setStoredData] = useState("");
   const tabs = [
     {
       title: "Aktif işlerim",
@@ -29,18 +27,6 @@ const Home = () => {
     },
   ];
 
-  const getApiAktif = async () => {
-    try {
-      const response = await axios.get("http://localhost:5233/aktifTadilat");
-      setItemsAktif(response.data || []);
-    } catch (error) {
-      console.error("Veri çekme hatası:", error);
-    }
-  };
-
-  useEffect(() => {
-    getApiAktif();
-  }, []);
 
   useEffect(() => {
     const initialState = {};
@@ -48,35 +34,30 @@ const Home = () => {
       initialState[item._id] = item.durum === "aktif";
     });
     setShowText(initialState);
+    const kullanici=JSON.parse(localStorage.getItem("kullanici"))
+    setStoredData(kullanici)
   }, [itemsAktif]);
 
   const handleSubmit = async (e, id) => {
-    console.log(id)
     e.preventDefault();
-    const newDurum = showText[id] ? "pasif" : "aktif";
-    try {
-      await axios.put(`http://localhost:5233/aktifTadilat/durum/${id}`, {
-        durum: newDurum,
-      });
+    const result = await updateDurum(id, showText[id]);
+    if (result.success) {
       setShowText((prev) => ({
         ...prev,
         [id]: !prev[id],
       }));
-
+  
       setItemsAktif((prev) =>
         prev.map((item) =>
-          item._id === id ? { ...item, durum: newDurum } : item
+          item._id === id ? { ...item, durum: result.newDurum } : item
         )
       );
-    } catch (error) {
-      console.error("Durum güncellenemedi:", error);
     }
   };
 
-
   const aktifIsler = itemsAktif.filter((item) => item.durum === "aktif");
   const pasifIsler = itemsAktif.filter((item) => item.durum === "pasif" || item.durum === "iptal");
-const storedData=JSON.parse(localStorage.getItem("kullanici"))
+
 
   const aktifMi = openIndex === 0;
   const seciliIsler = aktifMi ? aktifIsler : pasifIsler;

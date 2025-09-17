@@ -1,7 +1,11 @@
-import React from 'react'
-import Home from "../components/Home"
-const page = () => {
-  return <Home/>
-}
+import React from "react";
+import { getAktifTadilat } from "../services/api";
+import HomeClient from "../components/Home";
 
-export default page
+const Page = async () => {
+  const itemsAktif = await getAktifTadilat();
+
+  return <HomeClient itemsAktif={itemsAktif} />;
+};
+
+export default Page;
