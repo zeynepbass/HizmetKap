@@ -1,7 +1,0 @@
-{
-  "/ana-sayfa/page": "app/ana-sayfa/page.js",
-  "/page": "app/page.js",
-  "/hesap-bilgilerim/page": "app/hesap-bilgilerim/page.js",
-  "/sifre-degistir/page": "app/sifre-degistir/page.js",
-  "/veri-ve-gizlilik/page": "app/veri-ve-gizlilik/page.js"
-}

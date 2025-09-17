@@ -16,9 +16,6 @@ router.get("/aktifTadilat/:primaryKey", aktif.getAktifById);
 router.put("/aktifTadilat/durum/:id", aktif.updateDurum);
 router.get("/aktifTadilat", aktif.getAktif);
 // !tadilatroutes
-router.get("/tadilat", tadilat.listTadilat);
-router.post("/tadilat", tadilat.createTadilat);
-router.get("/tadilat/:kategoriId", tadilat.getTadilatById);
 router.put("/tadilat/:id", tadilat.updateTadilat);
 
 // !kullanıcı

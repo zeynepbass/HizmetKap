@@ -8,9 +8,7 @@ const stepSchema = new mongoose.Schema({
 
 const tadilatSchema = new mongoose.Schema({
   kategori: { type: mongoose.Schema.Types.ObjectId, ref: "Kategori", required: true },
- 
   adimlar: [stepSchema],                   
-  
   tarih: { type: Date, default: Date.now },
   bitirmeTarihi: { type: Date },
   durum: { type: String, enum: ["aktif", "pasif", "iptal"], default: "aktif" }
