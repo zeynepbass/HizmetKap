@@ -40,7 +40,7 @@ const [itemsAktif,setItemsAktif]=useState(initialItems)
 
   const handleSubmit = async (e, id) => {
     e.preventDefault();
-    const result = await updateDurum(id, showText[id]);
+    const result = await updateDurum(id, showText[id],false);
     if (result.success) {
       setShowText((prev) => ({
         ...prev,
@@ -81,10 +81,10 @@ const [itemsAktif,setItemsAktif]=useState(initialItems)
   
 
     <div className="flex-1 overflow-auto ">
-      {filteredData.length === 0 ? (
+      {filteredData.reverse().length === 0 ? (
         <div className="flex flex-col items-center justify-center pb-4 bg-gray-50 w-full text-center">
           {tabs[openIndex].image && (
-            <img src={tabs[openIndex].image} className="w-3/4 sm:w-2/5 mb-4" />
+            <img src={tabs[openIndex].image} className="w-full h-full" />
           )}
           <p className="font-bold text-[rgb(242,247,250)] mb-2">{tabs[openIndex].content}</p>
           {tabs[openIndex].button && (

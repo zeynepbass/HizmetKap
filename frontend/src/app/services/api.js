@@ -11,9 +11,31 @@ export const fetchUsersGet = async () => {
     return [];
   }
 };
+export const scoreUpdated = async (kullaniciId, rating, comment) => {
+  try {
+    const res = await axios.put(`${API_BASE}/degerlendirme/${kullaniciId}`, {
+      rating,
+      comment,
+    });
+    return res.data; 
+  } catch (error) {
+    console.error("Kullanıcı değerlendirme hatası:", error);
+    return null;
+  }
+};
+
 export const fetchKonusmalarGet = async (getChat) => {
   try {
     const res = await axios.get(`${API_BASE}/konusmalar/${getChat}`);
+    return res.data || [];
+  } catch (error) {
+    console.error("Konuşmalar çekilemedi:", error);
+    return [];
+  } 
+};
+export const MessageDelete = async (gonderenId, userId) => {
+  try {
+    const res = await axios.delete(`${API_BASE}/${gonderenId}/${userId}`);
     return res.data || [];
   } catch (error) {
     console.error("Konuşmalar çekilemedi:", error);
@@ -160,7 +182,6 @@ export const updateHesap = async (id, formData) => {
 
   export const activeUpdated = async (id, formData) => {
     try {
-        console.log(formData)
         const res = await axios.put(`${API_BASE}/aktifUpdated/${id}`, formData, {
             headers: { "Content-Type": "application/json" },
           });
@@ -181,20 +202,22 @@ export const getTadilatById = async (id) => {
       return null;
     }
   };
-export const updateDurum = async (id, currentShowText) => {
-  const newDurum = currentShowText ? "pasif" : "aktif";
-  try {
-    await axios.put(`${API_BASE}/aktifTadilat/durum/${id}`, {
-      durum: newDurum,
-    });
-    getAktifTadilat();
-    return { success: true, newDurum };
+  export const updateDurum = async (id, currentShowText, forceIptal = false) => {
 
-  } catch (error) {
-    console.error("Durum güncellenemedi:", error);
-    return { success: false };
-  }
-};
+    const newDurum = forceIptal ? "iptal" : (currentShowText ? "pasif" : "aktif");
+  
+    try {
+      await axios.put(`${API_BASE}/aktifTadilat/durum/${id}`, {
+        durum: newDurum,
+      });
+      getAktifTadilat();
+      return { success: true, newDurum };
+    } catch (error) {
+      console.error("Durum güncellenemedi:", error);
+      return { success: false };
+    }
+  };
+  
 export const handleRegisterPost=async(formData)=>{
     try{
     const res=    await axios.post(`${API_BASE}/kayit`, formData);

@@ -4,6 +4,41 @@ import multer from "multer";
 import jwt from "jsonwebtoken";
 
 
+export const degerlendirmeGuncelleByUser = async (req, res) => {
+  try {
+    const { id } = req.params; // Postman’de gönderilen id
+    const { rating, comment } = req.body;
+
+    if (rating == null)
+      return res.status(400).json({ message: "Rating zorunlu" });
+
+    // MongoDB _id kullanıyorsan:
+    const user = await Kullanici.findById(id);
+
+    // Eğer kendi id alanına göre arayacaksan:
+    // const user = await Kullanici.findOne({ id: id });
+
+    if (!user)
+      return res.status(404).json({ message: "Kullanıcı bulunamadı" });
+
+    user.rating = rating;
+    user.comment = comment || user.comment;
+
+    await user.save();
+
+    res.status(200).json({
+      message: "Değerlendirme kaydedildi",
+      rating: user.rating,
+      comment: user.comment,
+    });
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ message: "Değerlendirme kaydedilemedi", error: err.message });
+  }
+};
+
 export const login = async (req, res) => {
   try {
     const { email, parola } = req.body;
@@ -239,3 +274,4 @@ export const kullaniciGuncelle = [
     }
   },
 ];
+

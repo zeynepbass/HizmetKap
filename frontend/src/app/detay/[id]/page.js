@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import {getTadilatById,postAktifTadilat} from "../../../app/services/api"
+import {getTadilatById,postAktifTadilat,updateDurum} from "../../../app/services/api"
 import Link from "next/link";
 import {Snackbar, Alert } from '@mui/material';
 export default function Page() {
@@ -85,17 +85,17 @@ export default function Page() {
       return updated;
     });
   };
-  
+
   const handleClick = async () => {
-    const durumId = localStorage.getItem("itemDurum")
-    const newDurum = "iptal"
-     await updateDurum(durumId, newDurum);
-
-    setOpenDialog(true);
-
-
-  }
-  const handleClose = (event, reason) => {
+    const durumId = localStorage.getItem("itemDurum");
+    const result = await updateDurum(durumId, null, true); 
+  
+    if (result.success) {
+      setOpenDialog(true);
+    }
+  };
+  
+  const handleClose = (reason) => {
     if (reason === 'clickaway') {
       return;
     }

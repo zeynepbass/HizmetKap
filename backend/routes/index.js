@@ -17,10 +17,13 @@ router.put("/aktifTadilat/durum/:id", aktif.updateDurum);
 router.get("/aktifTadilat", aktif.getAktif);
 // !tadilatroutes
 router.put("/tadilat/:id", tadilat.updateTadilat);
-
+router.get("/tadilat", tadilat.listTadilat);
+router.post("/tadilat", tadilat.createTadilat);
+router.get("/tadilat/:kategoriId", tadilat.getTadilatById);
 // !kullanıcı
 router.get("/kullanicilar", kayit.kullanicilariListele);
 router.get("/kullanici/:id", kayit.kullaniciDetay);
+router.put("/degerlendirme/:id", kayit.degerlendirmeGuncelleByUser);
 
 router.post("/login", kayit.login);
 router.post("/kayit", kayit.kayitOl);

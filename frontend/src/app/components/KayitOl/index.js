@@ -24,16 +24,38 @@ const Index = () => {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         try {
-            const res = await handleRegisterPost(formData);
-            toast.success("Kayıt başarılı!", { position: "top-right", autoClose: 3000 })
-            localStorage.setItem("kullanici", JSON.stringify(res.data))
-            setTimeout(() => router.push("/"), 100)
+          const res = await handleRegisterPost(formData);
+      
+          if (res.data && res.data.yeniKullanici) {
+
+            toast.success(res.data.message || "Kayıt başarılı!", {
+              position: "top-right",
+              autoClose: 3000,
+            });
+      
+
+            localStorage.setItem("kullanici", JSON.stringify(res.data.yeniKullanici));
+            localStorage.removeItem("kullaniciAdi");
+      
+            setTimeout(() => router.push("/"), 100);
+          } else {
+        
+            toast.error("Kayıt sırasında beklenmedik bir cevap alındı", {
+              position: "top-right",
+              autoClose: 3000,
+            });
+          }
         } catch (error) {
-            toast.error(error.response?.data?.message || "Bir hata oluştu", { position: "top-right", autoClose: 3000 })
+
+          toast.error(
+            error.response?.data?.message || "Bir hata oluştu",
+            { position: "top-right", autoClose: 3000 }
+          );
         }
-    }
+      };
+      
 useEffect(()=>{
   const store = JSON.parse(localStorage.getItem("kullanici"));
   setKullaniciStore(store)

@@ -40,7 +40,6 @@ const Index = ({ paramsId }) => {
     const fetchDataKonusmalar = async (id) => {
         try {
             const res = await fetchKonusmalarGet(id);
-            console.log("Konuşmalar API yanıtı:", res); 
             setChat(res);
         } catch (err) {
             console.error("Veri çekilemedi:", err);
@@ -58,7 +57,6 @@ const Index = ({ paramsId }) => {
     useEffect(() => {
         const storedData = JSON.parse(localStorage.getItem("kullanici") || "{}");
         const getChat = storedData?.kullanici.id;
-        console.log("storedData", storedData.kullanici.id)
         fetchData(id);
         fethUser();
 

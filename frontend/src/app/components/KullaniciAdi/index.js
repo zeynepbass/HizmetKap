@@ -19,21 +19,37 @@ const Index = () => {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        try {
-    
-            const res = passwordSend(formData)
-         
-            toast.loading("Kayıt başarılı!", { position: "top-right", autoClose: 3000 })
+        e.preventDefault();
+      
 
-            setTimeout(() => {
-                router.push("/ana-sayfa")
-            }, 3000)
-        } catch (error) {
-            toast.error(error.response?.data?.message || "Bir hata oluştu", { position: "top-right", autoClose: 3000 })
+        if (!formData.kullaniciAdi || formData.kullaniciAdi.trim() === "") {
+          toast.error("Kullanıcı adı boş olamaz!", {
+            position: "top-right",
+            autoClose: 3000,
+          });
+          return;
         }
-    }
-
+      
+        try {
+          const res = await passwordSend(formData);
+      
+          toast.success(res.data?.message || "İşlem başarılı!", {
+            position: "top-right",
+            autoClose: 3000,
+          });
+      
+          setTimeout(() => {
+            router.push("/ana-sayfa");
+          }, 3000);
+        } catch (error) {
+          toast.error(error.response?.data?.message || "Bir hata oluştu", {
+            position: "top-right",
+            autoClose: 3000,
+          });
+        }
+      };
+      
+      
     return (
         <div className="flex justify-center items-center min-h-screen bg-white-50 ">
             <ToastContainer />

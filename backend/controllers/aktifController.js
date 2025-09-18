@@ -9,6 +9,7 @@ export const createAktif = async (req, res) => {
       durum,
       ad,
       email,
+      ratting,
       kullaniciId,
       telefonNo,
       konum,
@@ -45,6 +46,7 @@ export const createAktif = async (req, res) => {
       veriler: kayit.veriler,
       durum: kayit.durum,
       ad: kayit.ad,
+      
       email: kayit.email,
       kullaniciId: kayit.kullaniciId,
       telefonNo: kayit.telefonNo,

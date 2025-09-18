@@ -3,14 +3,15 @@ import mongoose from "mongoose";
 const stepSchema = new mongoose.Schema({
   baslik: { type: String, required: true }, 
   secenekler: [{ type: String }], 
-  secilen: { type: String }             
+  secilen: { type: String, default: null }
+            
 });
 
 const tadilatSchema = new mongoose.Schema({
   kategori: { type: mongoose.Schema.Types.ObjectId, ref: "Kategori", required: true },
   adimlar: [stepSchema],                   
   tarih: { type: Date, default: Date.now },
-  bitirmeTarihi: { type: Date },
+  bitirmeTarihi: { type: Date, default: null },
   durum: { type: String, enum: ["aktif", "pasif", "iptal"], default: "aktif" }
 });
 

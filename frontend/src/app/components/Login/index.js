@@ -20,23 +20,32 @@ const Index = () => {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         try {
-            const res = await Login(formData)
-
-            toast.loading("Giriş başarılı!", { position: "top-right", autoClose: 3000 })
-            localStorage.setItem("kullanici", JSON.stringify(res.data))
-            if (res.token) {
-                document.cookie = `token=${res.token}; path=/; max-age=${60 * 60 * 24}`;
-            }
-
-            setTimeout(() => {
-                router.push("/ana-sayfa")
-            }, 3000)
+          toast.dismiss(); 
+          const res = await Login(formData); 
+      
+          toast.success("Giriş başarılı!", { position: "top-right", autoClose: 3000 });
+      
+          localStorage.setItem("kullanici", JSON.stringify(res.data.kullanici));
+      
+          if (res.data.token) {
+            document.cookie = `token=${res.data.token}; path=/; max-age=${60 * 60 * 24}`;
+          }
+      
+          setTimeout(() => {
+            router.push("/ana-sayfa");
+          }, 3000);
         } catch (error) {
-            toast.error(error.response?.data?.message || "Bir hata oluştu", { position: "top-right", autoClose: 3000 })
+          toast.dismiss();
+          toast.error(error.response?.data?.message || "Bir hata oluştu", {
+            position: "top-right",
+            autoClose: 3000,
+          });
         }
-    }
+      };
+      
+      
 
     return (
         <div className="container mx-auto min-h-screen flex items-center justify-center">

@@ -19,30 +19,53 @@ const Index = () => {
       [e.target.name]: e.target.value
     });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
+  
 
-      await SifremiUnuttum(formData);
-      toast.success("Bilgiler başarıyla güncellendi!", {
+    if (
+      !formData.email ||
+      !formData.yeniParola ||
+      !formData.yeniParolaTekrar
+    ) {
+      toast.error("Lütfen tüm alanları doldurun!", {
         position: "top-right",
-        autoClose: 3000
+        autoClose: 3000,
       });
+      return; 
+    }
+  
 
-
+    if (formData.yeniParola !== formData.yeniParolaTekrar) {
+      toast.error("Yeni şifreler eşleşmiyor!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+      return;
+    }
+  
+    try {
+      const res = await SifremiUnuttum(formData);
+  
+      toast.success(res.data?.message || "Şifre başarıyla güncellendi!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+  
+      localStorage.clear();
+  
       setTimeout(() => {
         router.push("/");
       }, 3000);
-      localStorage.clear();
-    } catch (error) {
+    } catch (err) {
       console.error(err);
       toast.error("Sunucu hatası veya güncelleme başarısız!", {
         position: "top-right",
-        autoClose: 3000
+        autoClose: 3000,
       });
     }
   };
+  
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-white-50">

@@ -6,6 +6,8 @@ const kullaniciSchema = new mongoose.Schema({
   email: { type: String },
   parola: { type: String },
   kullaniciAdi: { type: String },
+  rating:{ type: Number,default:0 },
+  comment:{ type: String,default:null },
   resim: { type: String,default:null},
   hesap: { type: String,default:true},
   telefon: { type: String,default:null},
