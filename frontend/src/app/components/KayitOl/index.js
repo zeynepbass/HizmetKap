@@ -1,12 +1,13 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import {handleRegisterPost} from "../../services/api"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const Index = () => {
-    const kullaniciStorage = JSON.parse(localStorage.getItem("kullanici"));
+
+    const [kullaniciStorage,setKullaniciStore]=useState("")
     const router = useRouter()
     const [formData, setFormData] = useState({
         ad: "",
@@ -33,7 +34,10 @@ const Index = () => {
             toast.error(error.response?.data?.message || "Bir hata oluştu", { position: "top-right", autoClose: 3000 })
         }
     }
-
+useEffect(()=>{
+  const store = JSON.parse(localStorage.getItem("kullanici"));
+  setKullaniciStore(store)
+},[])
     return (
         <div className="container mx-auto min-h-screen flex items-center justify-center">
             <ToastContainer />
@@ -47,7 +51,7 @@ const Index = () => {
                             {kullaniciStorage ? "Kayıt Ol" : "Kaydet"}
                         </h1>
 
-                        <p className='text-[rgb(242,247,250)] text-center text-sm'>
+                        <p className='text-gray-500 text-center text-sm'>
                             Kayıt olarak <span className="underline cursor-pointer">Gizlilik Politikası</span> ve <span className="underline cursor-pointer">Kullanım Şartlarını</span> kabul etmiş olursunuz.
                         </p>
 

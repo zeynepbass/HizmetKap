@@ -23,6 +23,7 @@ const Index = () => {
         e.preventDefault()
         try {
             const res = await Login(formData)
+
             toast.loading("Giriş başarılı!", { position: "top-right", autoClose: 3000 })
             localStorage.setItem("kullanici", JSON.stringify(res.data))
             if (res.token) {
@@ -51,7 +52,7 @@ const Index = () => {
                         <h1 className="text-4xl font-bold p-4 text-center text-gray-400">
                             GİRİŞ YAP
                         </h1>
-                        <p className='text-gray-300 text-center'>Güvenliğiniz için yalnızca kendi cihazlarınızdan giriş yapın.</p>
+                        <p className='text-gray-500 text-center'>Güvenliğiniz için yalnızca kendi cihazlarınızdan giriş yapın.</p>
                         <br />
                         <input
                             type="text"

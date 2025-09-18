@@ -13,7 +13,7 @@ export default function KategoriPage() {
   useEffect(() => {
 
     const kullanici = JSON.parse(localStorage.getItem("kullanici"));
-    const kullaniciAdi = JSON.parse(localStorage.getItem("kullaniciAdi"));
+    const kullaniciAdi = localStorage.getItem("kullaniciAdi");
 
     setKullaniciStored(kullanici);
     setStoredKullaniciAdi(kullaniciAdi);

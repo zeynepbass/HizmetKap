@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 const Index = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    email:"",
+    email: "",
     yeniParola: "",
     yeniParolaTekrar: ""
   });
@@ -23,24 +23,24 @@ const Index = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      
-   await SifremiUnuttum(formData);
+
+      await SifremiUnuttum(formData);
       toast.success("Bilgiler başarıyla güncellendi!", {
         position: "top-right",
         autoClose: 3000
       });
-    
+
 
       setTimeout(() => {
         router.push("/");
       }, 3000);
       localStorage.clear();
     } catch (error) {
-       console.error(err);
-           toast.error("Sunucu hatası veya güncelleme başarısız!", {
-             position: "top-right",
-             autoClose: 3000
-           });
+      console.error(err);
+      toast.error("Sunucu hatası veya güncelleme başarısız!", {
+        position: "top-right",
+        autoClose: 3000
+      });
     }
   };
 
@@ -50,10 +50,10 @@ const Index = () => {
       <div className="flex justify-center items-center w-[80%]">
         <div className="w-full max-w-xl">
           <form onSubmit={handleSubmit} className="flex flex-col gap-5 rounded-lg p-10 shadow-lg bg-white">
-          <h1 className="text-3xl font-bold p-4 text-center text-gray-400">
-                           ŞİFRE DEĞİŞTİR
-                        </h1>
-            <p className='text-gray-300 text-center'>
+            <h1 className="text-3xl font-bold p-4 text-center text-gray-400">
+              ŞİFRE DEĞİŞTİR
+            </h1>
+            <p className='text-gray-500 text-center'>
               Şifreni güncellemek için lütfen sırasıyla email ve yeni şifreni gir.
             </p>
 
@@ -95,7 +95,7 @@ const Index = () => {
 
             <button
               type="submit"
-             className="w-[50%] rounded-4xl  mx-auto p-3 cursor-pointer  bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:text-gray-50 hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-2"
+              className="w-[50%] rounded-4xl  mx-auto p-3 cursor-pointer  bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:text-gray-50 hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-2"
             >
               Güncelle
             </button>

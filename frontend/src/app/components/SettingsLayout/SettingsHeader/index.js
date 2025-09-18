@@ -13,7 +13,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const data = localStorage.getItem("kullaniciAdi");
-    if (data) setStoredData(JSON.parse(data));
+    if (data) setStoredData(data);
   }, []);
 
   const formatURL = (text) =>
@@ -71,7 +71,7 @@ const Navbar = () => {
       </nav>
 
 
-      <div className="pt-10 pl-10">
+      <div className="pl-10">
         <Button />
       </div>
     </div>

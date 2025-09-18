@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
     const stored = localStorage.getItem("kullanici") || localStorage.getItem("kullaniciAdi");
 
     if (stored) {
-      setUser(JSON.parse(stored));
+      setUser(stored);
     } else {
       router.push("/");
     }

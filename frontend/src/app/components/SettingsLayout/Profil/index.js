@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { ToastContainer, toast } from 'react-toastify';
@@ -11,7 +11,8 @@ const Index = () => {
   const [telefon, setTelefon] = useState("");
   const [resim, setResim] = useState(null);
   const [preview, setPreview] = useState(null);
-
+  const [kullaniciStorage, setKullaniciStore] = useState(null);
+  
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -22,9 +23,12 @@ const Index = () => {
     if (file) setPreview(URL.createObjectURL(file));
     
   };
+useEffect(()=>{
+  const store = JSON.parse(localStorage.getItem("kullanici"));
+  setKullaniciStore(store)
+},[])
 
-  const kullaniciStorage = JSON.parse(localStorage.getItem("kullanici"));
-  const id = kullaniciStorage.kullanici?.id
+  const id = kullaniciStorage?.kullanici?.id
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -58,10 +62,10 @@ const Index = () => {
 
   return (
     <>
-      {kullaniciStorage ? <div className="flex flex-col items-center pt-10">
+      {kullaniciStorage ? <div className="flex flex-col items-center">
         <ToastContainer />
         <div className="flex flex-col items-center gap-4">
-          {resim ?     <img
+          {resim ?   <img
             src={preview}
             alt="Profil Fotoğrafı"
             className="rounded-2xl w-40 h-40 object-cover border-1 border-gray-200"

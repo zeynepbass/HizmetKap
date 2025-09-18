@@ -23,7 +23,7 @@ const Index = () => {
   }
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("kullanici"));
-    const adStored = JSON.parse(localStorage.getItem("kullaniciAdi"));
+    const adStored = localStorage.getItem("kullaniciAdi");
   
     setKullaniciStored(stored);
     setKullaniciAdi(adStored);
@@ -42,7 +42,7 @@ const Index = () => {
     <Card sx={{ position: "absolute", bottom: "60px", left: "20%", display: "flex", boxShadow: 2, width: "70%", borderRadius: 2, p: 1, alignItems: "center", gap: 2 }}>
       {kullaniciAdi ? (
         <div className="w-6 h-6 flex items-center justify-center rounded-full bg-[rgb(255,190,60)] text-[rgb(242,247,250)] uppercase font-bold">
-          {kullaniciAdi?.kullaniciAdi[0]}
+          {kullaniciAdi?.[0]}
         </div>
       ) :
         <>

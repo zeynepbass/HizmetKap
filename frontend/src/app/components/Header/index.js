@@ -5,7 +5,7 @@ const Index = () => {
   const [userControl, setUserControl] = useState(null);
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("kullaniciAdi"));
+    const stored = localStorage.getItem("kullaniciAdi");
     setUserControl(stored);
   }, []);
 

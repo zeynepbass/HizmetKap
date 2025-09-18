@@ -103,7 +103,7 @@ const ChatUI = ({ id }) => {
   ) || [];
   console.log(filteredData)
   return (
-    <div className="flex h-[80vh] bg-gray-100">
+    <div className="flex h-[90vh] bg-gray-100">
 
       <div className="w-1/4 bg-white border-r border-gray-200 overflow-y-auto">
         <h2 className="text-xl font-semibold mb-4 text-center text-[rgb(237,203,206)] pt-5">Kullanıcılar</h2>
@@ -122,7 +122,7 @@ const ChatUI = ({ id }) => {
             </div>
           ))
         ) : (
-          <p>Kullanıcı bulunamadı</p>
+          <p className="text-center text-gray-400">Kullanıcı bulunamadı</p>
         )}
       </div>
 

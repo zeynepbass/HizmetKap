@@ -23,8 +23,9 @@ const Index = () => {
         try {
     
             const res = passwordSend(formData)
+         
             toast.loading("Kayıt başarılı!", { position: "top-right", autoClose: 3000 })
-            localStorage.setItem("kullaniciAdi", JSON.stringify(res.data))
+
             setTimeout(() => {
                 router.push("/ana-sayfa")
             }, 3000)
@@ -41,7 +42,7 @@ const Index = () => {
                     <h1 className="text-4xl font-bold p-4 text-center text-gray-400">
                         GİRİŞ YAP
                     </h1>
-                    <p className='text-[rgb(242,247,250)] text-center'>Güvenliğiniz için yalnızca kendi cihazlarınızdan giriş yapın.</p>
+                    <p className='text-gray-400 text-center'>Güvenliğiniz için yalnızca kendi cihazlarınızdan giriş yapın.</p>
                     <br />
 
 

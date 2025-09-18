@@ -137,17 +137,26 @@ export const updateHesap = async (id, formData) => {
         return { success: false, error: err };
       }
     };
-  export const passwordSend = async (formData) => {
-    try {
-      const res = await axios.put(`${API_BASE}/sifre-gonder`, formData, {
-     headers: { "Content-Type": "application/json" },
-      });
-      return { success: true, data: res.data };
-    } catch (err) {
-      console.error("Hesap güncellenemedi:", err);
-      return { success: false, error: err };
-    }
-  };
+    export const passwordSend = async (formData) => {
+      try {
+        const res = await axios.post(`${API_BASE}/sifre-gonder`, formData, {
+          headers: { "Content-Type": "application/json" },
+        });
+    
+
+        const data = res.data;
+  
+        if (data.kullaniciAdi) {
+          localStorage.setItem("kullaniciAdi", data.kullaniciAdi);
+        }
+    
+        return { success: true, data };
+      } catch (err) {
+        console.error("Hesap güncellenemedi:", err);
+        return { success: false, error: err };
+      }
+    };
+    
 
   export const activeUpdated = async (id, formData) => {
     try {
