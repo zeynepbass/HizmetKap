@@ -54,7 +54,7 @@ const Index = () => {
       id: 2,
       text: "Mesaj Kutusu",
       icon: <TextsmsIcon />,
-      href: `/mesaj-kutusu/${storedData?.kullanici?.id}`,
+      href: `/mesaj-kutusu/${storedData?.id}`,
     },
   ];
   return (
@@ -108,7 +108,7 @@ const Index = () => {
               {category?.map((item) => (
                 <li
                   key={item.isim}
-                  className="flex items-center gap-3 p-2 rounded-xl cursor-pointer hover:bg-white hover:shadow-md transition-all duration-200"
+                  className="flex items-center gap-3 p-2 rounded-xl cursor-pointer hover:opacity-20 hover:shadow-md transition-all duration-200"
                   onClick={() => router.push(`/${toSlug(item.isim)}`)}
                 >
                   <img

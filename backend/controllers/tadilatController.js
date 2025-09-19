@@ -40,12 +40,12 @@ import mongoose from "mongoose";
     try {
       let { kategori, adimlar, bitirmeTarihi } = req.body;
   
-      // kategori sadece ObjectId olmalı
+      // kategori ObjectId doğrulama
       const kategoriDoc = await Kategori.findById(kategori);
       if (!kategoriDoc) {
         return res.status(404).json({ message: "Kategori bulunamadı!" });
       }
-      
+  
       bitirmeTarihi = bitirmeTarihi ? new Date(bitirmeTarihi) : null;
       let durum = "aktif";
       if (bitirmeTarihi && bitirmeTarihi < new Date()) durum = "pasif";
@@ -65,20 +65,17 @@ import mongoose from "mongoose";
   
       const kayit = await yeniTadilat.save();
   
-      res.status(201).json({
-        _id: kayit._id,
-        kategori: kategoriDoc.isim,
-        adimlar: kayit.adimlar,
-        bitirmeTarihi: kayit.bitirmeTarihi,
-        tarih: kayit.tarih,
-        durum: kayit.durum
-      });
+      // populate ile kategori nesnesi ekle
+      await kayit.populate("kategori");
+  
+      res.status(201).json(kayit);
   
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Tadilat eklenirken hata oluştu." });
     }
   };
+  
   
   
   
@@ -116,3 +113,5 @@ import mongoose from "mongoose";
     };
   
   
+
+    

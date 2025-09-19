@@ -8,7 +8,7 @@ const stepSchema = new mongoose.Schema({
 });
 
 const tadilatSchema = new mongoose.Schema({
-  kategori: { type: mongoose.Schema.Types.ObjectId, ref: "Kategori", required: true },
+  kategori: { type: mongoose.Schema.Types.ObjectId, ref: "Kategori" },
   adimlar: [stepSchema],                   
   tarih: { type: Date, default: Date.now },
   bitirmeTarihi: { type: Date, default: null },

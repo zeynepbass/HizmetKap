@@ -61,7 +61,7 @@ const [itemsAktif,setItemsAktif]=useState(initialItems)
 
   const aktifMi = openIndex === 0;
   const seciliIsler = aktifMi ? aktifIsler : pasifIsler;
-  const filteredData=seciliIsler.filter((item)=>item.email === storedData?.kullanici?.email)
+  const filteredData=seciliIsler.filter((item)=>item?.email === storedData?.email)
   return (
     <div className="min-h-screen flex flex-col ">
 

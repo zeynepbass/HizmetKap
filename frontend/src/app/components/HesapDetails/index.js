@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
+import { Details } from "../../services/api";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
@@ -13,9 +13,8 @@ const Index = () => {
   const router = useRouter();
 
   const fetchData = async (id) => {
-    console.log(id)
     try {
-      const res = await axios.get(`http://localhost:5233/kullanici/${id}`);
+      const res = await Details(id);
       setData(res.data);
      
     } catch (error) {

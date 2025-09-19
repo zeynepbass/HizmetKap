@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { fetchUsersGet, getAktifTadilat } from "../../app/services/api";
 import { Rating } from "@mui/material";
+import KonumHarita from "../components/Konum";
 export default function KategoriPage() {
   const params = useParams();
   const { isim } = params;
@@ -80,38 +81,23 @@ export default function KategoriPage() {
 
       <div className="relative w-full mx-auto">
         {filteredTadilat.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
             {filteredTadilat.reverse().map((slide) => {
               const user = data.find((u) => u.email === slide.email);
 
               return (
-                <div
-                  key={slide._id}
-             
-                >
+                <div key={slide._id}>
                   <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden">
                     <div className="p-5 border-b border-gray-100">
                       <p className="text-md text-gray-400 mb-2">
-                        <span className="font-semibold">Yayınlayan:</span>{" "}
-                        {slide.ad.toUpperCase()}
-                        {slide.telefonNo} {slide.email}
-                        {slide.konum} {slide.konum}
+                        <span className="font-semibold">Yayınlayan: {slide.ad.toUpperCase()}</span>{" "}<br/>
+                        <span className="font-semibold">Telefon No:  {slide.telefonNo}</span>{" "}<br/>
+                        <span className="font-semibold">Email:  {slide.email}</span>{" "}<br/>
+                        <span className="font-semibold">Konum: <KonumHarita konum={slide.konum} /></span>{" "}
+   
                       </p>
 
-                      {user && (
-  <div className="flex justify-left">
-    <p className="text-md text-yellow-600 font-bold">
-      Puan:
-    </p>
-    <Rating
-      name="rating"
-      value={user.rating ?? null}
-      size="medium"
-      sx={{ display: "inline-flex" }}
-    />
-  </div>
-)}
-
+                     
                     </div>
 
                     <div className="p-4">
@@ -155,7 +141,7 @@ export default function KategoriPage() {
                               router.push(`/mesaj-kutusu/${slide.kullaniciId}`)
                             }
                             type="button"
-                            className="w-[50%] rounded-4xl  mx-auto p-3 cursor-pointer  bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:text-gray-50 hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-2"
+                            className="w-[50%] rounded-4xl  mx-auto p-3 cursor-pointer  bg-[rgb(255,127,60)] text-[rgb(242,247,250)] hover:text-gray-50 hover:bg-[rgb(78,36,77)] transition-colors duration-300 mt-2"
                           >
                             Mesaj At
                           </button>

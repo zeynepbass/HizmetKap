@@ -28,7 +28,7 @@ useEffect(()=>{
   setKullaniciStore(store)
 },[])
 
-  const id = kullaniciStorage?.kullanici?.id
+  const id = kullaniciStorage?.id
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -42,15 +42,17 @@ useEffect(()=>{
 
     try {
       const res = await updateHesap(id, formData);
-
-
       toast.success("Bilgiler başarıyla güncellendi!", {
         position: "top-right",
         autoClose: 3000
       });
-
-
-      localStorage.setItem("kullanici", JSON.stringify(res.data));
+      const kullanici = {
+        ...res.data.kullanici,
+        id: res.data.kullanici._id
+      };
+      
+      localStorage.setItem("kullanici", JSON.stringify(kullanici));
+    
     } catch (err) {
       console.error(err);
       toast.error("Sunucu hatası veya güncelleme başarısız!", {

@@ -21,7 +21,7 @@ const ChatUI = ({ id }) => {
   const [open, setOpen] = useState("");
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const localId = storedData?.kullanici.id;
+  const localId = storedData?.id;
   const gonderenId = localId;
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const ChatUI = ({ id }) => {
       }
     };
 
-    const fetchKonusmalar = async () => {
+    const fetchKonusmalar = async (aliciIdStored) => {
       try {
         const res = await fetchKonusmalarGet(aliciIdStored);
         setData(res);
@@ -57,7 +57,7 @@ const ChatUI = ({ id }) => {
       }
     };
     fetchUsers();
-    fetchKonusmalar();
+    fetchKonusmalar(aliciIdStored);
 
     const stored = JSON.parse(localStorage.getItem("kullanici"));
     setStoredData(stored);
@@ -113,7 +113,7 @@ const ChatUI = ({ id }) => {
 
 
   return (
-    <div className="flex h-[80vh] bg-gray-100">
+    <div className="flex h-[90vh] bg-gray-100">
       <div className="w-1/4 bg-white border-r border-gray-200 overflow-y-auto">
         <h2 className="text-xl font-semibold mb-4 text-center text-[rgb(237,203,206)] pt-5">
           Kullanıcılar

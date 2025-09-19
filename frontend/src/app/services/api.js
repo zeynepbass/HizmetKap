@@ -11,6 +11,17 @@ export const fetchUsersGet = async () => {
     return [];
   }
 };
+export const Details = async (id) => {
+  try {
+    const res = await axios.get(`${API_BASE}/kullanici/${id}`)
+
+    return res;
+  } catch (error) {
+    console.error("Kullanıcı çekme hatası:", error);
+    return [];
+  }
+};
+
 export const scoreUpdated = async (kullaniciId, rating, comment) => {
   try {
     const res = await axios.put(`${API_BASE}/degerlendirme/${kullaniciId}`, {
@@ -24,9 +35,9 @@ export const scoreUpdated = async (kullaniciId, rating, comment) => {
   }
 };
 
-export const fetchKonusmalarGet = async (getChat) => {
+export const fetchKonusmalarGet = async (aliciIdStored) => {
   try {
-    const res = await axios.get(`${API_BASE}/konusmalar/${getChat}`);
+    const res = await axios.get(`${API_BASE}/konusmalar/${aliciIdStored}`);
     return res.data || [];
   } catch (error) {
     console.error("Konuşmalar çekilemedi:", error);
@@ -139,9 +150,7 @@ export const SifremiUnuttum = async ( formData) => {
 
 export const updateHesap = async (id, formData) => {
     try {
-      const res = await axios.put(`${API_BASE}/hesap/${id}`, formData, {
-     headers: { "Content-Type": "application/json" },
-      });
+      const res = await axios.put(`${API_BASE}/hesap/${id}`, formData);
       return { success: true, data: res.data };
     } catch (err) {
       console.error("Hesap güncellenemedi:", err);
@@ -160,6 +169,7 @@ export const updateHesap = async (id, formData) => {
       }
     };
     export const passwordSend = async (formData) => {
+      localStorage.clear();
       try {
         const res = await axios.post(`${API_BASE}/sifre-gonder`, formData, {
           headers: { "Content-Type": "application/json" },
@@ -196,7 +206,7 @@ export const updateHesap = async (id, formData) => {
 export const getTadilatById = async (id) => {
     try {
       const res = await axios.get(`${API_BASE}/tadilat/${id}`);
-      return res.data[0];
+      return res.data;
     } catch (err) {
       console.error("Tadilat verisi çekilemedi:", err);
       return null;

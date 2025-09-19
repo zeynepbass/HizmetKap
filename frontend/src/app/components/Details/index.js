@@ -56,7 +56,7 @@ const Index = ({ paramsId }) => {
     }
     useEffect(() => {
         const storedData = JSON.parse(localStorage.getItem("kullanici") || "{}");
-        const getChat = storedData?.kullanici.id;
+        const getChat = storedData?.id;
         fetchData(id);
         fethUser();
 

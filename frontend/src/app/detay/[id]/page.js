@@ -12,26 +12,45 @@ import { Snackbar, Alert } from "@mui/material";
 export default function Page() {
   const params = useParams();
   const { id } = params;
-  const storedData = localStorage.getItem("item");
+
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [dialog, setOpenDialog] = useState(false);
-  const stored = JSON.parse(localStorage.getItem("kullanici"));
+
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [showExitModal, setShowExitModal] = useState(false);
   const [steps, setSteps] = useState(null);
   const [item, setItem] = useState("");
+  const [stored, setKullanici] = useState(null);
+  const [storedData, setStoredItem] = useState(null);
   useEffect(() => {
-    if (id) {
-      getTadilatById(id).then((data) => {
-        if (data) {
-          setSteps(data.adimlar);
-          setItem(data);
+
+  
+    const fetchData = async () => {
+      try {
+        const res = await getTadilatById(id);
+   
+        console.log("data",res)
+        if (res) {
+          setSteps(res[0].adimlar);
+          setItem(res[0].kategori);
+
+       
         }
-      });
-    }
+      } catch (err) {
+        console.error("Tadilat verisi alınamadı:", err);
+      }
+    };
+  
+    fetchData();
+
+    const kullanici = JSON.parse(localStorage.getItem("kullanici"));
+    const storedItem = localStorage.getItem("item");
+    setKullanici(kullanici)
+    setStoredItem(storedItem)
   }, [id]);
+  
 
   if (!steps)
     return <p className="text-center font-bold text-gray-600">Yükleniyor...</p>;
@@ -40,6 +59,7 @@ export default function Page() {
   const PostData = async (item) => {
     try {
       const response = await postAktifTadilat(item);
+
       localStorage.setItem("item", response.primaryKey);
       localStorage.setItem("itemDurum", response._id);
     } catch (err) {
@@ -53,19 +73,19 @@ export default function Page() {
     } else {
       const dataToSend = {
         primaryKey: id,
-        anaBaslik: item.kategori.isim,
+        anaBaslik: item.isim,
         durum: "aktif",
-        ad: stored.kullanici.ad,
-        soyad: stored.kullanici.soyad,
-        email: stored.kullanici.email,
-        kullaniciId: stored.kullanici.id,
+        ad: stored.ad,
+        soyad: stored.soyad,
+        email: stored.email,
+        kullaniciId: stored.id,
         veriler: answers.map((ans) => ({
           kategoriIsim: ans.kategoriIsim,
           secenekler: ans.secenekler,
           secilen: ans.secilen,
         })),
-        telefonNo: stored.kullanici.telefonNo || null,
-        konum: stored.kullanici.konum || null,
+        telefonNo: stored.telefonNo || null,
+        konum: stored.konum || null,
       };
 
       PostData(dataToSend);
@@ -159,7 +179,7 @@ export default function Page() {
 
 
           <h2 className="text-xl font-semibold text-center mb-4 text-gray-500">
-            {item.kategori.isim}
+{item.isim}
           </h2>
 
           <div className="w-full bg-gray-100 rounded-full h-2.5 mb-4">
