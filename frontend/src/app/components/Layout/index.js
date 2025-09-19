@@ -39,11 +39,11 @@ const Layout = ({ children }) => {
   return (
     <div className="grid grid-cols-12 h-screen overflow-hidden">
 
-      <div className="col-span-12 md:col-span-2 bg-gray-100 h-full overflow-auto">
+      <div className="col-span-12 lg:col-span-3 md:col-span-4  lg:h-[100vh] md:h-[50vh] bg-gray-100 overflow-auto">
         <SolSidebar />
       </div>
 
-      <div className="col-span-12 md:col-span-10 flex flex-col h-full overflow-auto">
+      <div className="col-span-12 lg:col-span-9 md:col-span-8 flex flex-col h-full overflow-auto">
         <Header />
         <main className="flex-1 overflow-auto">
           {children}

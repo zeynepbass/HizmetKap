@@ -22,7 +22,6 @@ const Index = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-
     if (
       !formData.email ||
       !formData.yeniParola ||

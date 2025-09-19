@@ -55,11 +55,11 @@ const Index = () => {
             <ToastContainer />
             <div className="flex items-center justify-center w-[50%] px-4 ">
                 <form onSubmit={handleSubmit} className=' h-[50%] flex shadow-md flex-col gap-1 border border-gray-100  rounded-2xl p-10'>
-                    <h1 className="text-4xl font-bold p-4 text-center text-gray-400">
-                        GİRİŞ YAP
+                    <h1 className="text-xl font-bold p-4 text-center text-gray-400">
+                       KULLANICI ADI İLE GİRİŞ YAP
                     </h1>
                     <p className='text-gray-400 text-center'>Güvenliğiniz için yalnızca kendi cihazlarınızdan giriş yapın.</p>
-                    <br />
+             
 
 
                     <input

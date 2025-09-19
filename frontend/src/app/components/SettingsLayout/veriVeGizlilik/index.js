@@ -57,7 +57,7 @@ const Index = () => {
 
                     <div className="flex flex-col gap-4 p-4">
                         {items.map((item, index) => (
-                            <>
+                            <div key={index}>
                                 <h1
                                     className="text-xl text-gray-600 font-bold flex items-center justify-between cursor-pointer"
                                     onClick={() => toggle(index)}
@@ -69,7 +69,7 @@ const Index = () => {
                                 <p className="text-gray-500 mb-6">
                                     {item.content}
                                 </p>
-                            </>
+                            </div>
 
                         ))}
                     </div>

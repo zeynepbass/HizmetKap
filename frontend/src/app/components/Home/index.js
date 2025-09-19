@@ -14,7 +14,7 @@ const [itemsAktif,setItemsAktif]=useState(initialItems)
   const tabs = [
     {
       title: "Aktif işlerim",
-      image: "pngwing.com.png",
+      image: "9315312.png",
       content:
         "Aktif işin yok. Hemen kategorilerden, ihtiyacın olan hizmete kolayca ulaş.",
     },
@@ -80,11 +80,11 @@ const [itemsAktif,setItemsAktif]=useState(initialItems)
     </div>
   
 
-    <div className="flex-1 overflow-auto ">
+    <div className="h-[50vh]">
       {filteredData.reverse().length === 0 ? (
-        <div className="flex flex-col items-center justify-center pb-4 bg-gray-50 w-full text-center">
+        <div className="flex flex-col  h-[50vh] items-center justify-center pb-4 bg-gray-50 w-full text-center">
           {tabs[openIndex].image && (
-            <img src={tabs[openIndex].image} className="w-full h-full" />
+            <img src={tabs[openIndex].image} className="w-[50vh]" />
           )}
           <p className="font-bold text-[rgb(242,247,250)] mb-2">{tabs[openIndex].content}</p>
           {tabs[openIndex].button && (

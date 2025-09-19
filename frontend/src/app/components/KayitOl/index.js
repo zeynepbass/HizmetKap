@@ -69,7 +69,7 @@ useEffect(()=>{
                 <div className="col-span-12 md:col-span-6 flex justify-center items-center bg-white p-8">
                     <form onSubmit={handleSubmit} className='w-full flex flex-col gap-4'>
 
-                        <h1 className="text-4xl font-bold text-center text-gray-700">
+                        <h1 className="text-4xl font-bold text-center text-gray-400">
                             {kullaniciStorage ? "Kayıt Ol" : "Kaydet"}
                         </h1>
 
@@ -83,7 +83,7 @@ useEffect(()=>{
                                 name="ad"
                                 value={formData.ad}
                                 onChange={handleChange}
-                                placeholder="Adınız"
+                                placeholder="Ad*"
                                 className="flex-1 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
                             />
                             <input
@@ -91,7 +91,7 @@ useEffect(()=>{
                                 name="soyad"
                                 value={formData.soyad}
                                 onChange={handleChange}
-                                placeholder="Soyadınız"
+                                placeholder="Soyad*"
                                 className="flex-1 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
                             />
                         </div>
@@ -101,7 +101,7 @@ useEffect(()=>{
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
-                            placeholder="Email adresiniz"
+                            placeholder="Email*"
                             className="rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
                         />
 
@@ -110,7 +110,7 @@ useEffect(()=>{
                             name="parola"
                             value={formData.parola}
                             onChange={handleChange}
-                            placeholder="Parolanız"
+                            placeholder="Parola*"
                             className="rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
                         />
 
