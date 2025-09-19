@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { fetchUsersGet, getAktifTadilat } from "../../app/services/api";
-import { Rating } from "@mui/material";
 import KonumHarita from "../components/Konum";
 export default function KategoriPage() {
   const params = useParams();
