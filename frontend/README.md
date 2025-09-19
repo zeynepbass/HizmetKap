@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Hizmet Kap – Kişiye Özel Hizmet İlan Platformu
 
-## Getting Started
+<p align="center"> <img src="https://capsule-render.vercel.app/api?type=waving&color=#4E244D&height=120&animation=fadeIn&fontAlignY=35" /> </p>
 
-First, run the development server:
+Armut, kullanıcıların ihtiyaçlarına göre ilan oluşturabildiği, yönetebildiği ve hizmet değerlendirmesi yapabildiği bir web uygulamasıdır.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🚀 Özellikler
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Kullanıcılar kendi ilanlarını oluşturabilir ve yönetebilir (aktif/pasif, ilan süresi, konum, telefon).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+İlan üzerinde doğrudan mesajlaşma ve sohbet geçmişini silebilme.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Kullanıcılar aldıkları hizmetleri değerlendirebilir ve yorum bırakabilir.
 
-## Learn More
+Gerçek zamanlı mesajlaşma sistemi (Socket.IO).
 
-To learn more about Next.js, take a look at the following resources:
+Responsive ve modern tasarım (Tailwind CSS ve Material UI).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Güvenli giriş ve kayıt sistemi (JWT ve bcrypt).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Konum entegrasyonu (Leaflet & React-Leaflet).
 
-## Deploy on Vercel
+💻 Teknolojiler
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Next.js 14 – React tabanlı sunucu tarafı render ve SEO uyumlu sayfalar
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+React – Modern frontend
+
+Tailwind CSS – Hızlı ve responsive tasarım
+
+Material UI & Icons – Kullanıcı dostu arayüz
+
+Axios – API iletişimi
+
+Socket.IO – Gerçek zamanlı chat
+
+MongoDB – Veri yönetimi
+
+React-Toastify – Bildirimler
+
+🛠 Kullanıcı Akışı
+
+Kullanıcı kayıt ve giriş yapabilir.
+
+İhtiyacına göre ilan oluşturabilir, düzenleyebilir ve pasif/aktif duruma getirebilir.
+
+İlan üzerinde mesajlaşabilir, sohbeti silebilir ve hizmeti değerlendirebilir.
+
+Her ilan kullanıcıya özel olarak görüntülenir ve filtrelenir.
+
+🎨 Tasarım ve Paketler
+
+Tailwind CSS: Responsive ve modern tasarım
+
+Material UI: Kullanıcı dostu componentler
+
+React-Toastify: Başarı ve hata bildirimleri
+
+React-Leaflet & Leaflet: Harita ve konum
+
+Axios: API istekleri
+
+Socket.IO: Gerçek zamanlı chat
+
+📂 Proje Yapısı
+/pages
+/components
+/services
+/public
+
+📌 Notlar
+
+LocalStorage ile kullanıcı ve sayfa kontrolleri yapıldı.
+
+JWT ile güvenli oturum yönetimi sağlandı.
+
+İlanlar ve kullanıcı verileri MongoDB üzerinden yönetiliyor.
