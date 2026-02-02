@@ -1,5 +1,6 @@
 
 Hizmet Kap – Kişiye Özel Hizmet İlan Platformu
+
 Hizmet Kap, kullanıcıların ihtiyaçlarına göre ilan oluşturabildiği, yönetebildiği ve hizmet değerlendirmesi yapabildiği bir web uygulamasıdır.
 
 
