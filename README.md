@@ -1,9 +1,7 @@
 
 Hizmet Kap – Kişiye Özel Hizmet İlan Platformu
-
-<p align="center"> <img src="https://capsule-render.vercel.app/api?type=waving&color=#4E244D&height=120&animation=fadeIn&fontAlignY=35" /> </p>
-
 Hizmet Kap, kullanıcıların ihtiyaçlarına göre ilan oluşturabildiği, yönetebildiği ve hizmet değerlendirmesi yapabildiği bir web uygulamasıdır.
+
 
 🚀 Özellikler
 
