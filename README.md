@@ -75,3 +75,61 @@ LocalStorage ile kullanıcı ve sayfa kontrolleri yapıldı.
 JWT ile güvenli oturum yönetimi sağlandı.
 
 İlanlar ve kullanıcı verileri MongoDB üzerinden yönetiliyor.
+
+## Arayüzler
+
+<p align="center">
+  <img src="./frontend/public/screenshots/1758295331142.jpeg" alt="Dashboards" width="900">
+</p>
+
+<p align="center">
+  <img src="./frontend/public/screenshots/1758295330786.jpeg" alt="Dashboards" width="900">
+</p>
+
+<p align="center">
+  <img src="./frontend/public/screenshots/1758295330775.jpeg" alt="Dashboards" width="900">
+</p>
+
+<p align="center">
+  <img src="./frontend/public/screenshots/1758295330706.jpeg" alt="Dashboards" width="900">
+</p>
+
+
+<p align="center">
+  <img src="./frontend/public/screenshots/1758295330601.jpeg" alt="Dashboards" width="900">
+</p>
+
+<p align="center">
+  <img src="./frontend/public/screenshots/1758295330599.jpeg" alt="Dashboards" width="900">
+</p>
+
+<p align="center">
+  <img src="./frontend/public/screenshots/1758295330554.jpeg" alt="Dashboards" width="900">
+</p>
+<p align="center">
+  <img src="./frontend/public/screenshots/1758295330542.jpeg" alt="Dashboards" width="900">
+</p>
+
+<p align="center">
+  <img src="./frontend/public/screenshots/1758295330521.jpeg" alt="Dashboards" width="900">
+</p>
+
+<p align="center">
+  <img src="./frontend/public/screenshots/1758295330418.jpeg" alt="Dashboards" width="900">
+</p>
+
+<p align="center">
+  <img src="./frontend/public/screenshots/1758295330407.jpeg" alt="Dashboards" width="900">
+</p>
+<p align="center">
+  <img src="./frontend/public/screenshots/1758295330381.jpeg" alt="Dashboards" width="900">
+</p>
+<p align="center">
+  <img src="./frontend/public/screenshots/1758295330268.jpeg" alt="Dashboards" width="900">
+</p>
+<p align="center">
+  <img src="./frontend/public/screenshots/1758295330190.jpeg" alt="Giris yap" width="900">
+</p>
+<p align="center">
+  <img src="./frontend/public/screenshots/1758295330051.jpeg" alt="Kayıt ol" width="900">
+</p>
