@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import SolSidebar from "../Solsidebar";
-import Header from "../Header";
+import SolSidebar from "../../components/Solsidebar";
+import Header from "../../components/Header";
 import LayoutSettings from "../../components/SettingsLayout";
 import { usePathname, useRouter } from "next/navigation";
 
-const Layout = ({ children }) => {
+export function AppLayout  ({ children }){
   const pathname = usePathname();
   const router = useRouter();
   const [user, setUser] = useState(null);
@@ -53,4 +53,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+
