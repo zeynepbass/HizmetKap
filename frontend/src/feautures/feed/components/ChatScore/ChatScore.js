@@ -2,7 +2,7 @@
 import {useState } from "react";
 import { Rating, Box } from "@mui/material";
 import { useRouter } from "next/navigation";
-import {Button}from "@/shared/components/atoms"
+import {Button, Heading}from "@/shared/components/atoms"
 import {scoreUpdated,MessageDelete} from "@/services/api"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -53,12 +53,8 @@ export function ChatScore ({ kullaniciId, setOpen,gonderenId,setMessages,setUser
     <div className="fixed inset-0 bg-[rgb(242,247,250)] bg-opacity-40 flex items-center justify-center z-50">
           <ToastContainer />
       <div className="bg-white rounded-2xl shadow-xl w-96 p-6 relative">
-        <h2 className="text-2xl font-bold text-gray-700 mb-2">
-          Hizmeti Değerlendir
-        </h2>
-        <p className="text-gray-500 text-sm mb-4">
-          Birkaç soruya daha cevap vererek kullanıcıyı değerlendirebilirsin.
-        </p>
+        <Heading variant="dark" title=" Hizmeti Değerlendir" desc=" Birkaç soruya daha cevap vererek kullanıcıyı değerlendirebilirsin."/>
+ 
 
         <Box className="text-center">
           <Rating

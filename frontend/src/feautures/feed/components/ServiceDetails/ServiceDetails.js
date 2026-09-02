@@ -1,7 +1,7 @@
 "use client";
 
 import { Heading } from "@/shared/components/atoms";
-import KonumHarita from "../../../Konum";
+import {Location} from "@/shared/components/organism";
 
 export function ServiceDetails({ data }) {
   return (
@@ -40,7 +40,7 @@ export function ServiceDetails({ data }) {
                 Konum:
               </p>
 
-              <KonumHarita konum={data.konum} />
+              <Location konum={data.konum} />
             </div>
           )}
         </span>
