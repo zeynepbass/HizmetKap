@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Button, Heading } from "@/shared/components/atoms";
+import { Button, Heading ,Input} from "@/shared/components/atoms";
 
 export function LoginForm({
   formData,
@@ -21,24 +21,23 @@ export function LoginForm({
           title="GİRİŞ YAP"
           desc="Güvenliğiniz için yalnızca kendi cihazlarınızdan giriş yapın."
         />
-
-        <input
-          type="text"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Email*"
-          className="rounded-lg p-2 mt-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
+        <Input
+         type="text"
+         name="email"
+         value={formData.email}
+         onChange={handleChange}
+         placeholder="Email*"
+         className="rounded-lg p-2 mt-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
         />
-
-        <input
+        <Input
           type="password"
           name="parola"
           value={formData.parola}
           onChange={handleChange}
           placeholder="Parola*"
           className="rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] mt-2 bg-[rgb(242,247,250)]"
-        />
+           />
+
 
         <div className="flex justify-between mt-2">
           <Link
