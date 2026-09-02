@@ -9,7 +9,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import trLocale from "date-fns/locale/tr";
 
-import { Heading } from "@/shared/components/atoms";
+import { Button, Heading } from "@/shared/components/atoms";
 
 export function ServiceContactForm({
   location,
@@ -55,13 +55,12 @@ export function ServiceContactForm({
               </div>
 
               {!location && (
-                <button
-                  type="button"
-                  onClick={handleGetLocation}
-                  className="bg-[rgb(255,176,73)] w-1/2 text-[rgb(242,247,250)] px-4 py-1 rounded hover:bg-[rgb(255,127,58)]"
-                >
-                  Konum Al
-                </button>
+                <Button
+                type="button"
+                onClick={handleGetLocation}
+       className="bg-[rgb(255,176,73)] w-1/2 text-[rgb(242,247,250)] px-4 py-1 rounded hover:bg-[rgb(255,127,58)]"
+                >Konum Al</Button>
+       
               )}
             </li>
 
