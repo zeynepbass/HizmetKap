@@ -1,10 +1,10 @@
 "use client"
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import {passwordSend} from "@/services/api"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
+import {Button} from "@/components/atoms"
 export default function Kullaniciadi () {
     const router = useRouter()
     const [formData, setFormData] = useState({
@@ -71,14 +71,14 @@ export default function Kullaniciadi () {
                         className=" focus:ring-[rgb(255,176,73)] mt-2 bg-[rgb(242,247,250)] rounded-md p-2 focus:outline-none focus:ring-2"
                     />
 
+<Button
+             type="submit"
+             className="w-[50%] rounded-4xl  mx-auto p-3 cursor-pointer  bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:text-gray-50 hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-2"
+         >
+Giriş Yap
+</Button>
 
-
-                    <button
-                        type="submit"
-                        className="w-[50%] rounded-4xl  mx-auto p-3 cursor-pointer  bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:text-gray-50 hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-2"
-                    >
-                        Giriş Yap
-                    </button>
+ 
                 </form>
             </div>
         </div>

@@ -1,11 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import KayitOl from "@/../components/KayitOl"
-import {updateHesap} from "@/../services/api"
+import Kayitol from "./Kayitol"
+import {updateHesap} from "@/services/api"
+import { Button } from "@/components/atoms";
 export default function Profil() {
   const [form, setForm] = useState({ ad: "", soyad: "", email: "" });
   const [telefon, setTelefon] = useState("");
@@ -131,13 +132,15 @@ useEffect(()=>{
                 onChange={setTelefon}
               />
             </div>
-
-            <button className="w-[50%] rounded-4xl  mx-auto p-3 cursor-pointer  bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:text-gray-50 hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-2">
-              Kaydet
-            </button>
+            <Button
+className="w-[50%] rounded-4xl  mx-auto p-3 cursor-pointer  bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:text-gray-50 hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-2"
+>
+Kaydet
+</Button>
+   
           </form>
         </div>
-      </div> : <KayitOl />}
+      </div> : <Kayitol />}
 
     </>
 

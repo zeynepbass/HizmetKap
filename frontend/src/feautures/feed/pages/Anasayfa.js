@@ -1,10 +1,11 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Slider from "@/components/Slider";
 import ToggleOnIcon from "@mui/icons-material/ToggleOn";
 import ToggleOffIcon from "@mui/icons-material/ToggleOff";
 import {updateDurum} from "@/services/api"
+import { Button } from "@/components/atoms";
 export default function Anasayfa ({itemsAktif: initialItems}) {
   const router = useRouter();
 const [itemsAktif,setItemsAktif]=useState(initialItems)
@@ -68,14 +69,16 @@ const [itemsAktif,setItemsAktif]=useState(initialItems)
 
     <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center mb-4 px-4 sm:px-0">
       {tabs.map((item, index) => (
-        <button
-          key={index}
-          className={`py-3 px-2 font-semibold text-gray-600 rounded-md ${openIndex === index ? "border-b-2 border-[rgb(255,200,60)]" : ""
-            }`}
-          onClick={() => setOpenIndex(index)}
-        >
+        <Button
+        onClick={() => setOpenIndex(index)}
+        type="button"
+        key={index}
+        className={`py-3 px-2 font-semibold text-gray-600 rounded-md ${openIndex === index ? "border-b-2 border-[rgb(255,200,60)]" : ""
+          }`}
+      >
           {item.title}
-        </button>
+      </Button>
+
       ))}
     </div>
   
@@ -88,9 +91,13 @@ const [itemsAktif,setItemsAktif]=useState(initialItems)
           )}
           <p className="font-bold text-[rgb(242,247,250)] mb-2">{tabs[openIndex].content}</p>
           {tabs[openIndex].button && (
-            <button className="text-gray-500 p-3 rounded-md font-bold mt-2">
-              {tabs[openIndex].button}
-            </button>
+            <Button
+
+className="text-gray-500 p-3 rounded-md font-bold mt-2"
+                >
+   {tabs[openIndex].button}
+          </Button>
+
           )}
         </div>
       ) : (
@@ -103,13 +110,18 @@ const [itemsAktif,setItemsAktif]=useState(initialItems)
               <form onSubmit={(e) => handleSubmit(e, item._id)}>
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="text-lg font-bold text-gray-600">{item.anaBaslik}</h3>
-                  <button type="submit">
-                    {showText[item._id] ? (
+                  <Button
+
+type="submit"
+
+>
+{showText[item._id] ? (
                       <ToggleOnIcon className="text-[rgb(255,176,73)]" />
                     ) : (
                       <ToggleOffIcon className="text-[rgb(242,247,250)]" />
                     )}
-                  </button>
+</Button>
+ 
                 </div>
               </form>
   

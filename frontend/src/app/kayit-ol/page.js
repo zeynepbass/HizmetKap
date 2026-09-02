@@ -1,7 +1,7 @@
 import React from 'react'
 import Kayitol from "@/features/user/pages/Kayitol"
-const page = () => {
+export default function page() {
   return <Kayitol/>
 }
 
-export default page
+

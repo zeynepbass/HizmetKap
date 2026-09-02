@@ -1,10 +1,10 @@
 "use client"
-import React, { useState,useEffect } from 'react'
+import { useState,useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import {handleRegisterPost} from "@/services/api"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
+import {Button} from "@/components/atoms"
 export default function Kayitol () {
 
     const [kullaniciStorage,setKullaniciStore]=useState("")
@@ -113,14 +113,13 @@ useEffect(()=>{
                             placeholder="Parola*"
                             className="rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
                         />
-
-                        <button
-                            type="submit"
-                            className="w-full rounded-full p-3 bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-4"
-                        >
-                            {kullaniciStorage ? "Kayıt Ol" : "Kaydet"}
-                        </button>
-
+<Button
+      type="submit"
+      className="w-full rounded-full p-3 bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-4"
+  >
+{kullaniciStorage ? "Kayıt Ol" : "Kaydet"}
+</Button>
+        
                     </form>
                 </div>
 

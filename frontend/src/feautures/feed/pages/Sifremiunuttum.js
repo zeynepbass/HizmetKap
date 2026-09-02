@@ -1,10 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import { SifremiUnuttum } from "@/app/services/api";
 import "react-toastify/dist/ReactToastify.css";
-
+import {Button} from "@/components/atoms"
 export default function Sifreniunuttum (){
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -114,13 +114,13 @@ export default function Sifreniunuttum (){
                 className="w-full bg-[rgb(242,247,250)] rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,127,60)]"
               />
             </div>
-
-            <button
-              type="submit"
-              className="w-[50%] rounded-4xl  mx-auto p-3 cursor-pointer  bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:text-gray-50 hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-2"
-            >
-              Güncelle
-            </button>
+            <Button
+          type="submit"
+          className="w-[50%] rounded-4xl  mx-auto p-3 cursor-pointer  bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:text-gray-50 hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-2"
+        >
+          Güncelle
+</Button>
+     
           </form>
         </div>
       </div>

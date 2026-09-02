@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useRouter } from "next/navigation";
-import {accountDelete,updateAccount} from "@/../services/api"
+import {accountDelete,updateAccount} from "@/services/api"
+import {Button} from "@/components/atoms"
 export default function Verigizlilik () {
 
     const items = [
@@ -82,18 +83,19 @@ export default function Verigizlilik () {
                        
                             <img src={items[openIndex].image} width="50%" height="30%" className="" />
                             <p className='font-bold text-gray-400 text-md'>{items[openIndex].paragraf}</p>
-                            <button
-                                onClick={() => {
-                                    if (openIndex === 0) {
-                                        handleDurumDegistir();
-                                    } else if (openIndex === 1) {
-                                        handleHesapSil();
-                                    }
-                                }}
-                                className="p-3 rounded-md font-bold mt-5 text-[rgb(78,36,77)] mx-auto cursor-pointer underline hover:text-[rgb(255,176,73)]"
-                            >
-                                {items[openIndex].button}
-                            </button>
+                            <Button
+          onClick={() => {
+            if (openIndex === 0) {
+                handleDurumDegistir();
+            } else if (openIndex === 1) {
+                handleHesapSil();
+            }
+        }}
+        className="p-3 rounded-md font-bold mt-5 text-[rgb(78,36,77)] mx-auto cursor-pointer underline hover:text-[rgb(255,176,73)]"
+    >
+            {items[openIndex].button}
+</Button>
+                
 
                         </div>
                     )}

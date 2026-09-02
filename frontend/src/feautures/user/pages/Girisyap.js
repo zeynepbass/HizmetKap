@@ -1,10 +1,11 @@
 "use client"
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import {Login} from "@/services/api"
+import { Button } from "@/components/atoms"
 export default function Girisyap() {
     const router = useRouter()
     const [formData, setFormData] = useState({
@@ -95,23 +96,26 @@ export default function Girisyap() {
                                 Kayit ol
                             </span>
                         </div>
-                        <button
-                            type="submit"
-                            className="w-[50%] rounded-4xl  mx-auto p-3 cursor-pointer  bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:text-gray-50 hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-2"
-                        >
-                            Giriş Yap
-                        </button>
+                        <Button
+
+  type="submit"
+  className="w-[50%] rounded-4xl  mx-auto p-3 cursor-pointer  bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:text-gray-50 hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-2"
+>
+  Giriş Yap
+</Button>
+              
                         <p className="text-center text-black font-bold mt-2 ">
                             <span>veya</span>
                         </p>
                         <div className='flex gap-1'>
-                            <button
-                                type="button"
-                                onClick={() => router.push("/kullanici-adi-giris")}
-                                className="w-[50%]  mx-auto p-3 cursor-pointer rounded-md border border-gray-100 text-gray-400 hover:text-300 transition-colors duration-300 mt-2"
-                            >
-                                Kullanıcı adı ile giriş yap
-                            </button>
+                        <Button
+              onClick={() => router.push("/kullanici-adi-giris")}
+  type="button"
+  className="w-[50%]  mx-auto p-3 cursor-pointer rounded-md border border-gray-100 text-gray-400 hover:text-300 transition-colors duration-300 mt-2"
+  >
+      Kullanıcı adı ile giriş yap
+</Button>
+                         
 
 
                         </div>

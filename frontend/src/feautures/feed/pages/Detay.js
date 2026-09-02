@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import Box from "@mui/material/Box";
@@ -8,6 +8,8 @@ import ScheduleIcon from '@mui/icons-material/Schedule';
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Button } from "@/components/atoms";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -114,6 +116,19 @@ export default function Detay ({ paramsId }){
 
 
     return (
+        <>
+  
+        <Button
+        onClick={() => router.back()}
+        className="ml-4 cursor-pointer text-[rgb(237,203,206)]"
+      >
+        <ArrowBackIcon sx={{ fontSize: 35 }} />
+      </Button>
+      <div className="flex flex-col items-center mx-auto gap-6 min-h-[100vh]">
+        <div className="w-full max-w-xlg text-center h-[100vh] overflow-auto">
+          <h1 className="text-md font-bold mb-4 text-gray-600">
+            İletişim Bilgilerini ve Konumunu Eklemek İster misin?
+          </h1>
         <div className="max-w-3xl mx-auto p-4 space-y-6 ">
             <ul className="list-none space-y-4">
                 <form onSubmit={handleSubmit}>
@@ -342,6 +357,8 @@ export default function Detay ({ paramsId }){
 
             </div>
         </div>
+        </div>
+        </div>      </>
     );
 };
 

@@ -1,8 +1,8 @@
 import React from 'react'
-import Profil from "@/features/feed/pages/Profil"
-const page = () => {
+import Profil from "@/features/user/pages/Profil"
+export default function page() {
   return <Profil/>
 
 }
 
-export default page
+

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import {
   fetchUsersGet,
@@ -7,6 +7,7 @@ import {
   fetchMessagesGet,
   sendMessage
 } from "@/services/api";
+import {Button} from "@/components/atoms"
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import Score from "@/components/Score";
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5233";
@@ -195,12 +196,13 @@ export default function Chatroom ({ id })  {
               placeholder="Mesaj yazın..."
               className="flex-1 border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-purple-400 focus:outline-none transition"
             />
-            <button
-              type="submit"
-              className="w-28 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-md transition-colors duration-200"
-            >
+            <Button
+        type="submit"
+        className="w-28 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-md transition-colors duration-200"
+      >
               Gönder
-            </button>
+</Button>
+
           </form>
         </div>
       </div>
