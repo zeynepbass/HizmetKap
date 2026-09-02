@@ -9,7 +9,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import trLocale from "date-fns/locale/tr";
 
-import { Button, Heading } from "@/shared/components/atoms";
+import { Button, Heading,Input } from "@/shared/components/atoms";
 
 export function ServiceContactForm({
   location,
@@ -40,13 +40,15 @@ export function ServiceContactForm({
                 <AddLocationAltIcon className="w-8 h-8 text-[rgb(255,176,73)]" />
 
                 {location ? (
-                  <input
-                    type="text"
-                    value={location}
-                    readOnly
-                    className="border w-full border-gray-100 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-[rgb(255,127,58)]"
-                    placeholder="Konumunuz"
-                  />
+                          <Input
+                          type="text"
+                          value={location}
+                          readOnly
+                          className="border w-full border-gray-100 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-[rgb(255,127,58)]"
+                          placeholder="Konumunuz"
+                                 
+                                           />
+    
                 ) : (
                   <span className="text-gray-500">
                     Konum Verilmedi

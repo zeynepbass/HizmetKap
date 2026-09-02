@@ -2,7 +2,7 @@
 
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import { Button } from "@/shared/components/atoms";
+import { Button,Input } from "@/shared/components/atoms";
 
 export function ProfilForm({
   form,
@@ -18,36 +18,39 @@ export function ProfilForm({
         className="flex flex-col gap-4 shadow-md p-4 rounded-lg"
       >
         <div>
-          <input
-            type="text"
-            name="ad"
-            value={form.ad}
-            onChange={handleChange}
-            placeholder="Ad*"
-            className="w-full rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] mt-2 bg-[rgb(242,247,250)]"
-          />
+
+                 <Input
+                   type="text"
+                   name="ad"
+                   value={form.ad}
+                   onChange={handleChange}
+                   placeholder="Ad*"
+                   className="w-full rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] mt-2 bg-[rgb(242,247,250)]"
+                 />
         </div>
 
         <div>
-          <input
+        <Input
             type="text"
             name="soyad"
             value={form.soyad}
             onChange={handleChange}
             placeholder="Soyad*"
             className="w-full rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] mt-2 bg-[rgb(242,247,250)]"
-          />
+            />
+
         </div>
 
         <div>
-          <input
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="Email*"
-            className="w-full rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] mt-2 bg-[rgb(242,247,250)]"
-          />
+                   <Input
+                            type="email"
+                            name="email"
+                            value={form.email}
+                            onChange={handleChange}
+                            placeholder="Email*"
+                            className="w-full rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] mt-2 bg-[rgb(242,247,250)]"
+                            />
+
         </div>
 
         <div>

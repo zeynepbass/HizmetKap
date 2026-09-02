@@ -5,8 +5,10 @@ import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
 import TextsmsIcon from "@mui/icons-material/Textsms";
 import {Hesapdetay} from "@/feautures/user/components/HesaDetails";
 import { useRouter } from "next/navigation";
+import {toSlug} from "@/shared/helpers/toSlug"
 import Link from "next/link";
 import { getKategoriler } from "@/services/api";
+import { Input } from "@/shared/atoms";
 export function Sidebar() {
   const [open, setOpen] = useState(false);
   const [category, setCategory] = useState([]);
@@ -22,19 +24,7 @@ export function Sidebar() {
   };
 
   const [storedData, setStoredData] = useState(null);
-  const toSlug = (text) => {
-    return text
-      .toLowerCase()
-      .replace(/ç/g, "c")
-      .replace(/ğ/g, "g")
-      .replace(/ı/g, "i")
-      .replace(/ö/g, "o")
-      .replace(/ş/g, "s")
-      .replace(/ü/g, "u")
-      .replace(/[^a-z0-9\s-]/g, "")
-      .trim()
-      .replace(/\s+/g, "-");
-  };
+
   useEffect(() => {
     fetchCtegory();
     const data = JSON.parse(localStorage.getItem("kullanici"));
@@ -88,11 +78,12 @@ export function Sidebar() {
         </div>
 
         <div className="flex items-center rounded-full pr-2 bg-[rgb(242,247,250)] shadow-inner focus-within:ring-2 focus-within:ring-[rgb(255,176,73)]">
-          <input
-            type="text"
-            placeholder="Başka bir ihtiyacın?"
-            className="flex-1 p-3 rounded-full bg-transparent text-gray-700 focus:outline-none"
-          />
+     <Input
+           placeholder="Başka bir ihtiyacın?"
+           className="flex-1 p-3 rounded-full bg-transparent text-gray-700 focus:outline-none"
+       
+     />
+
           <SavedSearchIcon
             className="cursor-pointer text-[rgb(78,36,77)] mr-3"
             onClick={() => setOpen(!open)}

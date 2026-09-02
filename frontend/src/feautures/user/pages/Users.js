@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { fetchUsersGet, getAktifTadilat } from "@/services/api";
 import {Heading } from "@/shared/components/atoms";
 import { KullaniciCard } from "../components/KullaniciCard";
+export {toSlugUrl} from "@/shared/helpers/toSlug"
 export default function Kullanicilar(isim) {
 
   const [data, setData] = useState([]);
@@ -54,16 +55,7 @@ export default function Kullanicilar(isim) {
       .join(" ");
   };
 
-  const toSlugUrl = (text) => {
-    if (!text) return "";
-    return text
-      .toString()
-      .toLowerCase()
-      .trim()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/\s+/g, "-");
-  };
+
 
   const filteredTadilat = category.filter(
     (item) =>

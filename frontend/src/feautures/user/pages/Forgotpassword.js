@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import { SifremiUnuttum } from "@/shared/services/api";
 import "react-toastify/dist/ReactToastify.css";
-import {Button,Heading} from "@/shared/components/atoms"
+import {Button,Heading,Input} from "@/shared/components/atoms"
 export default function Sifreniunuttum (){
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -77,38 +77,42 @@ export default function Sifreniunuttum (){
 
             <div>
 
-              <input
+       
+                          <Input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Email*"
                 className="w-full bg-[rgb(242,247,250)] rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,127,60)]"
-              />
+            
+ />
             </div>
 
             <div>
-
-              <input
-                type="password"
-                name="yeniParola"
-                value={formData.yeniParola}
-                onChange={handleChange}
-                placeholder="Yeni şifre*"
-                className="w-full bg-[rgb(242,247,250)] rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,127,60)]"
-              />
+            <Input
+           type="password"
+           name="yeniParola"
+           value={formData.yeniParola}
+           onChange={handleChange}
+           placeholder="Yeni şifre*"
+           className="w-full bg-[rgb(242,247,250)] rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,127,60)]"
+       
+ />
+    
             </div>
 
             <div>
-
-              <input
-                type="password"
-                name="yeniParolaTekrar"
-                value={formData.yeniParolaTekrar}
-                onChange={handleChange}
-                placeholder="Yeni Şifre Tekrar*"
-                className="w-full bg-[rgb(242,247,250)] rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,127,60)]"
-              />
+ <Input
+             type="password"
+             name="yeniParolaTekrar"
+             value={formData.yeniParolaTekrar}
+             onChange={handleChange}
+             placeholder="Yeni Şifre Tekrar*"
+             className="w-full bg-[rgb(242,247,250)] rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,127,60)]"
+         
+ />
+      
             </div>
             <Button
           type="submit"

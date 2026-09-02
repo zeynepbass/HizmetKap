@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import {passwordSend} from "@/services/api"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import {Button,Heading} from "@/shared/components/atoms"
+import {Button,Heading,Input} from "@/shared/components/atoms"
 
 export default function Kullaniciadi () {
     const router = useRouter()
@@ -57,16 +57,25 @@ export default function Kullaniciadi () {
             <div className="flex items-center  justify-center w-[50%] px-4 ">
                 <form onSubmit={handleSubmit} className=' h-[50%] bg-white flex shadow-md flex-col gap-1 border border-gray-100  rounded-2xl p-10'>
                <Heading variant="login" title="KULLANICI ADI İLE GİRİŞ YAP" desc="Güvenliğiniz için yalnızca kendi cihazlarınızdan giriş yapın."/>
-               
-             
-                    <input
-                        type="text"
-                        name="kullaniciAdi"
-                        value={formData.kullaniciAdi}
-                        onChange={handleChange}
-                        placeholder="Kullanıcı adınız*"
-                        className=" focus:ring-[rgb(255,176,73)] mt-2 bg-[rgb(242,247,250)] rounded-md p-2 focus:outline-none focus:ring-2"
-                    />
+               <Input
+                               type="text"
+                               name="kullaniciAdi"
+                               value={formData.kullaniciAdi}
+                               onChange={handleChange}
+                               placeholder="Kullanıcı adınız*"
+                               className=" focus:ring-[rgb(255,176,73)] mt-2 bg-[rgb(242,247,250)] rounded-md p-2 focus:outline-none focus:ring-2"
+                         
+               />
+                       <Input
+                 type="text"
+                 name="kullaniciAdi"
+                 value={formData.kullaniciAdi}
+                 onChange={handleChange}
+                 placeholder="Kullanıcı adınız*"
+                 className=" focus:ring-[rgb(255,176,73)] mt-2 bg-[rgb(242,247,250)] rounded-md p-2 focus:outline-none focus:ring-2"
+                        
+               />
+
 
 <Button
              type="submit"

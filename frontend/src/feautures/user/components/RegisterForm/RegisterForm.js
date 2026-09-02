@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Heading } from "@/shared/components/atoms";
+import { Button, Heading,Input } from "@/shared/components/atoms";
 
 export function RegisterForm({
   formData,
@@ -33,42 +33,46 @@ export function RegisterForm({
         />
 
         <div className="flex flex-col md:flex-row gap-4">
-          <input
-            type="text"
-            name="ad"
-            value={formData.ad}
-            onChange={handleChange}
-            placeholder="Ad*"
-            className="flex-1 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
-          />
+                               <Input
+                           type="text"
+                           name="ad"
+                           value={formData.ad}
+                           onChange={handleChange}
+                           placeholder="Ad*"
+                           className="flex-1 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
+                               
+                         />
+                       <Input
+                     type="text"
+                     name="soyad"
+                     value={formData.soyad}
+                     onChange={handleChange}
+                     placeholder="Soyad*"
+                     className="flex-1 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
+                          
+                         />
 
-          <input
-            type="text"
-            name="soyad"
-            value={formData.soyad}
-            onChange={handleChange}
-            placeholder="Soyad*"
-            className="flex-1 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
-          />
         </div>
+        <Input
+               type="text"
+               name="email"
+               value={formData.email}
+               onChange={handleChange}
+               placeholder="Email*"
+               className="rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
+                 
+                         />
+                                 <Input
+            type="password"
+            name="parola"
+            value={formData.parola}
+            onChange={handleChange}
+            placeholder="Parola*"
+            className="rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
+          
+                         />
 
-        <input
-          type="text"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Email*"
-          className="rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
-        />
 
-        <input
-          type="password"
-          name="parola"
-          value={formData.parola}
-          onChange={handleChange}
-          placeholder="Parola*"
-          className="rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
-        />
 
         <Button
           type="submit"

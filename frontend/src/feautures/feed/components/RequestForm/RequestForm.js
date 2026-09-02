@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/shared/components/atoms";
+import { Button,Input } from "@/shared/components/atoms";
 
 export function RequestForm({
   item,
@@ -39,12 +39,12 @@ export function RequestForm({
             key={option}
             className="flex items-center space-x-2 cursor-pointer text-gray-600"
           >
-            <input
-              type="radio"
-              name={`step-${currentStep}`}
-              checked={answers[currentStep]?.secilen === option}
-              onChange={() => handleAnswer(option)}
-            />
+                            <Input
+                           type="radio"
+                           name={`step-${currentStep}`}
+                           checked={answers[currentStep]?.secilen === option}
+                           onChange={() => handleAnswer(option)}      />
+    
 
             <span>{option}</span>
           </label>
