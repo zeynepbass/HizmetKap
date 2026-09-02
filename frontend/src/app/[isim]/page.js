@@ -1,6 +1,6 @@
 
 
-import Kullanicilar from "@/feautures/user/pages/Kullanicilar";
+import Kullanicilar from "@/feautures/user/pages/Users";
 
 export default async function page() {
   const params = useParams();

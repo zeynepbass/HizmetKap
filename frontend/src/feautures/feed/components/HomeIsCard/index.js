@@ -1,0 +1,1 @@
+export {HomeIsCard} from "./HomeIsCard"

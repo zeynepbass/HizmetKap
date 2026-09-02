@@ -1,11 +1,11 @@
 
 import { getAktifTadilat } from "@/services/api";
-import Anasayfa from "@/features/feed/pages/Anasayfa";
+import Home from "@/features/feed/pages/Home";
 
 export default async function page() {
   const itemsAktif = await getAktifTadilat();
 
-  return <Anasayfa itemsAktif={itemsAktif} />;
+  return <Home itemsAktif={itemsAktif} />;
 };
 
 

@@ -1,1 +1,0 @@
-export {Konum} from "./Konum"

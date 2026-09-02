@@ -1,6 +1,6 @@
 
-import Verigizlilik from "@/features/feed/pages/Verigizlilik"
+import Dataprivacy from "@/features/feed/pages/Dataprivacy"
 export default function page() {
-  return <Verigizlilik/>
+  return <Dataprivacy/>
 }
 

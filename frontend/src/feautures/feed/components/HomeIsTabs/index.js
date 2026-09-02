@@ -1,0 +1,1 @@
+export {HomeIsTabs} from "./HomeIsTabs"

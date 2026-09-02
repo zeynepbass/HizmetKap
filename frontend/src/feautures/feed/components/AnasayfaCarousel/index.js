@@ -1,1 +1,0 @@
-export {AnasayfaCarousel} from "./AnasayfaCarousel"
