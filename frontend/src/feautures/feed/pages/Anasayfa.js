@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Slider from "../components/Slider";
+import {AnasayfaSlider} from "../components/AnasayfaSlider";
 import {AnasayfaIsTabs} from "../components/AnasayfaIsTabs"
 import {AnasayfaEmptyState} from "../components/AnasayfaEmptyState"
 import {AnasayfaIsCard} from "../components/AnasayfaIsCard/AnasayfaIsCard"
@@ -93,7 +93,7 @@ const [itemsAktif,setItemsAktif]=useState(initialItems)
   
 
     <div className="w-full pt-5 border-t border-gray-100">
-      <Slider />
+      <AnasayfaSlider />
     </div>
   </div>
   

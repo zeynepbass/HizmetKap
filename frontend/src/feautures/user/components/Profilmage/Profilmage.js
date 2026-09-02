@@ -1,4 +1,4 @@
-export function ProfileImage({
+export function Profilmage({
     resim,
     preview,
     handleFileChange,

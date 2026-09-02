@@ -1,8 +1,8 @@
 "use client";
 
 import { ToastContainer } from "react-toastify";
-import { ProfileForm } from "../components/ProfileForm";
-import { ProfileImage } from "../components/ProfileImage";
+import { ProfileForm } from "../components/ProfilForm";
+import { ProfileImage } from "../components/Profilmage";
 import { useProfile } from "./hooks/useProfile";
 
 export default function Profil() {

@@ -4,7 +4,7 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { Button } from "@/shared/components/atoms";
 
-export function ProfileForm({
+export function ProfilForm({
   form,
   telefon,
   setTelefon,

@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
-import ThreePerViewCarousel from "@/components/ThreePerViewCarousel";
+import {AnasayfaCarousel} from "@/components/AnasayfaCarousel";
 import {getKategoriler} from "@/shared/services/api"
-export default function xPage() {
+export function AnasayfaSlider() {
   const [slides, setSlides] = useState([]);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function xPage() {
 
   return (
     <main>
-      {slides.length > 0 && <ThreePerViewCarousel slides={slides} />}
+      {slides.length > 0 && <AnasayfaCarousel slides={slides} />}
     </main>
   );
 }
