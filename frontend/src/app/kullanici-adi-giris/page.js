@@ -1,5 +1,5 @@
 import React from 'react'
-import KullaniciAdi from "../components/KullaniciAdi"
+import KullaniciAdi from "@/features/user/pages/Kullaniciadi"
 const page = () => {
   return <KullaniciAdi/>
 }

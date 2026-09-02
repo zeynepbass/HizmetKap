@@ -1,7 +1,7 @@
 import React from 'react'
-import KayitOl from "../components/KayitOl"
+import Kayitol from "@/features/user/pages/Kayitol"
 const page = () => {
-  return <KayitOl/>
+  return <Kayitol/>
 }
 
 export default page

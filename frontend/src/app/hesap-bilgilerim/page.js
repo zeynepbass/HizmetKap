@@ -1,7 +1,7 @@
 import React from 'react'
-import Ayarlar from "../components/SettingsLayout/Profil"
+import Profil from "@/features/feed/pages/Profil"
 const page = () => {
-  return <Ayarlar/>
+  return <Profil/>
 
 }
 

@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import {
   getTadilatById,
   postAktifTadilat,
   updateDurum,
-} from "../../../app/services/api";
-import Link from "next/link";
+} from "@/app/services/api";
+import Link from "next/navigation";
 import { Snackbar, Alert } from "@mui/material";
-export default function Page() {
+const page=()=> {
   const params = useParams();
   const { id } = params;
 
@@ -272,3 +272,4 @@ export default function Page() {
     </div>
   );
 }
+export default page
