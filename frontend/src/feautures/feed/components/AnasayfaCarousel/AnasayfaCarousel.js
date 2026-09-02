@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function ThreePerViewCarousel({ slides }) {
+export default function AnaSayfaCarousel({ slides }) {
   const [current, setCurrent] = useState(0);
   const itemsPerView = 3;
   const router = useRouter();

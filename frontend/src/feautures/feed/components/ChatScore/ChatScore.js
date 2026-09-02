@@ -7,7 +7,7 @@ import {scoreUpdated,MessageDelete} from "@/services/api"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-const Degerlendirme = ({ kullaniciId, setOpen,gonderenId,setMessages,setUserList }) => {
+export function ChatScore ({ kullaniciId, setOpen,gonderenId,setMessages,setUserList }) {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const router = useRouter();
@@ -119,4 +119,4 @@ const Degerlendirme = ({ kullaniciId, setOpen,gonderenId,setMessages,setUserList
   );
 };
 
-export default Degerlendirme;
+

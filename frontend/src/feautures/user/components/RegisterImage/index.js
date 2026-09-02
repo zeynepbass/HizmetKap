@@ -1,0 +1,1 @@
+export {RegisterImage} from "./RegisterImage.js"

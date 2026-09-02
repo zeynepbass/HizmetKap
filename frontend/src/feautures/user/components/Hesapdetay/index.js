@@ -1,1 +1,0 @@
-export {Hesapdetay} from "./Hesapdetay"

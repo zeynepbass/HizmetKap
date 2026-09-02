@@ -7,7 +7,7 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
-export function Hesapdetay(){
+export function HesapDetails(){
   const [data, setData] = useState({});
   const [kullaniciAdi, setKullaniciAdi] = useState(null);
   const router = useRouter();

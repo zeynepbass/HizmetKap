@@ -1,0 +1,1 @@
+export {KullaniciCard} from "./KullaniciCard"

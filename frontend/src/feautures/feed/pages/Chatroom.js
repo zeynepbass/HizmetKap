@@ -9,7 +9,7 @@ import {
 } from "@/services/api";
 import {Button} from "@/shared/components/atoms"
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
-import Score from "@/components/Score";
+import {ChatScore} from "../components/ChatScore";
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 const socket = io(baseUrl);
 
@@ -142,7 +142,7 @@ export default function Chatroom ({ id })  {
                 onClick={() => setOpen(true)}
                 className="w-6 h-6 cursor-pointer text-gray-500 hover:text-gray-100 transition duration-300 ease-in-out"
               />
-                   {open ? <Score  kullaniciId={item._id} gonderenId={gonderenId} setMessages={setMessages} setUserList={setUserList} /> : null}
+                   {open ? <ChatScore  kullaniciId={item._id} gonderenId={gonderenId} setMessages={setMessages} setUserList={setUserList} /> : null}
           
             </div>
           ))

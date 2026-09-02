@@ -1,0 +1,1 @@
+export {TalepForm} from "./TalepForm"

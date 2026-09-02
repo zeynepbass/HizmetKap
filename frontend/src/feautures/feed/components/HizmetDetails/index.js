@@ -1,0 +1,1 @@
+export {HizmetDetails} from "./HizmetDetails"
