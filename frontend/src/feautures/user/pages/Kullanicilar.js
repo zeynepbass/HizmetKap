@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { fetchUsersGet, getAktifTadilat } from "@/app/services/api";
-import {Konum} from "@/features/feed/components"
-import { Button } from "@/components/atoms";
+import { fetchUsersGet, getAktifTadilat } from "@/services/api";
+import {Konum} from "@/feautures/feed/components/Konum"
+import { Button,Heading } from "@/shared/components/atoms";
 export default function Kullanicilar(isim) {
 
   const [data, setData] = useState([]);
@@ -74,10 +74,9 @@ export default function Kullanicilar(isim) {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-extrabold text-gray-500 mb-8  pb-3">
-        Kategori: {toDisplay(filteredTadilat[0]?.anaBaslik || isim)}
-      </h1>
-
+<Heading
+  title={`Kategori: ${toDisplay(filteredTadilat[0]?.anaBaslik || isim)}`}
+/>
       <div className="relative w-full mx-auto">
         {filteredTadilat.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">

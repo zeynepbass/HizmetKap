@@ -2,7 +2,7 @@
 import {useState } from "react";
 import { Rating, Box } from "@mui/material";
 import { useRouter } from "next/navigation";
-import {Button}from "@/components/atoms"
+import {Button}from "@/shared/components/atoms"
 import {scoreUpdated,MessageDelete} from "@/services/api"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import {Sidebar,Header,Settingsheader} from "@/components/organism";
+import {Sidebar,Header,Settingsheader} from "@/shared/components/organism";
 import { usePathname, useRouter } from "next/navigation";
 
 export function Layout({ children }){
@@ -26,8 +26,7 @@ export function Layout({ children }){
 
   const settingsPaths = [
     "/hesap-bilgilerim",
-    "/veri-ve-gizlilik",
-    "/sifre-degistir",
+    "/veri-gizlilik"
   ];
   const isSettingsPage = settingsPaths.includes(pathname);
 
@@ -35,7 +34,7 @@ export function Layout({ children }){
   if (isSettingsPage) return <><Settingsheader />{children}</>;
 
   return (
-    <div className="grid grid-cols-12 h-screen overflow-hidden">
+    <div className="grid grid-cols-12 h-screen overflow-hidden ">
 
       <div className="col-span-12 lg:col-span-3 md:col-span-4  lg:h-[100vh] md:h-[50vh] bg-gray-100 overflow-auto">
         <Sidebar />

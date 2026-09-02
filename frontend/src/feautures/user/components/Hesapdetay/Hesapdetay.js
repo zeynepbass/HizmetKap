@@ -7,7 +7,7 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
-export default function Hesapdetay(){
+export function Hesapdetay(){
   const [data, setData] = useState({});
   const [kullaniciAdi, setKullaniciAdi] = useState(null);
   const router = useRouter();
@@ -59,7 +59,7 @@ export default function Hesapdetay(){
           <CardMedia
             component="img"
             sx={{ width: 50, height: 50, borderRadius: "50%" }}
-            image={`http://localhost:5233/uploads/${data.resim}`}
+            image={`http://localhost:6398/uploads/${data.resim}`}
             alt="kullanıcı resmi"
           />
         )

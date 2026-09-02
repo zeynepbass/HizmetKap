@@ -1,5 +1,5 @@
-import React from 'react'
-import Kayitol from "@/features/user/pages/Kayitol"
+
+import Kayitol from "@/feautures/user/pages/Kayitol"
 export default function page() {
   return <Kayitol/>
 }

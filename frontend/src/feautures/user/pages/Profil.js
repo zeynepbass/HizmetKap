@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Kayitol from "./Kayitol"
 import {updateHesap} from "@/services/api"
-import { Button } from "@/components/atoms";
+import { Button } from "@/shared/components/atoms";
 export default function Profil() {
   const [form, setForm] = useState({ ad: "", soyad: "", email: "" });
   const [telefon, setTelefon] = useState("");

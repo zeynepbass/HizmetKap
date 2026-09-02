@@ -1,8 +1,8 @@
-import Login from "../app/components/Login";
+import Girisyap from "@/feautures/user/pages/Girisyap";
 export default function Home() {
   return (
     <main>
-      <Login />
+      <Girisyap />
     </main>
   );
 }
