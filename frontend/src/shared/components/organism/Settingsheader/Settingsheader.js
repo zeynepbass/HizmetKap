@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter,Link } from "next/navigation";
 
-import {Button} from "@/components/atoms";
+import {Button} from "@/shared/components/atoms";
 
 const navItems = ["Hesap Bilgilerim", "Şifre Değiştir", "Veri ve gizlilik"];
 

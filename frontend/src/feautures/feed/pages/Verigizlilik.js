@@ -4,7 +4,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useRouter } from "next/navigation";
 import {accountDelete,updateAccount} from "@/services/api"
-import {Button} from "@/components/atoms"
+import {Button,Heading} from "@/shared/components/atoms"
 export default function Verigizlilik () {
 
     const items = [
@@ -59,17 +59,12 @@ export default function Verigizlilik () {
                     <div className="flex flex-col gap-4 p-4">
                         {items.map((item, index) => (
                             <div key={index}>
-                                <h1
-                                    className="text-xl text-gray-600 font-bold flex items-center justify-between cursor-pointer"
-                                    onClick={() => toggle(index)}
-                                >
+                                <Heading   onClick={() => toggle(index)} title={<>
                                     {item.title}
                                     {openIndex === index ? <KeyboardArrowDownIcon /> : <ArrowForwardIosIcon />}
-                                </h1>
-
-                                <p className="text-gray-500 mb-6">
-                                    {item.content}
-                                </p>
+                              
+                                    </>} desc=            {item.content}/>
+                          
                             </div>
 
                         ))}

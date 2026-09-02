@@ -10,7 +10,7 @@ const customIcon = L.icon({
   popupAnchor: [0, -40], 
 });
 
-export default function Konum({ konum }) {
+export function Konum({ konum }) {
   if (!konum) return null;
 
   const matches = konum.match(/Lat:\s*([0-9.-]+),\s*Lng:\s*([0-9.-]+)/);

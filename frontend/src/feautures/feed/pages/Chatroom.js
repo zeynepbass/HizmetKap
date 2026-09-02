@@ -7,10 +7,10 @@ import {
   fetchMessagesGet,
   sendMessage
 } from "@/services/api";
-import {Button} from "@/components/atoms"
+import {Button} from "@/shared/components/atoms"
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import Score from "@/components/Score";
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5233";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 const socket = io(baseUrl);
 
 export default function Chatroom ({ id })  {

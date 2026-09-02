@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import {Login} from "@/services/api"
-import { Button } from "@/components/atoms"
+import { Button,Heading } from "@/shared/components/atoms"
 export default function Girisyap() {
     const router = useRouter()
     const [formData, setFormData] = useState({
@@ -54,16 +54,13 @@ export default function Girisyap() {
             <div className="grid grid-cols-12 w-full max-w-6xl shadow-xl rounded-2xl overflow-hidden">
 
 
-                <div className="col-span-12 md:col-span-6  flex justify-center items-center">
+                <div className="col-span-12 md:col-span-6  bg-white flex justify-center items-center">
                     <form
                         onSubmit={handleSubmit}
-                        className="w-[90%] flex flex-col gap-1 rounded-lg p-10"
+                        className="w-[90%] flex flex-col  gap-1 rounded-lg p-10"
                     >
-                        <h1 className="text-4xl font-bold p-4 text-center text-gray-400">
-                            GİRİŞ YAP
-                        </h1>
-                        <p className='text-gray-500 text-center'>Güvenliğiniz için yalnızca kendi cihazlarınızdan giriş yapın.</p>
-                        <br />
+                        <Heading title="GİRİŞ YAP" DESC="Güvenliğiniz için yalnızca kendi cihazlarınızdan giriş yapın."/>
+            
                         <input
                             type="text"
                             name="email"
@@ -90,7 +87,7 @@ export default function Girisyap() {
                                 </span>
                             </Link>
                             <span
-                                className="text-md font-bold text-gray-400 text-right pr-2 cursor-pointer"
+                                className="text-md  text-gray-400 text-right pr-2 cursor-pointer"
                                 onClick={() => router.push("/kayit-ol")}
                             >
                                 Kayit ol
@@ -103,15 +100,12 @@ export default function Girisyap() {
 >
   Giriş Yap
 </Button>
-              
-                        <p className="text-center text-black font-bold mt-2 ">
-                            <span>veya</span>
-                        </p>
+
                         <div className='flex gap-1'>
                         <Button
               onClick={() => router.push("/kullanici-adi-giris")}
   type="button"
-  className="w-[50%]  mx-auto p-3 cursor-pointer rounded-md border border-gray-100 text-gray-400 hover:text-300 transition-colors duration-300 mt-2"
+  className="w-[50%]   mx-auto p-3 cursor-pointer rounded-md   text-gray-400 hover:text-300 transition-colors duration-300 mt-2"
   >
       Kullanıcı adı ile giriş yap
 </Button>

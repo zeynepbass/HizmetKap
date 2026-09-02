@@ -9,7 +9,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Button } from "@/components/atoms";
+import { Button,Heading } from "@/shared/components/atoms";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -126,9 +126,10 @@ export default function Detay ({ paramsId }){
       </Button>
       <div className="flex flex-col items-center mx-auto gap-6 min-h-[100vh]">
         <div className="w-full max-w-xlg text-center h-[100vh] overflow-auto">
-          <h1 className="text-md font-bold mb-4 text-gray-600">
-            İletişim Bilgilerini ve Konumunu Eklemek İster misin?
-          </h1>
+            <Heading 
+            
+            className="text-md font-bold mb-4 text-gray-600" title="    İletişim Bilgilerini ve Konumunu Eklemek İster misin?"/>
+   
         <div className="max-w-3xl mx-auto p-4 space-y-6 ">
             <ul className="list-none space-y-4">
                 <form onSubmit={handleSubmit}>
@@ -246,8 +247,8 @@ export default function Detay ({ paramsId }){
             </ul>
 
             <hr className="text-gray-100" />
+<Heading title="Detaylar" className="text-3xl font-bold text-center text-gray-600"/>
 
-            <h1 className="text-3xl font-bold text-center text-gray-600">Detaylar</h1>
             <span className="mb-4 text-xl font-bold text-gray-600 text-left">
                 {storedData?.anaBaslik}
             </span>

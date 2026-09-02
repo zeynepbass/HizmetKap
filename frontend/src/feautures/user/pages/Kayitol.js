@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import {handleRegisterPost} from "@/services/api"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import {Button} from "@/components/atoms"
+import {Button,Heading} from "@/shared/components/atoms"
 export default function Kayitol () {
 
     const [kullaniciStorage,setKullaniciStore]=useState("")
@@ -69,13 +69,24 @@ useEffect(()=>{
                 <div className="col-span-12 md:col-span-6 flex justify-center items-center bg-white p-8">
                     <form onSubmit={handleSubmit} className='w-full flex flex-col gap-4'>
 
-                        <h1 className="text-4xl font-bold text-center text-gray-400">
-                            {kullaniciStorage ? "Kayıt Ol" : "Kaydet"}
-                        </h1>
-
-                        <p className='text-gray-500 text-center text-sm'>
-                            Kayıt olarak <span className="underline cursor-pointer">Gizlilik Politikası</span> ve <span className="underline cursor-pointer">Kullanım Şartlarını</span> kabul etmiş olursunuz.
-                        </p>
+             
+    <Heading variant="login" title= {kullaniciStorage ? "Kayıt Ol" : "Kaydet"}
+    
+    desc={
+        <>
+          Kayıt olarak{" "}
+          <span className="underline cursor-pointer">
+            Gizlilik Politikası
+          </span>{" "}
+          ve{" "}
+          <span className="underline cursor-pointer">
+            Kullanım Şartlarını
+          </span>{" "}
+          kabul etmiş olursunuz.
+        </>
+      }
+      />       
+          
 
                         <div className='flex flex-col md:flex-row gap-4'>
                             <input
@@ -115,8 +126,8 @@ useEffect(()=>{
                         />
 <Button
       type="submit"
-      className="w-full rounded-full p-3 bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-4"
-  >
+      className="w-[50%] rounded-4xl  mx-auto p-3 cursor-pointer  bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:text-gray-50 hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-2"
+>
 {kullaniciStorage ? "Kayıt Ol" : "Kaydet"}
 </Button>
         

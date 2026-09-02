@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import ThreePerViewCarousel from "@/components/ThreePerViewCarousel";
-import {getKategoriler} from "@/app/services/api"
+import {getKategoriler} from "@/shared/services/api"
 export default function xPage() {
   const [slides, setSlides] = useState([]);
 

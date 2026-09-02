@@ -2,12 +2,12 @@
 
 import  { useState, useEffect } from "react";
 import {  useRouter } from "next/navigation";
-import {Button} from "@/components/atoms"
+import {Button} from "@/shared/components/atoms"
 import {
   getTadilatById,
   postAktifTadilat,
   updateDurum,
-} from "@/app/services/api";
+} from "@/shared/services/api";
 import Link from "next/navigation";
 import { Snackbar, Alert } from "@mui/material";
 export default function Talep(id) {

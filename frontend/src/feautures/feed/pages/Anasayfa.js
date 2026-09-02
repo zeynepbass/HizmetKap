@@ -5,7 +5,7 @@ import Slider from "@/components/Slider";
 import ToggleOnIcon from "@mui/icons-material/ToggleOn";
 import ToggleOffIcon from "@mui/icons-material/ToggleOff";
 import {updateDurum} from "@/services/api"
-import { Button } from "@/components/atoms";
+import { Button } from "@/shared/components/atoms";
 export default function Anasayfa ({itemsAktif: initialItems}) {
   const router = useRouter();
 const [itemsAktif,setItemsAktif]=useState(initialItems)

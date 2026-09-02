@@ -2,9 +2,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
-import { SifremiUnuttum } from "@/app/services/api";
+import { SifremiUnuttum } from "@/shared/services/api";
 import "react-toastify/dist/ReactToastify.css";
-import {Button} from "@/components/atoms"
+import {Button,Heading} from "@/shared/components/atoms"
 export default function Sifreniunuttum (){
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -72,12 +72,8 @@ export default function Sifreniunuttum (){
       <div className="flex justify-center items-center w-[80%]">
         <div className="w-full max-w-xl">
           <form onSubmit={handleSubmit} className="flex flex-col gap-5 rounded-lg p-10 shadow-lg bg-white">
-            <h1 className="text-3xl font-bold p-4 text-center text-gray-400">
-              ŞİFRE DEĞİŞTİR
-            </h1>
-            <p className='text-gray-500 text-center'>
-              Şifreni güncellemek için lütfen sırasıyla email ve yeni şifreni gir.
-            </p>
+            <Heading variant="dark" title="ŞİFRE DEĞİŞTİR" desc="Şifreni güncellemek için lütfen sırasıyla email ve yeni şifreni gir."/>
+
 
             <div>
 
