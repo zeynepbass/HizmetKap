@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../../components/Button";
-import Details from "../../components/Details";
+import Button from "@/components/Button";//!bakılcak ayırılıcak
+import Detay from "@/features/feed/pages/Detay";
 
 const Page = ({ params }) => {
     const { id } = params;
@@ -12,7 +12,7 @@ const Page = ({ params }) => {
                     <h1 className="text-md font-bold mb-4 text-gray-600">
                         İletişim Bilgilerini ve Konumunu Eklemek İster misin?
                     </h1>
-                    <Details paramsId={id} />
+                    <Detay paramsId={id} />
                 </div>
             </div>
         </>

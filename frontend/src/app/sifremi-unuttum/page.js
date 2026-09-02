@@ -1,7 +1,7 @@
-import React from 'react'
-import SifremiUnuttum from "../components/SettingsLayout/SifremiUnuttum"
+
+import Sifremiunuttum from "@/features/feed/pages/Sifremiunuttum"
 const page = () => {
-  return <SifremiUnuttum/>
+  return <Sifremiunuttum/>
 }
 
 export default page

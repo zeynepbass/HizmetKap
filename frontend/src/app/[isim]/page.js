@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { fetchUsersGet, getAktifTadilat } from "../../app/services/api";
-import KonumHarita from "../components/Konum";
-export default function KategoriPage() {
+import { fetchUsersGet, getAktifTadilat } from "@/app/services/api";
+import Konum from "@/features/feed/pages/Konum"
+const page=()=>{
   const params = useParams();
   const { isim } = params;
   const [data, setData] = useState([]);
@@ -92,7 +92,7 @@ export default function KategoriPage() {
                         <span className="font-semibold">Yayınlayan: {slide.ad.toUpperCase()}</span>{" "}<br/>
                         <span className="font-semibold">Telefon No:  {slide.telefonNo}</span>{" "}<br/>
                         <span className="font-semibold">Email:  {slide.email}</span>{" "}<br/>
-                        <span className="font-semibold">Konum: <KonumHarita konum={slide.konum} /></span>{" "}
+                        <span className="font-semibold">Konum: <Konum konum={slide.konum} /></span>{" "}
    
                       </p>
 
@@ -161,3 +161,4 @@ export default function KategoriPage() {
     </div>
   );
 }
+export default page
