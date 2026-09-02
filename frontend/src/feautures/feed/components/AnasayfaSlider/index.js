@@ -1,1 +1,0 @@
-export {AnasayfaSlider} from "./AnasayfaSlider"

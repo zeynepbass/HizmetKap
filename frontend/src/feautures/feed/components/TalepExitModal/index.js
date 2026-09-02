@@ -1,1 +1,0 @@
-export {TalepExitModal} from "./TalepExitModal"

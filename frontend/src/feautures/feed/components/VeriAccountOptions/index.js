@@ -1,1 +1,0 @@
-export {VeriAccountOptions} from "./VeriAccountOptions"

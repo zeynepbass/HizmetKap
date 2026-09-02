@@ -1,7 +1,7 @@
 
-import Profil from "@/features/user/pages/Profil"
+import Profile from "@/features/user/pages/Profile"
 export default function page() {
-  return <Profil/>
+  return <Profile/>
 
 }
 

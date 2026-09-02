@@ -1,7 +1,7 @@
 
-import Sifremiunuttum from "@/features/feed/pages/Sifremiunuttum"
+import Forgotpassword from "@/features/feed/pages/Forgotpassword"
 export default function page() {
-  return <Sifremiunuttum/>
+  return <Forgotpassword/>
 }
 
 

@@ -1,1 +1,0 @@
-export {HizmetOptions} from "./HizmetOptions"

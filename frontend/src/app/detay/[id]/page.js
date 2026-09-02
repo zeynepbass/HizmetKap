@@ -1,7 +1,7 @@
 
-import Talep from "@/features/feed/pages/Talep"
+import Request from "@/features/feed/pages/Request"
 export default function page({ params }) {
   const { id } = params;
-  return <Talep id={id}/>
+  return <Request id={id}/>
 }
 

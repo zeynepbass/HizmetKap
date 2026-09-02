@@ -1,1 +1,0 @@
-export {TalepForm} from "./TalepForm"

@@ -1,7 +1,7 @@
 
-import Kayitol from "@/feautures/user/pages/Kayitol"
+import Register from "@/feautures/user/pages/Register"
 export default function page() {
-  return <Kayitol/>
+  return <Register/>
 }
 
 

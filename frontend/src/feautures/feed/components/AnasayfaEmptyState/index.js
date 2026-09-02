@@ -1,1 +1,0 @@
-export {AnasayfaEmptyState} from "./AnasayfaEmptyState"

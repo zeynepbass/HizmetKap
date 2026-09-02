@@ -1,7 +1,7 @@
 
-import Kullaniciadi from "@/feautures/user/pages/Kullaniciadi"
+import Username from "@/feautures/user/pages/Username"
 export default function page() {
-  return <Kullaniciadi/>
+  return <Username/>
 }
 
 

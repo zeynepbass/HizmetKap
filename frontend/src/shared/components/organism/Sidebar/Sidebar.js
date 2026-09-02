@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import SavedSearchIcon from "@mui/icons-material/SavedSearch";
 import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
 import TextsmsIcon from "@mui/icons-material/Textsms";
-import {Hesapdetay} from "@/feautures/user/components/HesapDetails";
+import {Hesapdetay} from "@/feautures/user/components/HesaDetails";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { getKategoriler } from "@/services/api";
