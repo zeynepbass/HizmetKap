@@ -1,0 +1,1 @@
+export {TalepSuccess} from "./TalepSuccess"

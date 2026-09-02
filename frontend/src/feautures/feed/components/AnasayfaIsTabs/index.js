@@ -1,0 +1,1 @@
+export {AnasayfaIsTabs} from "./AnasayfaIsTabs"

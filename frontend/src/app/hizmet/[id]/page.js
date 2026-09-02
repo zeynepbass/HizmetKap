@@ -1,9 +1,9 @@
 
-import Detay from "@/features/feed/pages/Detay";
+import Hizmet from "@/features/feed/pages/Hizmet";
 
 export default function page({ params })  {
   const { id } = params;
-  return<Detay paramsId={id} />
+  return<Hizmet paramsId={id} />
 
 };
 
