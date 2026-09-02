@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import {Sidebar,Header,Settingsheader} from "@/components/organism";
 import { usePathname, useRouter } from "next/navigation";
 
-export function AppLayout({ children }){
+export function Layout({ children }){
   const pathname = usePathname();
   const router = useRouter();
   const [user, setUser] = useState(null);

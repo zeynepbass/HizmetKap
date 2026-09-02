@@ -1,12 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SavedSearchIcon from "@mui/icons-material/SavedSearch";
 import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
 import TextsmsIcon from "@mui/icons-material/Textsms";
 import HesapDetails from "@/components/HesapDetails";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { getKategoriler } from "@/../app/services/api";
+import { getKategoriler } from "@/app/services/api";
 export function Sidebar() {
   const [open, setOpen] = useState(false);
   const [category, setCategory] = useState([]);

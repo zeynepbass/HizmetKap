@@ -1,7 +1,8 @@
 "use client";
-import React, {useState } from "react";
-import { Rating, Box, Button } from "@mui/material";
+import {useState } from "react";
+import { Rating, Box } from "@mui/material";
 import { useRouter } from "next/navigation";
+import {Button}from "@/components/atoms"
 import {scoreUpdated,MessageDelete} from "@/services/api"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -77,40 +78,42 @@ const Degerlendirme = ({ kullaniciId, setOpen,gonderenId,setMessages,setUserList
 
           <Button
             onClick={handleSubmit}
-            sx={{
-              width: "50%",
-              borderRadius: "2rem",
-              mx: "auto",
-              p: 1.5,
-              bgcolor: "rgb(78,36,77)",
-              color: "rgb(242,247,250)",
-              "&:hover": {
-                bgcolor: "rgb(255,127,60)",
-                color: "#f2f7fa",
-              },
-              mt: 2,
-            }}
+            className="
+            w-[50%]
+            rounded-[2rem]
+            mx-auto
+            p-1.5
+            bg-[rgb(78,36,77)]
+            text-[rgb(242,247,250)]
+            hover:bg-[rgb(255,127,60)]
+            hover:text-[#f2f7fa]
+            mt-2
+          "
           >
             Gönder
           </Button>
           <div className="flex gap-3 mb-4">
-                  <button
-                    onClick={() => handleDelete(gonderenId, kullaniciId)}
-                    type="button"
-                    className="flex-1 py-2 bg-gradient-to-r mt-2 from-pink-400 to-pink-300 hover:from-pink-300 hover:to-pink-400 text-white font-semibold rounded-xl shadow-md transition-transform duration-200 transform hover:scale-105"
-                  >
-                    Sohbeti Sil
-                  </button>
+          <Button
+        onClick={() => handleDelete(gonderenId, kullaniciId)}
+        type="button"
+        className="flex-1 py-2 bg-gradient-to-r mt-2 from-pink-400 to-pink-300 hover:from-pink-300 hover:to-pink-400 text-white font-semibold rounded-xl shadow-md transition-transform duration-200 transform hover:scale-105"
+      >
+        Sohbeti Sil
+</Button>
+          
                 </div>{" "}
 
         </Box>
+        <Button
+        onClick={() => router.back()}
+        className="absolute top-4 cursor-pointer right-4 text-gray-400 hover:text-gray-700 transition-all"
+     
+  type="button"
 
-        <button
-          onClick={() => router.back()}
-          className="absolute top-4 cursor-pointer right-4 text-gray-400 hover:text-gray-700 transition-all"
-        >
-          ✕
-        </button>
+>
+✕
+</Button>
+
       </div>
     </div>
   );

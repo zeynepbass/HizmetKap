@@ -1,7 +1,6 @@
 
 import Verigizlilik from "@/features/feed/pages/Verigizlilik"
-const page = () => {
+export default function page() {
   return <Verigizlilik/>
 }
 
-export default page

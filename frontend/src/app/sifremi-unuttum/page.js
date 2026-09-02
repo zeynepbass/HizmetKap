@@ -1,7 +1,7 @@
 
 import Sifremiunuttum from "@/features/feed/pages/Sifremiunuttum"
-const page = () => {
+export default function page() {
   return <Sifremiunuttum/>
 }
 
-export default page
+

@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import Button from "@/Button";
+import { useState, useEffect } from "react";
+import { useRouter,Link } from "next/navigation";
+
+import {Button} from "@/components/atoms";
 
 const navItems = ["Hesap Bilgilerim", "Şifre Değiştir", "Veri ve gizlilik"];
 
@@ -72,7 +72,12 @@ export default function Settingsheader() {
 
 
       <div className="pl-10">
-        <Button />
+      <Button
+  onClick={() => router.back()}
+  className="ml-4 cursor-pointer text-[rgb(237,203,206)]"
+>
+  <ArrowBackIcon sx={{ fontSize: 35 }} />
+</Button>
       </div>
     </div>
   );
