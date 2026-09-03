@@ -1,18 +1,18 @@
+
 "use client";
-
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-
-import {
-  deleteAccount,
-  updateAccount,
-} from "@/features/user/api";
 
 import { DataAccountOptions } from "../components/DataAccountOptions";
 import { DataAccountAction } from "../components/DataAccountAction";
 
+import { useDataPrivacy } from "../hooks/useDataPrivacy";
+
 export default function Dataprivacy() {
-  const router = useRouter();
+  const {
+    openIndex,
+    toggle,
+    handleAction,
+    isLoading,
+  } = useDataPrivacy();
 
   const items = [
     {
@@ -37,61 +37,6 @@ export default function Dataprivacy() {
     },
   ];
 
-  const [openIndex, setOpenIndex] = useState(null);
-
-  const toggle = (index) => {
-    setOpenIndex((prev) =>
-      prev === index ? null : index
-    );
-  };
-
-  const handleDurumDegistir = async () => {
-    try {
-      const kullanici = JSON.parse(
-        localStorage.getItem("kullanici")
-      );
-
-      const result = await updateAccount(
-        kullanici.kullanici.id,
-        false
-      );
-
-      if (result.success) {
-        localStorage.clear();
-        router.push("/");
-      } else {
-        alert("Hesap durumu güncellenemedi");
-      }
-    } catch (error) {
-      alert("Hesap durumu güncellenemedi");
-    }
-  };
-
-  const handleHesapSil = async () => {
-    try {
-      const kullanici = JSON.parse(
-        localStorage.getItem("kullanici")
-      );
-
-      await deleteAccount(kullanici.kullanici.id);
-
-      localStorage.clear();
-      router.push("/");
-    } catch (error) {
-      alert("Hesap durumu güncellenemedi");
-    }
-  };
-
-  const handleAction = () => {
-    if (openIndex === 0) {
-      handleDurumDegistir();
-    }
-
-    if (openIndex === 1) {
-      handleHesapSil();
-    }
-  };
-
   return (
     <div className="min-h-screen flex flex-col items-center pt-10">
       <div className="flex flex-col md:flex-row max-w-4xl w-full bg-white p-8 rounded-2xl shadow-lg gap-10 justify-center items-start">
@@ -107,6 +52,7 @@ export default function Dataprivacy() {
             <DataAccountAction
               item={items[openIndex]}
               handleAction={handleAction}
+              isLoading={isLoading}
             />
           )}
 
@@ -115,3 +61,4 @@ export default function Dataprivacy() {
     </div>
   );
 }
+
