@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import {HomeCarousel} from "../HomeCarousel";
-import {getCategories} from "@/features/feed/api"
+import {getCategories} from "../../api/post.api"
 export function HomeSlider() {
   const [slides, setSlides] = useState([]);
 

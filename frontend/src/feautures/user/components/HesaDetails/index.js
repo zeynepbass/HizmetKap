@@ -1,1 +1,0 @@
-export {HesapgetUserDetails} from "./HesapgetUserDetails"

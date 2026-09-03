@@ -8,9 +8,9 @@ export function HomeIsTabs({ tabs, openIndex, setOpenIndex }) {
           key={index}
           onClick={() => setOpenIndex(index)}
           type="button"
-          className={`py-3 px-2 font-semibold text-gray-600 rounded-md ${
+          className={`py-3 px-2 font-semibold text-gray-600  ${
             openIndex === index
-              ? "border-b-2 border-[rgb(255,200,60)]"
+              ? "border-b-2 border-[#222C31]"
               : ""
           }`}
         >

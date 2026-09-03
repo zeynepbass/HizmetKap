@@ -6,9 +6,9 @@ import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-import { sendPassword } from "@/features/user/api";
+import { sendPassword } from "../api/user.api";
 
-export const useUsername = () => {
+export function useUsername  () {
   const router = useRouter();
 
   const [formData, setFormData] = useState({

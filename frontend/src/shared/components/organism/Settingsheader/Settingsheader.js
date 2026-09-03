@@ -1,19 +1,26 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter,Link } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Button } from "@/shared/components/atoms";
+import Link from "next/link";
 
-import {Button} from "@/shared/components/atoms";
+const navItems = ["Hesap Bilgilerim", "Veri Gizliliği"];
 
-const navItems = ["Hesap Bilgilerim", "Şifre Değiştir", "Veri ve gizlilik"];
-
-export default function Settingsheader() {
+export function Settingsheader() {
   const router = useRouter();
+  const pathname = usePathname();
+
   const [storedData, setStoredData] = useState(null);
 
   useEffect(() => {
     const data = localStorage.getItem("kullaniciAdi");
-    if (data) setStoredData(data);
+
+    if (data) {
+      setStoredData(data);
+    }
   }, []);
 
   const formatURL = (text) =>
@@ -34,53 +41,70 @@ export default function Settingsheader() {
 
   return (
     <div className="w-full">
-      <nav className="bg-[rgb(237,203,206)] text-[rgb(242,247,250)]">
-        <div className="mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:justify-between items-center sm:h-16 py-4">
+      <div className="flex flex-col items-center sm:h-20 sm:flex-row sm:justify-between">
+        <div className="border-b border-gray-200 bg-white px-4 py-4">
+          <Link href="/ana-sayfa" className="flex items-center gap-3">
+            <img
+              src="/sidebarLogo.png"
+              alt="Hizmet Kap Logo"
+              className="h-10 w-11 rounded-xl object-cover"
+            />
 
+            <div>
+              <h1 className="text-lg  text-[#4E244D]">
+                Hizmet Kap
+              </h1>
 
-            <Link href="/ana-sayfa" className="flex items-center gap-2 mb-4 sm:mb-0">
-              <img src="/logo-icon.png" className="w-12 h-12" alt="Hizmet Kap Logo" />
-              <span className="text-[rgb(78,36,77)] font-bold text-[20px]">Hizmet Kap</span>
-            </Link>
-
-
-            <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-3 sm:space-y-0 items-center">
-              {navItems
-                .filter((item) => !(item === "Veri ve gizlilik" && storedData))
-                .map((item) => (
-                  <Link
-                    key={item}
-                    href={`/${formatURL(item)}`}
-                    className="w-[120px] text-center hover:underline cursor-pointer"
-                  >
-                    {item}
-                  </Link>
-                ))}
-
-              <span
-                className="hover:underline cursor-pointer w-[120px] text-center"
-                onClick={handleClick}
-              >
-                Çıkış yap
-              </span>
+              <p className="text-xs text-gray-400">
+                Hizmet yönetim platformu
+              </p>
             </div>
-
-          </div>
+          </Link>
         </div>
-      </nav>
 
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+          {navItems
+            .filter(
+              (item) =>
+                !(item === "Veri Gizliliği" && storedData)
+            )
+            .map((item) => {
+              const href = `/${formatURL(item)}`;
+              const isActive = pathname === href;
 
-      <div className="pl-10">
-      <Button
-  onClick={() => router.back()}
-  className="ml-4 cursor-pointer text-[rgb(237,203,206)]"
->
-  <ArrowBackIcon sx={{ fontSize: 35 }} />
-</Button>
+              return (
+                <Link
+                  key={item}
+                  href={href}
+                  className={`flex items-center justify-center gap-3 rounded-xl px-3.5 py-3 text-sm font-medium transition-all duration-200 ${
+                    isActive
+                      ? "underline text-[#4E244D]"
+                      : "text-gray-600 hover:bg-white hover:text-[#4E244D]"
+                  }`}
+                >
+                  {item}
+                </Link>
+              );
+            })}
+
+          <button
+            type="button"
+            onClick={handleClick}
+            className="flex items-center justify-center gap-3 rounded-xl px-3.5 py-3 text-sm font-medium text-gray-600 transition-all duration-200 hover:bg-white hover:text-[#4E244D]"
+          >
+            Çıkış yap
+          </button>
+        </div>
+      </div>
+
+      <div className="bg-gray-100 pl-10">
+        <Button
+          onClick={() => router.back()}
+          className="ml-4 cursor-pointer text-[rgb(237,203,206)]"
+        >
+          <ArrowBackIcon sx={{ fontSize: 25 }} />
+        </Button>
       </div>
     </div>
   );
-};
-
-
+}

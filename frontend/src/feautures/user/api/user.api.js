@@ -2,7 +2,7 @@
 import apiClient from "@/shared/api/client";
 
 
-export const updateAccount = async (id, durum = false) => {
+export async function updateAccount  (id, durum = false) {
   const { data } = await apiClient.put(`/hesap/${id}`, {
     hesap: durum,
   });
@@ -11,56 +11,56 @@ export const updateAccount = async (id, durum = false) => {
 };
 
 
-export const register = async (formData) => {
+export async function register  (formData) {
   const { data } = await apiClient.post("/kayit", formData);
 
   return data;
 };
 
 
-export const deleteAccount = async (id) => {
+export async function deleteAccount  (id) {
   const { data } = await apiClient.delete(`/hesapSil/${id}`);
 
   return data;
 };
 
 
-export const forgotPassword = async (formData) => {
+export async function forgotPassword  (formData) {
   const { data } = await apiClient.post("/sifremi-unuttum", formData);
 
   return data;
 };
 
 
-export const updateAccountInfo = async (id, formData) => {
+export async function updateAccountInfo  (id, formData) {
   const { data } = await apiClient.put(`/hesap/${id}`, formData);
 
   return data;
 };
 
 
-export const Login = async (formData) => {
+export async function Login  (formData) {
   const { data } = await apiClient.post("/login", formData);
 
   return data;
 };
 
 
-export const sendPassword = async (formData) => {
+export async function sendPassword  (formData) {
   const { data } = await apiClient.post("/sifre-gonder", formData);
 
   return data;
 };
 
 
-export const getUsers = async () => {
+export async function getUsers  () {
   const { data } = await apiClient.get("/kullanicilar");
 
   return data.kullanicilar || [];
 };
 
 
-export const getUsergetUserDetails = async (id) => {
+export async function getUsergetUserDetails  (id) {
   const { data } = await apiClient.get(`/kullanici/${id}`);
 
   return data;

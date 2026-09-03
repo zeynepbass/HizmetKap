@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
-export default function HomeCarousel({ slides }) {
+import { Button } from "@/shared/components/atoms";
+export function HomeCarousel({ slides }) {
   const [current, setCurrent] = useState(0);
   const itemsPerView = 3;
   const router = useRouter();
@@ -21,7 +21,7 @@ export default function HomeCarousel({ slides }) {
   return (
     <div className="relative p-5 w-[80%] mx-auto">
       <div className={`${userControl ? "opacity-50 pointer-events-none" : ""}`}>
-        <h6 className="font-bold pb-3 text-gray-600">Trend Hizmetler</h6>
+        <h6 className=" pb-3 text-gray-600">Trend Hizmetler</h6>
 
         <div className="overflow-hidden">
           <div
@@ -57,7 +57,7 @@ export default function HomeCarousel({ slides }) {
         </div>
         <Button
         onClick={prev}
-        className="absolute right-20 top-5 -translate-y-1/2 text-[rgb(255,176,73)] bg-white/90 p-2 rounded-full shadow hover:bg-white z-10"
+        className="absolute right-20 top-5 -translate-y-1/2 text-[rgb(34,44,49)] bg-white/90 p-2 rounded-full shadow hover:bg-white z-10"
 
   type="button"
 
@@ -67,7 +67,7 @@ export default function HomeCarousel({ slides }) {
 <Button
   type="button"
         onClick={next}
-        className="absolute right-10 top-5 -translate-y-1/2 text-[rgb(255,176,73)] bg-white/90 p-2 rounded-full shadow hover:bg-white z-10"
+        className="absolute right-10 top-5 -translate-y-1/2 text-[rgb(34,44,49)] bg-white/90 p-2 rounded-full shadow hover:bg-white z-10"
       >
         ▶
 </Button>

@@ -1,12 +1,12 @@
 
-import { toSlugUrl } from "@/shared/utils/toSlugUrl";
+import { toSlugUrl } from "@/shared/helpers/toSlug";
 
-export const filterTadilat = (
+export function filterTadilat(
   tadilatlar,
   isim,
   storedKullaniciAdi,
   kullaniciStored
-) => {
+)  {
   return tadilatlar.filter(
     (item) =>
       toSlugUrl(item?.anaBaslik) === isim &&
@@ -16,7 +16,7 @@ export const filterTadilat = (
   );
 };
 
-export const filterTadilatByStatus = (items, status) => {
+export function filterTadilatByStatus (items, status) {
   return items.filter((item) => {
     if (status === "aktif") {
       return item?.durum === "aktif";
@@ -29,7 +29,7 @@ export const filterTadilatByStatus = (items, status) => {
   });
 };
 
-export const filterTadilatByUser = (items, email) => {
+export function filterTadilatByUser (items, email) {
   return items.filter(
     (item) => item?.email === email
   );

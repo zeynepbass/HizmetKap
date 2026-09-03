@@ -1,5 +1,5 @@
 
-import { getActiveRenovations } from "@/features/feed/api";
+import { getActiveRenovations } from "@/feautures/feed/api/post.api";
 import Home from "@/feautures/feed/pages/Home";
 
 export default async function page() {

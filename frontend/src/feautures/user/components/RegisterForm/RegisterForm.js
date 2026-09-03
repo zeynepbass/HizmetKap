@@ -1,6 +1,7 @@
+
 "use client";
 
-import { Button, Heading,Input } from "@/shared/components/atoms";
+import { Button, Heading, Input } from "@/shared/components/atoms";
 
 export function RegisterForm({
   formData,
@@ -9,74 +10,72 @@ export function RegisterForm({
   kullaniciStorage,
 }) {
   return (
-    <div className="col-span-12 md:col-span-6 flex justify-center items-center bg-white p-8">
+    <div className="flex w-full items-center justify-center bg-white">
       <form
         onSubmit={handleSubmit}
-        className="w-full flex flex-col gap-4"
+        className="flex w-full max-w-md flex-col gap-4 "
       >
-        <Heading
-          variant="login"
-          title={kullaniciStorage ? "Kayıt Ol" : "Kaydet"}
-          desc={
-            <>
-              Kayıt olarak{" "}
-              <span className="underline cursor-pointer">
-                Gizlilik Politikası
-              </span>{" "}
-              ve{" "}
-              <span className="underline cursor-pointer">
-                Kullanım Şartlarını
-              </span>{" "}
-              kabul etmiş olursunuz.
-            </>
-          }
+        <div className="mb-3">
+          <Heading
+            variant="login"
+            title={kullaniciStorage ? "Kayıt Ol" : "Kaydet"}
+            desc={
+              <>
+                Kayıt olarak{" "}
+                <span className="cursor-pointer underline">
+                  Gizlilik Politikası
+                </span>{" "}
+                ve{" "}
+                <span className="cursor-pointer underline">
+                  Kullanım Şartlarını
+                </span>{" "}
+                kabul etmiş olursunuz.
+              </>
+            }
+          />
+        </div>
+
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <Input
+            type="text"
+            name="ad"
+            value={formData.ad}
+            onChange={handleChange}
+            placeholder="Ad*"
+            className="w-full flex-1 rounded-lg border border-gray-200 bg-[rgb(242,247,250)] p-3 text-sm outline-none transition focus:border-[rgb(34,44,49)] focus:ring-1 focus:ring-[rgb(34,44,49)]"
+          />
+
+          <Input
+            type="text"
+            name="soyad"
+            value={formData.soyad}
+            onChange={handleChange}
+            placeholder="Soyad*"
+            className="w-full flex-1 rounded-lg border border-gray-200 bg-[rgb(242,247,250)] p-3 text-sm outline-none transition focus:border-[rgb(34,44,49)] focus:ring-1 focus:ring-[rgb(34,44,49)]"
+          />
+        </div>
+
+        <Input
+          type="text"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Email*"
+          className="w-full rounded-lg border border-gray-200 bg-[rgb(242,247,250)] p-3 text-sm outline-none transition focus:border-[rgb(34,44,49)] focus:ring-1 focus:ring-[rgb(34,44,49)]"
         />
 
-        <div className="flex flex-col md:flex-row gap-4">
-                               <Input
-                           type="text"
-                           name="ad"
-                           value={formData.ad}
-                           onChange={handleChange}
-                           placeholder="Ad*"
-                           className="flex-1 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
-                               
-                         />
-                       <Input
-                     type="text"
-                     name="soyad"
-                     value={formData.soyad}
-                     onChange={handleChange}
-                     placeholder="Soyad*"
-                     className="flex-1 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
-                          
-                         />
-
-        </div>
         <Input
-               type="text"
-               name="email"
-               value={formData.email}
-               onChange={handleChange}
-               placeholder="Email*"
-               className="rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
-                 
-                         />
-                                 <Input
-            type="password"
-            name="parola"
-            value={formData.parola}
-            onChange={handleChange}
-            placeholder="Parola*"
-            className="rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[rgb(255,176,73)] bg-[rgb(242,247,250)]"
-          
-                         />
-
-
+          type="password"
+          name="parola"
+          value={formData.parola}
+          onChange={handleChange}
+          placeholder="Parola*"
+          className="w-full rounded-lg border border-gray-200 bg-[rgb(242,247,250)] p-3 text-sm outline-none transition focus:border-[rgb(34,44,49)] focus:ring-1 focus:ring-[rgb(34,44,49)]"
+        />
 
         <Button
           type="submit"
-          className="w-[50%] rounded-4xl mx-auto p-3 cursor-pointer bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:text-gray-50 hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-2"
+    className="mx-auto mt-5 w-full rounded-xl bg-[rgb(78,36,77)] p-3 text-sm font-semibold text-[rgb(242,247,250)] transition-colors duration-300 hover:bg-[rgb(34,44,49)] hover:text-white"
         >
           {kullaniciStorage ? "Kayıt Ol" : "Kaydet"}
         </Button>

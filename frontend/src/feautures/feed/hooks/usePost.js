@@ -3,9 +3,9 @@
 
 import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { updateDurum } from "../api";
+import { updateStatus } from "../api/post.api";
 
-export const useTadilat = (initialItems = []) => {
+export function useTadilat  (initialItems = []){
   const [itemsAktif, setItemsAktif] = useState(initialItems);
   const [showText, setShowText] = useState({});
 
@@ -19,9 +19,9 @@ export const useTadilat = (initialItems = []) => {
     setShowText(initialState);
   }, [itemsAktif]);
 
-  const updateDurumMutation = useMutation({
+  const updateStatusMutation = useMutation({
     mutationFn: ({ id, show }) =>
-      updateDurum(id, show, false),
+      updateStatus(id, show, false),
 
     onSuccess: (result, variables) => {
       const { id } = variables;
@@ -47,7 +47,7 @@ export const useTadilat = (initialItems = []) => {
   const handleSubmit = (e, id) => {
     e.preventDefault();
 
-    updateDurumMutation.mutate({
+    updateStatusMutation.mutate({
       id,
       show: showText[id],
     });
@@ -57,7 +57,7 @@ export const useTadilat = (initialItems = []) => {
     itemsAktif,
     showText,
     handleSubmit,
-    isUpdating: updateDurumMutation.isPending,
+    isUpdating: updateStatusMutation.isPending,
   };
 };
 

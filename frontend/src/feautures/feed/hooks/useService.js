@@ -10,9 +10,9 @@ import {
   getActiveRenovationsgetUserDetails,
   getUsers,
   getConversations,
-} from "@/services/api";
+} from "../api/post.api";
 
-export const useService = (paramsId) => {
+export function useService (paramsId) {
   const router = useRouter();
 
   const [location, setLocation] = useState("");

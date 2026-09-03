@@ -1,3 +1,4 @@
+
 import { Button } from "@/shared/components/atoms";
 
 export function DataAccountAction({
@@ -5,30 +6,35 @@ export function DataAccountAction({
   handleAction,
 }) {
   return (
-    <div className="flex justify-center items-center h-auto flex-col w-[60%]">
-      <br />
+    <div className="flex w-full max-w-lg flex-col items-center rounded-3xl border border-gray-200 bg-white p-6 text-center sm:p-8">
 
-      <h6 className="pb-4 font-bold text-xl m-auto text-gray-500">
+      <div className="mb-6 flex h-24 w-24 items-center justify-center overflow-hidden rounded-2xl bg-[#EDE7F1]">
+        <img
+          src={item.image}
+          alt={item.title || item.baslik}
+          className="h-full w-full object-contain p-3"
+        />
+      </div>
+
+
+      <h2 className="text-xl font-semibold tracking-tight text-gray-800">
         {item.baslik}
-      </h6>
+      </h2>
 
-      <img
-        src={item.image}
-        width="50%"
-        height="30%"
-        alt={item.title}
-      />
 
-      <p className="font-bold text-gray-400 text-md">
+      <p className="mt-3 max-w-md text-sm leading-6 text-gray-500">
         {item.paragraf}
       </p>
 
+
       <Button
+        type="button"
         onClick={handleAction}
-        className="p-3 rounded-md font-bold mt-5 text-[rgb(78,36,77)] mx-auto cursor-pointer underline hover:text-[rgb(255,176,73)]"
+        className="mt-6 rounded-xl bg-[#4E244D] px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-[#6B4F6D]"
       >
         {item.button}
       </Button>
     </div>
   );
 }
+

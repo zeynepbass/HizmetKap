@@ -12,7 +12,7 @@ export function Heading({
     },
 
     dark: {
-      title: "text-3xl font-bold p-4 text-center text-gray-400",
+      title: "text-3xl  p-4 text-center text-gray-400",
       desc: "text-gray-500 text-center",
     },
   };

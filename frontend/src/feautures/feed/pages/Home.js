@@ -86,7 +86,7 @@ export default function Home({ itemsAktif: initialItems }) {
         )}
       </div>
 
-      <div className="w-full pt-5 border-t border-gray-100">
+      <div className="w-full pt-5 border-gray-100">
         <HomeSlider />
       </div>
     </div>

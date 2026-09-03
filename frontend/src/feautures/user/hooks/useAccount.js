@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-import { updateHesap } from "@/features/user/api";
+import { updateHesap } from  "../api/user.api";
 
-export const useAccount = () => {
+export function useAccount () {
   const [form, setForm] = useState({
     ad: "",
     soyad: "",

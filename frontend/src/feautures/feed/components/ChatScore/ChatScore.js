@@ -1,42 +1,71 @@
-"use client";
-import {useState } from "react";
-import { Rating, Box } from "@mui/material";
-import { useRouter } from "next/navigation";
-import {Button, Heading}from "@/shared/components/atoms"
-import {updateScore,deleteMessage} from "@/features/feed/api"
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 
-export function ChatScore ({ kullaniciId, setOpen,gonderenId,setMessages,setUserList }) {
+"use client";
+
+import { useState } from "react";
+import { Rating } from "@mui/material";
+import { useRouter } from "next/navigation";
+import { Button, Heading } from "@/shared/components/atoms";
+import { updateScore, deleteMessage } from "../../api/post.api";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+export function ChatScore({
+  kullaniciId,
+  setOpen,
+  gonderenId,
+  setMessages,
+  setUserList,
+}) {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+
   const router = useRouter();
 
   const handleSubmit = async () => {
-    if (rating === 0) return alert("Lütfen bir yıldız seçin");
+    if (rating === 0) {
+      toast.warning("Lütfen bir yıldız seçin.", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+      return;
+    }
 
     try {
-      const response = await updateScore(kullaniciId, rating, comment);
-  
-      if (!response) throw new Error("API'den cevap alınamadı");
-  
+      const response = await updateScore(
+        kullaniciId,
+        rating,
+        comment
+      );
 
+      if (!response) {
+        throw new Error("API'den cevap alınamadı");
+      }
 
-    toast.success("Değerlendirme başarıyla kaydedildi!", { position: "top-right", autoClose: 3000 })
-      if (setOpen) setOpen(false);
+      toast.success("Değerlendirme başarıyla kaydedildi!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+
+      if (setOpen) {
+        setOpen(false);
+      }
+
       router.back();
     } catch (err) {
       console.error("Değerlendirme gönderilemedi:", err);
-      alert("Bir hata oluştu. Lütfen tekrar deneyin.");
+
+      toast.error("Bir hata oluştu. Lütfen tekrar deneyin.", {
+        position: "top-right",
+        autoClose: 3000,
+      });
     }
   };
+
   const handleDelete = async (gonderenId, kullaniciId) => {
-   
     try {
       const res = await deleteMessage(gonderenId, kullaniciId);
-      if (res) {
 
-        
+      if (res) {
         setMessages([]);
         setUserList("");
         router.push("/ana-sayfa");
@@ -45,74 +74,113 @@ export function ChatScore ({ kullaniciId, setOpen,gonderenId,setMessages,setUser
       }
     } catch (error) {
       console.error("Mesaj silme hatası:", error);
+
+      toast.error("Sohbet silinemedi. Lütfen tekrar deneyin.", {
+        position: "top-right",
+        autoClose: 3000,
+      });
     }
   };
 
-
   return (
-    <div className="fixed inset-0 bg-[rgb(242,247,250)] bg-opacity-40 flex items-center justify-center z-50">
-          <ToastContainer />
-      <div className="bg-white rounded-2xl shadow-xl w-96 p-6 relative">
-        <Heading variant="dark" title=" Hizmeti Değerlendir" desc=" Birkaç soruya daha cevap vererek kullanıcıyı değerlendirebilirsin."/>
- 
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#222C31]/40 px-4 backdrop-blur-sm">
 
-        <Box className="text-center">
-          <Rating
-            name="rating"
-            value={rating}
-            onChange={(event, newValue) => setRating(newValue)}
-            size="large"
-          />
+      <ToastContainer />
 
-          <textarea
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            placeholder="İstersen yorum yazabilirsin..."
-            className="w-full mt-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[rgb(255,127,60)]"
-            rows={3}
-          />
+      <div className="relative w-full max-w-md overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-xl">
+
+
+        <div className="border-b border-gray-100 px-6 py-5">
+          <div className="pr-8">
+            <Heading
+              variant="dark"
+              title="Hizmeti Değerlendir"
+              desc="Aldığın hizmet hakkında değerlendirme yapabilirsin."
+            />
+          </div>
 
           <Button
-            onClick={handleSubmit}
-            className="
-            w-[50%]
-            rounded-[2rem]
-            mx-auto
-            p-1.5
-            bg-[rgb(78,36,77)]
-            text-[rgb(242,247,250)]
-            hover:bg-[rgb(255,127,60)]
-            hover:text-[#f2f7fa]
-            mt-2
-          "
+            onClick={() => router.back()}
+            type="button"
+            className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-lg text-lg text-gray-400 transition-all duration-200 hover:bg-[#F7F7F9] hover:text-[#4E244D]"
           >
-            Gönder
+            ✕
           </Button>
-          <div className="flex gap-3 mb-4">
+        </div>
+
+
+        <div className="px-6 py-6">
+
+
+          <div className="rounded-2xl bg-[#FCFBFD] p-5 text-center">
+            <p className="mb-3 text-sm font-medium text-[#222C31]">
+              Hizmetten memnun kaldın mı?
+            </p>
+
+            <Rating
+              name="rating"
+              value={rating}
+              onChange={(event, newValue) => setRating(newValue)}
+              size="large"
+              sx={{
+                "& .MuiRating-iconFilled": {
+                  color: "#6B4F6D",
+                },
+                "& .MuiRating-iconHover": {
+                  color: "#4E244D",
+                },
+              }}
+            />
+
+            <p className="mt-2 text-xs text-gray-400">
+              {rating === 0
+                ? "Puan vermek için yıldız seç"
+                : `${rating} / 5 puan`}
+            </p>
+          </div>
+
+
+          <div className="mt-5">
+            <label className="mb-2 block text-sm font-medium text-[#222C31]">
+              Yorum
+              <span className="ml-1 font-normal text-gray-400">
+                (opsiyonel)
+              </span>
+            </label>
+
+            <textarea
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              placeholder="İstersen deneyimini paylaşabilirsin..."
+              rows={4}
+              className="w-full resize-none rounded-xl border border-gray-200 bg-[#F7F7F9] px-4 py-3 text-sm text-[#222C31] outline-none transition-all duration-200 placeholder:text-gray-400 focus:border-[#C9B7CE] focus:bg-white focus:ring-2 focus:ring-[#EDE7F1]"
+            />
+          </div>
+
+
           <Button
-        onClick={() => handleDelete(gonderenId, kullaniciId)}
-        type="button"
-        className="flex-1 py-2 bg-gradient-to-r mt-2 from-pink-400 to-pink-300 hover:from-pink-300 hover:to-pink-400 text-white font-semibold rounded-xl shadow-md transition-transform duration-200 transform hover:scale-105"
-      >
-        Sohbeti Sil
-</Button>
-          
-                </div>{" "}
+            type="button"
+            onClick={handleSubmit}
+            className="mt-5 w-full rounded-xl bg-[#6B4F6D] py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#4E244D]"
+          >
+            Değerlendirmeyi Gönder
+          </Button>
 
-        </Box>
-        <Button
-        onClick={() => router.back()}
-        className="absolute top-4 cursor-pointer right-4 text-gray-400 hover:text-gray-700 transition-all"
-     
-  type="button"
 
->
-✕
-</Button>
+          <div className="mt-5 border-t border-gray-100 pt-5">
+            <Button
+              type="button"
+              onClick={() =>
+                handleDelete(gonderenId, kullaniciId)
+              }
+              className="w-full rounded-xl border border-gray-200 bg-white py-3 text-sm font-medium text-gray-500 transition-all duration-200 hover:border-red-200 hover:bg-red-50 hover:text-red-500"
+            >
+              Sohbeti Sil
+            </Button>
+          </div>
 
+        </div>
       </div>
     </div>
   );
-};
-
-
+}

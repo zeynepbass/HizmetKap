@@ -1,8 +1,16 @@
+
 export function RegisterImage() {
-    return (
-      <div className="col-span-12 md:col-span-6 relative flex items-center justify-center">
-        <div className="absolute inset-0 bg-[url('/kayit.jpg')] bg-cover bg-center" />
-        <div className="absolute inset-0 bg-black/10" />
-      </div>
-    );
-  }
+  return (
+    <div className="relative h-full min-h-[600px] w-full overflow-hidden">
+      <div
+        className="absolute inset-0 bg-[url('/kayit.jpg')] bg-cover bg-center"
+        aria-hidden="true"
+      />
+
+      <div
+        className="absolute inset-0 bg-black/10"
+        aria-hidden="true"
+      />
+    </div>
+  );
+}

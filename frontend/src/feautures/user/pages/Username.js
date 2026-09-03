@@ -41,7 +41,7 @@ export default function Username() {
             value={formData.kullaniciAdi}
             onChange={handleChange}
             placeholder="Kullanıcı adınız*"
-            className="focus:ring-[rgb(255,176,73)] mt-2 bg-[rgb(242,247,250)] rounded-md p-2 focus:outline-none focus:ring-2"
+            className="focus:ring-[rgb(34,44,49)] mt-2 bg-[rgb(242,247,250)] rounded-md p-2 focus:outline-none focus:ring-2"
           />
 
           <Button

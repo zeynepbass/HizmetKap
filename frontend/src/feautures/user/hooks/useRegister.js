@@ -6,9 +6,9 @@ import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-import { register } from "@/features/feed/api";
+import { register } from  "../api/user.api";
 
-export const useRegister = () => {
+export function useRegister  ()  {
   const router = useRouter();
 
   const [kullaniciStorage, setKullaniciStore] = useState(null);
