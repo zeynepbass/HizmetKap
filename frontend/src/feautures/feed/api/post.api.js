@@ -2,7 +2,7 @@
 import apiClient from "@/shared/api/client";
 
 
-export const updateScore = async (kullaniciId, rating, comment) => {
+export async function updateScore  (kullaniciId, rating, comment){
   const { data } = await apiClient.put(`/degerlendirme/${kullaniciId}`, {
     rating,
     comment,
@@ -12,14 +12,14 @@ export const updateScore = async (kullaniciId, rating, comment) => {
 };
 
 
-export const getConversations = async (aliciId) => {
+export async function getConversations  (aliciId){
   const { data } = await apiClient.get(`/konusmalar/${aliciId}`);
 
   return data || [];
 };
 
 
-export const deleteMessage = async (gonderenId, userId) => {
+export async function deleteMessage  (gonderenId, userId){
   const { data } = await apiClient.delete(
     `/${gonderenId}/${userId}`
   );
@@ -28,7 +28,7 @@ export const deleteMessage = async (gonderenId, userId) => {
 };
 
 
-export const getMessages = async (gonderenId, selectedUser) => {
+export async function getMessages  (gonderenId, selectedUser){
   const { data } = await apiClient.get(
     `/mesajlar/${gonderenId}/${selectedUser}`
   );
@@ -37,14 +37,14 @@ export const getMessages = async (gonderenId, selectedUser) => {
 };
 
 
-export const sendMessage = async (msgData) => {
+export async function sendMessage  (msgData){
   const { data } = await apiClient.post("/mesajlar", msgData);
 
   return data;
 };
 
 
-export const updateActive = async (id, formData) => {
+export async function updateActive  (id, formData){
   const { data } = await apiClient.put(
     `/aktifUpdated/${id}`,
     formData
@@ -54,18 +54,18 @@ export const updateActive = async (id, formData) => {
 };
 
 
-export const getRenovationById = async (id) => {
+export async function getRenovationById  (id){
   const { data } = await apiClient.get(`/tadilat/${id}`);
 
   return data;
 };
 
 
-export const updateStatus = async (
+export async function updateStatus  (
   id,
   currentShowText,
   forceCancel = false
-) => {
+){
   const newStatus = forceCancel
     ? "iptal"
     : currentShowText
@@ -86,7 +86,7 @@ export const updateStatus = async (
 };
 
 
-export const getActiveRenovations = async () => {
+export async function getActiveRenovations  (){
   const { data } = await apiClient.get("/aktifTadilat");
 
   return data || [];
@@ -95,7 +95,7 @@ export const getActiveRenovations = async () => {
 
 
 
-export const createActiveRenovation = async (item) => {
+export async function createActiveRenovation  (item){
   const { data } = await apiClient.post(
     "/aktifTadilat",
     item
@@ -105,7 +105,7 @@ export const createActiveRenovation = async (item) => {
 };
 
 
-export const getCategories = async () => {
+export async function getCategories  (){
   const { data } = await apiClient.get("/kategori");
 
   return data || [];

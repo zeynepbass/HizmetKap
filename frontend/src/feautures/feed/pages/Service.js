@@ -37,7 +37,7 @@ export default function Service({ paramsId }) {
 
   if (isLoading) {
     return (
-      <p className="text-center font-bold text-gray-600">
+      <p className="text-center  text-gray-600">
         Yükleniyor...
       </p>
     );
@@ -49,7 +49,7 @@ export default function Service({ paramsId }) {
         onClick={handleBack}
         className="ml-4 cursor-pointer text-[rgb(237,203,206)]"
       >
-        <ArrowBackIcon sx={{ fontSize: 35 }} />
+        <ArrowBackIcon sx={{ fontSize: 25 }} />
       </Button>
 
       <div className="flex flex-col items-center mx-auto gap-6 min-h-[100vh]">

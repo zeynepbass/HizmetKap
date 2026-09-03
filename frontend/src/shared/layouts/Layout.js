@@ -26,7 +26,7 @@ export function Layout({ children }){
 
   const settingsPaths = [
     "/hesap-bilgilerim",
-    "/veri-gizlilik"
+    "/veri-gizliligi"
   ];
   const isSettingsPage = settingsPaths.includes(pathname);
 

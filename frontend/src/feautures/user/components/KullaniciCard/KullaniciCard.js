@@ -1,71 +1,154 @@
+
+"use client";
+
+import { Button } from "@/shared/components/atoms";
+import { Konum } from "@/shared/components/organism";
+
 export function KullaniciCard({ slide, onMessage }) {
-    return (
-      <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden">
-        <div className="p-5 border-b border-gray-100">
-          <p className="text-md text-gray-400 mb-2">
-            <span className="font-semibold">
-              Yayınlayan: {slide.ad.toUpperCase()}
-            </span>
-            <br />
-  
-            <span className="font-semibold">
-              Telefon No: {slide.telefonNo}
-            </span>
-            <br />
-  
-            <span className="font-semibold">
-              Email: {slide.email}
-            </span>
-            <br />
-  
-            <span className="font-semibold">
-              Konum: <Konum konum={slide.konum} />
-            </span>
-          </p>
+  return (
+    <div className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-200 hover:border-[#DCD0E3] hover:shadow-md">
+
+
+      <div className="border-b border-gray-100 px-5 py-5">
+
+        <div className="mb-4 flex items-center gap-3">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#EDE7F1] text-sm font-semibold text-[#6B4F6D]">
+            {slide?.ad?.charAt(0)?.toUpperCase()}
+          </div>
+
+          <div className="min-w-0">
+            <p className="text-xs font-medium text-gray-400">
+              Hizmeti Yayınlayan
+            </p>
+
+            <p className="truncate text-sm font-semibold text-[#222C31]">
+              {slide?.ad?.toUpperCase()}
+            </p>
+          </div>
         </div>
-  
-        <div className="p-4">
-          <p className="text-sm text-gray-500 mb-2 text-center">
-            <span className="font-semibold">Kategoriler:</span>{" "}
-            {slide.kategoriIsim}
-          </p>
-  
-          <p className="text-sm text-gray-500 text-center mb-4">
-            <span className="font-semibold">İlan tarihi:</span>{" "}
-            {slide.baslangicTarihi && slide.bitisTarihi
-              ? `${new Date(slide.baslangicTarihi).toLocaleDateString(
-                  "tr-TR"
-                )} - ${new Date(slide.bitisTarihi).toLocaleDateString("tr-TR")}`
-              : "Süresiz"}
-          </p>
-  
-          <div className="space-y-2">
-            {slide.veriler.map((veri, idx) => (
-              <div
-                key={idx}
-                className="bg-gray-50 p-3 rounded-lg border border-gray-100 hover:bg-gray-100 transition"
-              >
-                <span className="font-semibold">
-                  {veri.kategoriIsim}:
-                </span>{" "}
-                <span>
-                  Seçenekler: {veri.secenekler.join(", ")}
-                </span>{" "}
-                <span>Seçilen: {veri.secilen}</span>
+
+        <div className="space-y-3">
+
+          <div>
+            <p className="text-xs text-gray-400">
+              Telefon
+            </p>
+
+            <p className="mt-1 text-sm font-medium text-[#222C31]">
+              {slide?.telefonNo || "Belirtilmemiş"}
+            </p>
+          </div>
+
+          <div>
+            <p className="text-xs text-gray-400">
+              E-posta
+            </p>
+
+            <p className="mt-1 break-all text-sm font-medium text-[#222C31]">
+              {slide?.email || "Belirtilmemiş"}
+            </p>
+          </div>
+
+          {slide?.konum && (
+            <div>
+              <p className="mb-1 text-xs text-gray-400">
+                Konum
+              </p>
+
+              <div className="text-sm text-[#222C31]">
+                <Konum konum={slide.konum} />
               </div>
-            ))}
-          </div>
-  
-          <div className="flex justify-center mt-5">
-            <Button
-              onClick={onMessage}
-              type="button"
-              className="w-[50%] rounded-4xl mx-auto p-3 cursor-pointer bg-[rgb(255,127,60)] text-[rgb(242,247,250)] hover:text-gray-50 hover:bg-[rgb(78,36,77)] transition-colors duration-300 mt-2"
-            >
-              Mesaj At
-            </Button>
-          </div>
+            </div>
+          )}
+
         </div>
       </div>
-    );
-  }
+
+
+      <div className="px-5 py-5">
+
+        <div className="mb-5 flex items-center justify-between gap-3">
+          <div>
+            <p className="text-xs font-medium uppercase tracking-wide text-[#6B4F6D]">
+              Kategori
+            </p>
+
+            <p className="mt-1 text-sm font-semibold text-[#222C31]">
+              {slide?.kategoriIsim || "Belirtilmemiş"}
+            </p>
+          </div>
+
+          <span className="rounded-full bg-[#EDE7F1] px-3 py-1 text-xs font-medium text-[#6B4F6D]">
+            Hizmet
+          </span>
+        </div>
+
+
+        <div className="mb-5 rounded-xl bg-[#FCFBFD] p-4">
+          <p className="text-xs font-medium text-gray-400">
+            İlan Tarihi
+          </p>
+
+          <p className="mt-1 text-sm font-semibold text-[#222C31]">
+            {slide?.baslangicTarihi && slide?.bitisTarihi
+              ? `${new Date(
+                  slide.baslangicTarihi
+                ).toLocaleDateString("tr-TR")} - ${new Date(
+                  slide.bitisTarihi
+                ).toLocaleDateString("tr-TR")}`
+              : "Süresiz"}
+          </p>
+        </div>
+
+
+        {slide?.veriler?.length > 0 && (
+          <div>
+            <p className="mb-3 text-xs font-medium uppercase tracking-wide text-[#6B4F6D]">
+              Hizmet Detayları
+            </p>
+
+            <div className="space-y-2">
+              {slide.veriler.map((veri, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-xl border border-gray-100 bg-[#FCFBFD] p-4 transition-colors duration-200 hover:border-[#DCD0E3]"
+                >
+                  <p className="text-sm font-semibold text-[#222C31]">
+                    {veri?.kategoriIsim}
+                  </p>
+
+                  {veri?.secilen && (
+                    <p className="mt-1 text-sm text-gray-500">
+                      <span className="font-medium text-[#6B4F6D]">
+                        Seçilen:
+                      </span>{" "}
+                      {veri.secilen}
+                    </p>
+                  )}
+
+                  {veri?.secenekler?.length > 0 && (
+                    <p className="mt-1 text-xs leading-5 text-gray-400">
+                      Seçenekler: {veri.secenekler.join(", ")}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+
+        <div className="mt-6 border-t border-gray-100 pt-5">
+          <Button
+            type="button"
+            onClick={onMessage}
+            className="w-full rounded-xl bg-[#6B4F6D] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#4E244D]"
+          >
+            Mesaj Gönder
+          </Button>
+        </div>
+
+      </div>
+    </div>
+  );
+}

@@ -1,6 +1,7 @@
+
 "use client";
 
-import { Button,Input } from "@/shared/components/atoms";
+import { Button, Input } from "@/shared/components/atoms";
 
 export function RequestForm({
   item,
@@ -16,70 +17,116 @@ export function RequestForm({
   const currentQuestion = steps[currentStep];
 
   return (
-    <div className="w-[90%] md:w-[70%] min-h-[80vh] mx-auto mt-16 md:mt-24">
+    <div className="mx-auto mt-12 min-h-[80vh] w-[90%] max-w-3xl md:mt-20">
 
-      <h2 className="text-xl font-semibold text-center mb-4 text-gray-500">
-        {item.isim}
-      </h2>
 
-      <div className="w-full bg-gray-100 rounded-full h-2.5 mb-4">
-        <div
-          className="bg-[rgb(237,203,206)] h-2.5 rounded-full transition-all"
-          style={{ width: `${progressPercent}%` }}
-        />
+      <div className="mb-8 text-center">
+        <span className="text-sm font-medium text-[#6B4F6D]">
+          Hizmet Talebi
+        </span>
+
+        <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#222C31]">
+          {item.isim}
+        </h2>
       </div>
 
-      <h3 className="text-lg font-medium mb-2 text-gray-400">
-        {currentQuestion.baslik}
-      </h3>
 
-      <div className="space-y-2">
-        {currentQuestion.secenekler.map((option) => (
-          <label
-            key={option}
-            className="flex items-center space-x-2 cursor-pointer text-gray-600"
-          >
-                            <Input
-                           type="radio"
-                           name={`step-${currentStep}`}
-                           checked={answers[currentStep]?.secilen === option}
-                           onChange={() => handleAnswer(option)}      />
-    
+      <div className="mb-10">
+        <div className="mb-2 flex items-center justify-between">
+          <span className="text-xs font-medium text-gray-400">
+            İlerleme
+          </span>
 
-            <span>{option}</span>
-          </label>
-        ))}
+          <span className="text-xs font-medium text-[#6B4F6D]">
+            %{Math.round(progressPercent)}
+          </span>
+        </div>
+
+        <div className="h-2 overflow-hidden rounded-full bg-[#EDE7F1]">
+          <div
+            className="h-full rounded-full bg-[#6B4F6D] transition-all duration-300"
+            style={{ width: `${progressPercent}%` }}
+          />
+        </div>
       </div>
 
-      <div className="mt-6 flex justify-between">
 
-        <Button
-          type="button"
-          onClick={() => setShowExitModal(true)}
-          className="bg-[rgb(255,176,73)] text-[rgb(242,247,250)] px-4 py-2 rounded hover:opacity-85"
-        >
-          Çık
-        </Button>
+      <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm md:p-8">
 
-        <div className="space-x-2">
+        <div className="mb-6">
+          <span className="text-xs font-medium uppercase tracking-wide text-[#6B4F6D]">
+            Soru {currentStep + 1}
+          </span>
 
-          {currentStep > 0 && (
-            <Button
-              onClick={handleBack}
-              className="border text-gray-400 border-gray-200 px-4 py-2 rounded hover:bg-gray-100"
-            >
-              Geri
-            </Button>
-          )}
+          <h3 className="mt-2 text-lg font-semibold leading-7 text-[#222C31]">
+            {currentQuestion.baslik}
+          </h3>
+        </div>
+
+     
+        <div className="space-y-3">
+          {currentQuestion.secenekler.map((option) => {
+            const isSelected =
+              answers[currentStep]?.secilen === option;
+
+            return (
+              <label
+                key={option}
+                className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3.5 transition-all duration-200 ${
+                  isSelected
+                    ? "border-[#C9B7CE] bg-[#EDE7F1] text-[#4E244D]"
+                    : "border-gray-200 bg-white text-gray-600 hover:border-[#DCD0E3] hover:bg-[#FCFBFD]"
+                }`}
+              >
+                <Input
+                  type="radio"
+                  name={`step-${currentStep}`}
+                  checked={isSelected}
+                  onChange={() => handleAnswer(option)}
+                  className="h-4 w-4 accent-[#6B4F6D]"
+                />
+
+                <span className="text-sm font-medium">
+                  {option}
+                </span>
+              </label>
+            );
+          })}
+        </div>
+
+
+        <div className="mt-8 flex items-center justify-between border-t border-gray-100 pt-6">
 
           <Button
-            onClick={handleNext}
-            disabled={!answers[currentStep]}
-            className="border text-gray-400 border-gray-200 px-4 py-2 rounded hover:bg-gray-100"
+            type="button"
+            onClick={() => setShowExitModal(true)}
+            className="rounded-xl border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-500 transition-all duration-200 hover:border-[#DCD0E3] hover:bg-[#F7F7F9] hover:text-[#4E244D]"
           >
-            Devam
+            Çık
           </Button>
 
+          <div className="flex items-center gap-3">
+
+            {currentStep > 0 && (
+              <Button
+                type="button"
+                onClick={handleBack}
+                className="rounded-xl border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-500 transition-all duration-200 hover:border-[#DCD0E3] hover:bg-[#F7F7F9] hover:text-[#4E244D]"
+              >
+                Geri
+              </Button>
+            )}
+
+            <Button
+              type="button"
+              onClick={handleNext}
+              disabled={!answers[currentStep]}
+              className="rounded-xl bg-[#6B4F6D] px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#4E244D] disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Devam
+            </Button>
+
+          </div>
         </div>
       </div>
     </div>

@@ -6,9 +6,9 @@ import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-import { forgotPassword } from "@/features/user/api";
+import { forgotPassword } from  "../api/user.api";
 
-export const useForgotPassword = () => {
+export function useForgotPassword  ()  {
   const router = useRouter();
 
   const [formData, setFormData] = useState({

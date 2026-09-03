@@ -8,10 +8,10 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   getTadilatById,
   createActiveRenovation,
-  updateDurum,
-} from "../api";
+  updateStatus,
+} from "../api/post.api";
 
-export const useRequest = (id) => {
+export function useRequest(id)  {
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
@@ -63,7 +63,7 @@ export const useRequest = (id) => {
 
   const updateMutation = useMutation({
     mutationFn: ({ id, forceIptal }) =>
-      updateDurum(id, null, forceIptal),
+      updateStatus(id, null, forceIptal),
 
     onSuccess: () => {
       setOpenDialog(true);

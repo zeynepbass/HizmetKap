@@ -6,9 +6,9 @@ import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-import { Login } from "../api";
+import { Login } from "../api/user.api";
 
-export const useLogin = () => {
+export function useLogin () {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -16,41 +16,42 @@ export const useLogin = () => {
     parola: "",
   });
 
-  const loginMutation = useMutation({
-    mutationFn: Login,
 
-    onSuccess: (res) => {
-      toast.success("Giriş başarılı!", {
+
+const loginMutation = useMutation({
+  mutationFn: Login,
+
+  onSuccess: (res) => {
+    toast.success(res.message || "Giriş başarılı!", {
+      position: "top-right",
+      autoClose: 3000,
+    });
+
+    localStorage.setItem(
+      "kullanici",
+      JSON.stringify(res.kullanici)
+    );
+
+    if (res.token) {
+      document.cookie = `token=${res.token}; path=/; max-age=${
+        60 * 60 * 24
+      }`;
+    }
+
+    router.push("/ana-sayfa");
+  },
+
+  onError: (error) => {
+    toast.error(
+      error.response?.data?.message || "Bir hata oluştu",
+      {
         position: "top-right",
         autoClose: 3000,
-      });
-
-      localStorage.setItem(
-        "kullanici",
-        JSON.stringify(res.data.kullanici)
-      );
-
-      if (res.data.token) {
-        document.cookie = `token=${res.data.token}; path=/; max-age=${
-          60 * 60 * 24
-        }`;
       }
+    );
+  },
+});
 
-      setTimeout(() => {
-        router.push("/ana-sayfa");
-      }, 3000);
-    },
-
-    onError: (error) => {
-      toast.error(
-        error.response?.data?.message || "Bir hata oluştu",
-        {
-          position: "top-right",
-          autoClose: 3000,
-        }
-      );
-    },
-  });
 
   const handleChange = (e) => {
     setFormData((prev) => ({

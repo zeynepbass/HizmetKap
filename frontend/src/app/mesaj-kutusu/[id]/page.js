@@ -1,5 +1,5 @@
 
-import Chatroom from "@/features/feed/pages/Chatroom";
+import Chatroom from "@/feautures/feed/pages/Chatroom";
 
 export default function page({ params }) {
   const { id } = params;

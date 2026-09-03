@@ -6,7 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { RegisterForm } from "../components/RegisterForm";
 import { RegisterImage } from "../components/RegisterImage";
-
 import { useRegister } from "../hooks/useRegister";
 
 export default function Register() {
@@ -19,21 +18,30 @@ export default function Register() {
   } = useRegister();
 
   return (
-    <div className="container mx-auto min-h-screen flex items-center justify-center">
+    <main className="min-h-screen bg-[#F7F7F9] px-4 py-8 sm:px-6 lg:px-8">
       <ToastContainer />
 
-      <div className="grid grid-cols-12 w-full max-w-6xl shadow-xl rounded-2xl overflow-hidden">
-        <RegisterForm
-          formData={formData}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          kullaniciStorage={kullaniciStorage}
-          isLoading={isLoading}
-        />
+      <div className="mx-auto flex min-h-screen w-full max-w-6xl items-center justify-center">
+        <div className="grid w-full overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-xl lg:grid-cols-2">
 
-        <RegisterImage />
+
+          <div className="flex items-center justify-center">
+            <RegisterForm
+              formData={formData}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              kullaniciStorage={kullaniciStorage}
+              isLoading={isLoading}
+            />
+          </div>
+
+
+          <div className="relative hidden min-h-[600px] overflow-hidden lg:block">
+            <RegisterImage />
+          </div>
+
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
-

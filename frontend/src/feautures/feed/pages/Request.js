@@ -34,7 +34,7 @@ export default function Request({ id }) {
 
   if (isLoading) {
     return (
-      <p className="text-center font-bold text-gray-600">
+      <p className="text-center  text-gray-600">
         Yükleniyor...
       </p>
     );

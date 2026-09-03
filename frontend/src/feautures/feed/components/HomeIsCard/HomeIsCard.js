@@ -11,13 +11,13 @@ export function HomeIsCard({ item, showText, handleSubmit }) {
       
       <form onSubmit={(e) => handleSubmit(e, item._id)}>
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-bold text-gray-600">
+          <h3 className="text-lg  text-gray-600">
             {item.anaBaslik}
           </h3>
 
           <Button type="submit">
             {showText[item._id] ? (
-              <ToggleOnIcon className="text-[rgb(255,176,73)]" />
+              <ToggleOnIcon className="text-[rgb(34,44,49)]" />
             ) : (
               <ToggleOffIcon className="text-[rgb(242,247,250)]" />
             )}
@@ -33,7 +33,7 @@ export function HomeIsCard({ item, showText, handleSubmit }) {
             router.push(`/hizmet/${item.primaryKey}`)
           }
         >
-          <p className="font-bold text-gray-700">
+          <p className=" text-gray-700">
             {veri.kategoriIsim}: {veri.secilen}
           </p>
 
@@ -70,9 +70,9 @@ export function HomeIsCard({ item, showText, handleSubmit }) {
               item.durum === "iptal"
                 ? "text-red-600 font-semibold"
                 : item.durum === "aktif"
-                ? "text-[rgb(255,176,73)] font-semibold"
+                ? "text-[rgb(34,44,49)] font-semibold"
                 : item.durum === "pasif"
-                ? "text-[rgb(255,176,73)]"
+                ? "text-[rgb(34,44,49)]"
                 : "text-gray-400"
             }
           >

@@ -8,9 +8,9 @@ import { useMutation } from "@tanstack/react-query";
 import {
   deleteAccount,
   updateAccount,
-} from "@/features/user/api";
+} from "@/feautures/feed/hooks/useDataPrivacy";
 
-export const useDataPrivacy = () => {
+export function useDataPrivacy  () {
   const router = useRouter();
 
   const [openIndex, setOpenIndex] = useState(null);

@@ -14,13 +14,13 @@ import {
   getConversations,
   getMessages,
   sendMessage,
-} from "@/features/feed/api";
+} from "../api/post.api";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 const socket = io(baseUrl);
 
-export const useChatroom = (id) => {
+export function useChatroom (id)  {
   const queryClient = useQueryClient();
 
   const aliciIdStored = `${id}`;

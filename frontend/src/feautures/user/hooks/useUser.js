@@ -2,10 +2,11 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { getActiveRenovations } from "../api/tadilat.service";
-import { getUsers } from "@/features/users/api/user.service";
 
-export const useTadilat = () => {
+import { getActiveRenovations } from  "@/feautures/feed/hooks/useService";
+import { getUsers } from "../api/user.api";
+
+export function useTadilat ()  {
   const usersQuery = useQuery({
     queryKey: ["users"],
     queryFn: getUsers,
