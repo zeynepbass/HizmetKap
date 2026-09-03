@@ -1,5 +1,5 @@
 
-import Forgotpassword from "@/features/feed/pages/Forgotpassword"
+import Forgotpassword from "@/feautures/user/pages/Forgotpassword"
 export default function page() {
   return <Forgotpassword/>
 }

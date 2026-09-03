@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { forgotPassword } from "@/features/user/api";
 import "react-toastify/dist/ReactToastify.css";
 import {Button,Heading,Input} from "@/shared/components/atoms"
-export default function Sifreniunuttum (){
+export default function ForgotPassword (){
   const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",

@@ -11,7 +11,7 @@ import {
 import { DataAccountOptions } from "../components/DataAccountOptions";
 import { DataAccountAction } from "../components/DataAccountAction";
 
-export default function Verigizlilik() {
+export default function Dataprivacy() {
   const router = useRouter();
 
   const items = [

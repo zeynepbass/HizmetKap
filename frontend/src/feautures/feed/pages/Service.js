@@ -1,143 +1,52 @@
+
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import { Button } from "@/shared/components/atoms";
-
-import {
-  updateActive,
-  getActiveRenovationsgetUserDetails,
-  getUsers,
-  getConversations,
-} from "@/services/api";
 
 import { ServiceContactForm } from "../components/ServiceContactForm";
 import { ServicegetUserDetails } from "../components/ServicegetUserDetails";
 import { ServiceOptions } from "../components/ServiceOptions";
 import { ServiceMessageUsers } from "../components/ServiceMessageUsers";
 
-export default function Hizmet({ paramsId }) {
-  const router = useRouter();
-  const id = paramsId;
+import { useService } from "../hooks/useService";
 
-  const [storedData, setStoredData] = useState({});
-  const [chat, setChat] = useState([]);
-  const [location, setLocation] = useState("");
-  const [user, setUser] = useState([]);
-  const [phone, setPhone] = useState("");
-  const [sure, setSure] = useState(null);
-  const [promptPhone, setPromptPhone] = useState(false);
+export default function Service({ paramsId }) {
+  const {
+    storedData,
+    filteredData,
 
-  const fetchData = async (id) => {
-    try {
-      const res = await getActiveRenovationsgetUserDetails(id);
-      setStoredData(res);
-    } catch (err) {
-      console.error("Veri çekilemedi:", err);
-    }
-  };
+    location,
+    phone,
+    sure,
+    promptPhone,
 
-  const fetchDataKonusmalar = async (id) => {
-    try {
-      const res = await getConversations(id);
-      setChat(res);
-    } catch (err) {
-      console.error("Veri çekilemedi:", err);
-    }
-  };
+    setPhone,
+    setSure,
 
-  const fetchUser = async () => {
-    try {
-      const res = await getUsers();
-      setUser(res);
-    } catch (error) {
-      console.error("Kullanıcılar alınamadı:", error);
-    }
-  };
+    handleGetLocation,
+    handleGetPhone,
+    handleGetCalendar,
+    handleSubmit,
+    handleBack,
 
-  useEffect(() => {
-    const storedUser = JSON.parse(
-      localStorage.getItem("kullanici") || "{}"
+    isLoading,
+    isUpdating,
+  } = useService(paramsId);
+
+  if (isLoading) {
+    return (
+      <p className="text-center font-bold text-gray-600">
+        Yükleniyor...
+      </p>
     );
-
-    const getChat = storedUser?.id;
-
-    fetchData(id);
-    fetchUser();
-
-    if (getChat) {
-      fetchDataKonusmalar(getChat);
-    } else {
-      console.warn(
-        "Kullanıcı ID bulunamadığı için chat fetch edilemiyor."
-      );
-    }
-  }, [id]);
-
-  const handleGetLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setLocation(
-          `Lat: ${position.coords.latitude}, Lng: ${position.coords.longitude}`
-        );
-      });
-    } else {
-      alert("Tarayıcı konumu desteklemiyor!");
-    }
-  };
-
-  const handleGetPhone = () => {
-    setPromptPhone((prev) => !prev);
-  };
-
-  const handleGetCalendar = () => {
-    setSure((prev) => (prev ? null : new Date()));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const formData = {
-      konum: location,
-      telefonNo: phone,
-      bitisTarihi: sure ? sure.toISOString() : null,
-    };
-
-    try {
-      await updateActive(id, formData);
-
-      setLocation("");
-      setPhone("");
-      setPromptPhone(false);
-      setSure(null);
-
-      await fetchData(id);
-
-      const storedUser = JSON.parse(
-        localStorage.getItem("kullanici") || "{}"
-      );
-
-      if (storedUser?.id) {
-        await fetchDataKonusmalar(storedUser.id);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const filteredData = user.filter((userItem) =>
-    chat.some(
-      (chatItem) =>
-        chatItem.gonderenId === userItem._id
-    )
-  );
+  }
 
   return (
     <>
       <Button
-        onClick={() => router.back()}
+        onClick={handleBack}
         className="ml-4 cursor-pointer text-[rgb(237,203,206)]"
       >
         <ArrowBackIcon sx={{ fontSize: 35 }} />
@@ -157,6 +66,7 @@ export default function Hizmet({ paramsId }) {
             handleGetPhone={handleGetPhone}
             handleGetCalendar={handleGetCalendar}
             handleSubmit={handleSubmit}
+            isUpdating={isUpdating}
           />
 
           <ServicegetUserDetails data={storedData} />
@@ -174,3 +84,4 @@ export default function Hizmet({ paramsId }) {
     </>
   );
 }
+

@@ -1,6 +1,6 @@
 import Kategori from "../models/Kategori.js";
 
-// !slider kategori
+
 export const createKategori = async (req, res) => {
   try {
     const { isim, aciklama, resim } = req.body;

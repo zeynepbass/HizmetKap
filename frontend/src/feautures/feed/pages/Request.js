@@ -1,61 +1,38 @@
+
 "use client";
-
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-
-import {
-  getTadilatById,
-  createActiveRenovation,
-  updateDurum,
-} from "@/features/feed/api";
 
 import { RequestForm } from "../components/RequestForm";
 import { RequestSuccess } from "../components/RequestSuccess";
 import { RequestExitModal } from "../components/RequestExitModal";
+import { useRequest } from "../hooks/useRequest";
 
-export default function Talep({ id }) {
-  const router = useRouter();
+export default function Request({ id }) {
+  const {
+    open,
+    dialog,
+    currentStep,
+    answers,
+    showRequestExitModal,
 
-  const [open, setOpen] = useState(false);
-  const [dialog, setOpenDialog] = useState(false);
+    steps,
+    item,
+    storedData,
 
-  const [currentStep, setCurrentStep] = useState(0);
-  const [answers, setAnswers] = useState([]);
+    progressPercent,
 
-  const [showRequestExitModal, setShowRequestExitModal] = useState(false);
+    isLoading,
 
-  const [steps, setSteps] = useState(null);
-  const [item, setItem] = useState("");
-  const [stored, setKullanici] = useState(null);
-  const [storedData, setStoredItem] = useState(null);
+    handleAnswer,
+    handleBack,
+    handleNext,
+    handleClick,
+    handleClose,
+    handleExit,
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await getTadilatById(id);
+    setShowRequestExitModal,
+  } = useRequest(id);
 
-        if (res) {
-          setSteps(res[0].adimlar);
-          setItem(res[0].kategori);
-        }
-      } catch (err) {
-        console.error("Tadilat verisi alınamadı:", err);
-      }
-    };
-
-    fetchData();
-
-    const kullanici = JSON.parse(
-      localStorage.getItem("kullanici")
-    );
-
-    const storedItem = localStorage.getItem("item");
-
-    setKullanici(kullanici);
-    setStoredItem(storedItem);
-  }, [id]);
-
-  if (!steps) {
+  if (isLoading) {
     return (
       <p className="text-center font-bold text-gray-600">
         Yükleniyor...
@@ -63,97 +40,8 @@ export default function Talep({ id }) {
     );
   }
 
-  const progressPercent =
-    ((currentStep + 1) / steps.length) * 100;
-
-  const handleAnswer = (option) => {
-    setAnswers((prev) => {
-      const updated = [...prev];
-
-      updated[currentStep] = {
-        kategoriIsim: steps[currentStep].baslik,
-        secenekler: steps[currentStep].secenekler,
-        secilen: option,
-      };
-
-      return updated;
-    });
-  };
-
-  const handleBack = () => {
-    if (currentStep > 0) {
-      setCurrentStep((prev) => prev - 1);
-    }
-  };
-
-  const handleNext = async () => {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep((prev) => prev + 1);
-      return;
-    }
-
-    const dataToSend = {
-      primaryKey: id,
-      anaBaslik: item.isim,
-      durum: "aktif",
-      ad: stored.ad,
-      soyad: stored.soyad,
-      email: stored.email,
-      kullaniciId: stored.id,
-
-      veriler: answers.map((ans) => ({
-        kategoriIsim: ans.kategoriIsim,
-        secenekler: ans.secenekler,
-        secilen: ans.secilen,
-      })),
-
-      telefonNo: stored.telefonNo || null,
-      konum: stored.konum || null,
-    };
-
-    try {
-      const response = await createActiveRenovation(dataToSend);
-
-      localStorage.setItem("item", response.primaryKey);
-      localStorage.setItem("itemDurum", response._id);
-
-      setOpen(true);
-    } catch (err) {
-      console.error("Post işlemi başarısız:", err);
-    }
-  };
-
-  const handleClick = async () => {
-    const durumId = localStorage.getItem("itemDurum");
-
-    const result = await updateDurum(
-      durumId,
-      null,
-      true
-    );
-
-    if (result.success) {
-      setOpenDialog(true);
-    }
-  };
-
-  const handleClose = (reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpenDialog(false);
-    router.push("/ana-sayfa");
-  };
-
-  const handleExit = () => {
-    setShowRequestExitModal(false);
-    router.push("/ana-sayfa");
-  };
-
   return (
     <div className="w-full justify-center">
-
       {open ? (
         <RequestSuccess
           dialog={dialog}
@@ -177,10 +65,12 @@ export default function Talep({ id }) {
 
       <RequestExitModal
         open={showRequestExitModal}
-        onClose={() => setShowRequestExitModal(false)}
+        onClose={() =>
+          setShowRequestExitModal(false)
+        }
         onExit={handleExit}
       />
-
     </div>
   );
 }
+
