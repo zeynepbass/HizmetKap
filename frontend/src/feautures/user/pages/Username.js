@@ -1,7 +1,7 @@
 "use client"
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import {passwordSend} from "@/services/api"
+import {sendPassword} from "@/features/user/api"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import {Button,Heading,Input} from "@/shared/components/atoms"
@@ -32,7 +32,7 @@ export default function Kullaniciadi () {
         }
       
         try {
-          const res = await passwordSend(formData);
+          const res = await sendPassword(formData);
       
           toast.success(res.data?.message || "İşlem başarılı!", {
             position: "top-right",

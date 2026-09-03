@@ -1,1 +1,1 @@
-export {ServiceDetails} from "./ServiceDetails"
+export {ServicegetUserDetails} from "./ServicegetUserDetails"

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { handleRegisterPost } from "@/services/api";
+import { register } from "@/features/feed/api";
 
 import { RegisterForm } from "../components/RegisterForm";
 import { RegisterImage } from "../components/RegisterImage";
@@ -33,7 +33,7 @@ export default function Kayitol() {
     e.preventDefault();
 
     try {
-      const res = await handleRegisterPost(formData);
+      const res = await register(formData);
 
       if (res.data && res.data.yeniKullanici) {
         toast.success(res.data.message || "Kayıt başarılı!", {

@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 
 import {
   getTadilatById,
-  postAktifTadilat,
+  createActiveRenovation,
   updateDurum,
-} from "@/shared/services/api";
+} from "@/features/feed/api";
 
 import { RequestForm } from "../components/RequestForm";
 import { RequestSuccess } from "../components/RequestSuccess";
@@ -112,7 +112,7 @@ export default function Talep({ id }) {
     };
 
     try {
-      const response = await postAktifTadilat(dataToSend);
+      const response = await createActiveRenovation(dataToSend);
 
       localStorage.setItem("item", response.primaryKey);
       localStorage.setItem("itemDurum", response._id);

@@ -2,11 +2,11 @@
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import {
-  fetchUsersGet,
-  fetchKonusmalarGet,
-  fetchMessagesGet,
+  getUsers,
+  getConversations,
+  getMessages,
   sendMessage
-} from "@/services/api";
+} from "@/features/feed/api";
 import {Button} from "@/shared/components/atoms"
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import {ChatScore} from "../components/ChatScore";
@@ -42,7 +42,7 @@ export default function Chatroom ({ id })  {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetchUsersGet();
+        const res = await getUsers();
         setUserList(res);
       } catch (error) {
         console.error("Kullanıcı çekme hatası:", error);
@@ -51,7 +51,7 @@ export default function Chatroom ({ id })  {
 
     const fetchKonusmalar = async (aliciIdStored) => {
       try {
-        const res = await fetchKonusmalarGet(aliciIdStored);
+        const res = await getConversations(aliciIdStored);
         setData(res);
       } catch (error) {
         console.error("Mesaj çekme hatası:", error);
@@ -66,7 +66,7 @@ export default function Chatroom ({ id })  {
 
   const fetchMessages = async (gonderenId, userId) => {
     try {
-      const res = await fetchMessagesGet(gonderenId, userId);
+      const res = await getMessages(gonderenId, userId);
       setMessages(res);
     } catch (error) {
       console.error("Mesaj çekme hatası:", error);

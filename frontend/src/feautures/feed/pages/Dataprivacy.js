@@ -4,9 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import {
-  accountDelete,
+  deleteAccount,
   updateAccount,
-} from "@/services/api";
+} from "@/features/user/api";
 
 import { DataAccountOptions } from "../components/DataAccountOptions";
 import { DataAccountAction } from "../components/DataAccountAction";
@@ -73,7 +73,7 @@ export default function Verigizlilik() {
         localStorage.getItem("kullanici")
       );
 
-      await accountDelete(kullanici.kullanici.id);
+      await deleteAccount(kullanici.kullanici.id);
 
       localStorage.clear();
       router.push("/");

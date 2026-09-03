@@ -1,1 +1,1 @@
-export {HesapDetails} from "./HesapDetails"
+export {HesapgetUserDetails} from "./HesapgetUserDetails"

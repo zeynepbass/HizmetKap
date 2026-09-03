@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { Login } from "@/services/api";
+import { Login } from "@/features/user/api"
 
 import { LoginForm } from "../components/LoginForm";
 import { LoginImage } from "../components/LoginImage";

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
-import { SifremiUnuttum } from "@/shared/services/api";
+import { forgotPassword } from "@/features/user/api";
 import "react-toastify/dist/ReactToastify.css";
 import {Button,Heading,Input} from "@/shared/components/atoms"
 export default function Sifreniunuttum (){
@@ -44,7 +44,7 @@ export default function Sifreniunuttum (){
     }
   
     try {
-      const res = await SifremiUnuttum(formData);
+      const res = await forgotPassword(formData);
   
       toast.success(res.data?.message || "Şifre başarıyla güncellendi!", {
         position: "top-right",

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { fetchUsersGet, getAktifTadilat } from "@/services/api";
+import { getUsers, getActiveRenovations } from "@/features/feed/api"
 import {Heading } from "@/shared/components/atoms";
 import { KullaniciCard } from "../components/KullaniciCard";
 export {toSlugUrl} from "@/shared/helpers/toSlug"
@@ -15,7 +15,7 @@ export default function Kullanicilar(isim) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const users = await fetchUsersGet();
+        const users = await getUsers();
         setData(users);
       } catch (error) {
         console.error("Kullanıcılar alınamadı:", error);
@@ -33,7 +33,7 @@ export default function Kullanicilar(isim) {
 
   const fetchTadilat = async () => {
     try {
-      const response = await getAktifTadilat();
+      const response = await getActiveRenovations();
       setCategory(response);
     } catch (error) {
       console.log(error);

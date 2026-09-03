@@ -7,14 +7,14 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Button } from "@/shared/components/atoms";
 
 import {
-  activeUpdated,
-  getAktifTadilatDetails,
-  fetchUsersGet,
-  fetchKonusmalarGet,
+  updateActive,
+  getActiveRenovationsgetUserDetails,
+  getUsers,
+  getConversations,
 } from "@/services/api";
 
 import { ServiceContactForm } from "../components/ServiceContactForm";
-import { ServiceDetails } from "../components/ServiceDetails";
+import { ServicegetUserDetails } from "../components/ServicegetUserDetails";
 import { ServiceOptions } from "../components/ServiceOptions";
 import { ServiceMessageUsers } from "../components/ServiceMessageUsers";
 
@@ -32,7 +32,7 @@ export default function Hizmet({ paramsId }) {
 
   const fetchData = async (id) => {
     try {
-      const res = await getAktifTadilatDetails(id);
+      const res = await getActiveRenovationsgetUserDetails(id);
       setStoredData(res);
     } catch (err) {
       console.error("Veri çekilemedi:", err);
@@ -41,7 +41,7 @@ export default function Hizmet({ paramsId }) {
 
   const fetchDataKonusmalar = async (id) => {
     try {
-      const res = await fetchKonusmalarGet(id);
+      const res = await getConversations(id);
       setChat(res);
     } catch (err) {
       console.error("Veri çekilemedi:", err);
@@ -50,7 +50,7 @@ export default function Hizmet({ paramsId }) {
 
   const fetchUser = async () => {
     try {
-      const res = await fetchUsersGet();
+      const res = await getUsers();
       setUser(res);
     } catch (error) {
       console.error("Kullanıcılar alınamadı:", error);
@@ -106,7 +106,7 @@ export default function Hizmet({ paramsId }) {
     };
 
     try {
-      await activeUpdated(id, formData);
+      await updateActive(id, formData);
 
       setLocation("");
       setPhone("");
@@ -159,7 +159,7 @@ export default function Hizmet({ paramsId }) {
             handleSubmit={handleSubmit}
           />
 
-          <ServiceDetails data={storedData} />
+          <ServicegetUserDetails data={storedData} />
 
           <ServiceOptions
             options={storedData?.veriler}

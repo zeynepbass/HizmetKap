@@ -5,7 +5,7 @@ import {HomeSlider} from "../components/HomeSlider";
 import {HomeIsTabs} from "../components/HomeIsTabs"
 import {HomeEmptyState} from "../components/HomeEmptyState"
 import {HomeIsCard} from "../components/HomeIsCard/HomeIsCard"
-import {updateDurum} from "@/services/api"
+import {updateDurum} from "@/features/feed/api"
 export default function Anasayfa ({itemsAktif: initialItems}) {
   const router = useRouter();
 const [itemsAktif,setItemsAktif]=useState(initialItems)
