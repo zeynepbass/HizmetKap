@@ -161,7 +161,7 @@ export function ChatScore({
           <Button
             type="button"
             onClick={handleSubmit}
-            className="mt-5 w-full rounded-xl bg-[#6B4F6D] py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#4E244D]"
+            className="mt-5 w-full rounded-xl bg-[#6B4F6D] py-3 text-sm  text-white shadow-sm transition-all duration-200 hover:bg-[#4E244D]"
           >
             Değerlendirmeyi Gönder
           </Button>

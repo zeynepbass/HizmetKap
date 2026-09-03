@@ -20,7 +20,7 @@ export function Profilmage({
           />
         ) : (
           <div className="flex h-40 w-40 items-center justify-center rounded-2xl border border-gray-200 bg-[#F7F7F9]">
-            <span className="text-4xl font-semibold uppercase text-[#B9A6BF]">
+            <span className="text-4xl  uppercase text-[#B9A6BF]">
               ?
             </span>
           </div>

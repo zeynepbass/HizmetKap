@@ -112,7 +112,7 @@ export default function Verigizlilik() {
             Gizlilik ve hesap
           </span>
 
-          <h1 className="mt-2 text-2xl font-semibold tracking-tight text-gray-800 sm:text-3xl">
+          <h1 className="mt-2 text-2xl  tracking-tight text-gray-800 sm:text-3xl">
             Hesap ve veri yönetimi
           </h1>
 

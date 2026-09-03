@@ -5,6 +5,7 @@ import { RequestForm } from "../components/RequestForm";
 import { RequestSuccess } from "../components/RequestSuccess";
 import { RequestExitModal } from "../components/RequestExitModal";
 import { useRequest } from "../hooks/useRequest";
+import { Loading } from "@/shared/components/molecules";
 
 export default function Request({ id }) {
   const {
@@ -33,11 +34,7 @@ export default function Request({ id }) {
   } = useRequest(id);
 
   if (isLoading) {
-    return (
-      <p className="text-center  text-gray-600">
-        Yükleniyor...
-      </p>
-    );
+    return<Loading/>
   }
 
   return (
@@ -59,7 +56,7 @@ export default function Request({ id }) {
           handleAnswer={handleAnswer}
           handleNext={handleNext}
           handleBack={handleBack}
-          setShowRequestExitModal={setShowRequestExitModal}
+          setShowExitModal={setShowRequestExitModal}
         />
       )}
 

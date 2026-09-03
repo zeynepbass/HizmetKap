@@ -39,12 +39,12 @@ export function RequestSuccess({
 
     
         <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#EDE7F1]">
-          <span className="text-2xl font-semibold text-[#6B4F6D]">
+          <span className="text-2xl  text-[#6B4F6D]">
             ✓
           </span>
         </div>
 
-        <h2 className="mt-5 text-2xl font-semibold tracking-tight text-[#222C31]">
+        <h2 className="mt-5 text-2xl  tracking-tight text-[#222C31]">
           Talebini Aldık
         </h2>
 
@@ -84,7 +84,7 @@ export function RequestSuccess({
           <Button
             type="button"
             onClick={() => router.push("/ana-sayfa")}
-            className="rounded-xl bg-[#6B4F6D] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#4E244D]"
+            className="rounded-xl bg-[#6B4F6D] px-6 py-3 text-sm  text-white shadow-sm transition-all duration-200 hover:bg-[#4E244D]"
           >
             İşlerime git
           </Button>

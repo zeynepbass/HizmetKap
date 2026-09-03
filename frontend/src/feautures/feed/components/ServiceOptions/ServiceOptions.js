@@ -9,7 +9,7 @@ export function ServiceOptions({ options }) {
                 className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white p-4 rounded-lg shadow hover:shadow-md transition w-full"
               >
                 <div className="flex flex-col">
-                  <span className="font-semibold text-gray-600">
+                  <span className=" text-gray-600">
                     {item.kategoriIsim || "Kategori belirtilmemiş"}
                   </span>
   

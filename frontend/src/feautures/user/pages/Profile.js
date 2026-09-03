@@ -50,7 +50,7 @@ export default function Profil() {
         <section className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
 
           <div className="border-b border-gray-100 bg-[#FCFBFD] px-6 py-5 sm:px-8">
-            <h2 className="text-base font-semibold text-gray-800">
+            <h2 className="text-base  text-gray-800">
               Kişisel Bilgiler
             </h2>
 

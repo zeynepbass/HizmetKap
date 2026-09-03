@@ -6,11 +6,12 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Button } from "@/shared/components/atoms";
 
 import { ServiceContactForm } from "../components/ServiceContactForm";
-import { ServicegetUserDetails } from "../components/ServicegetUserDetails";
+import { ServiceDetails } from "../components/ServiceDetails";
 import { ServiceOptions } from "../components/ServiceOptions";
 import { ServiceMessageUsers } from "../components/ServiceMessageUsers";
 
 import { useService } from "../hooks/useService";
+import { Loading } from "@/shared/components/molecules";
 
 export default function Service({ paramsId }) {
   const {
@@ -36,11 +37,7 @@ export default function Service({ paramsId }) {
   } = useService(paramsId);
 
   if (isLoading) {
-    return (
-      <p className="text-center  text-gray-600">
-        Yükleniyor...
-      </p>
-    );
+    return <Loading/>
   }
 
   return (
@@ -69,7 +66,7 @@ export default function Service({ paramsId }) {
             isUpdating={isUpdating}
           />
 
-          <ServicegetUserDetails data={storedData} />
+          <ServiceDetails data={storedData} />
 
           <ServiceOptions
             options={storedData?.veriler}

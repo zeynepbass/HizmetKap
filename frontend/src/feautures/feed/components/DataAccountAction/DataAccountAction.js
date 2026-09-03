@@ -17,7 +17,7 @@ export function DataAccountAction({
       </div>
 
 
-      <h2 className="text-xl font-semibold tracking-tight text-gray-800">
+      <h2 className="text-xl  tracking-tight text-gray-800">
         {item.baslik}
       </h2>
 

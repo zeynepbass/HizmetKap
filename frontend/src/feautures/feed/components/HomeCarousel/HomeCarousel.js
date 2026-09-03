@@ -45,7 +45,7 @@ export function HomeCarousel({ slides }) {
                       className="w-full h-40 object-cover"
                     />
                     <div className="p-3">
-                      <h3 className="text-center text-gray-700 font-semibold text-sm truncate">
+                      <h3 className="text-center text-gray-700  text-sm truncate">
                         {slide.isim}
                       </h3>
                     </div>

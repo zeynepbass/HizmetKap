@@ -4,7 +4,7 @@
 import { Button } from "@/shared/components/atoms";
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-
+import {Loading} from "@/shared/components/molecules"
 import { ChatScore } from "../components/ChatScore";
 import { useChatroom } from "../hooks/useChatRoom";
 
@@ -27,13 +27,7 @@ export default function Chatroom({ id }) {
   } = useChatroom(id);
 
   if (isLoading) {
-    return (
-      <div className="flex h-[90vh] items-center justify-center bg-[#F7F7F9]">
-        <div className="text-sm text-gray-500">
-          Yükleniyor...
-        </div>
-      </div>
-    );
+    return <Loading/>
   }
 
   return (
@@ -54,7 +48,7 @@ export default function Chatroom({ id }) {
             </div>
 
             <div>
-              <h2 className="text-sm font-semibold text-[#222C31]">
+              <h2 className="text-sm  text-[#222C31]">
                 Mesajlar
               </h2>
 
@@ -82,7 +76,7 @@ export default function Chatroom({ id }) {
                 >
    
                   <div
-                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold ${
+                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm  ${
                       isSelected
                         ? "bg-[#6B4F6D] text-white"
                         : "bg-gray-100 text-gray-600"
@@ -153,12 +147,12 @@ export default function Chatroom({ id }) {
         <header className="flex h-[72px] shrink-0 items-center border-b border-gray-200 bg-white px-6">
           {selectedUser ? (
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#EDE7F1] text-sm font-semibold text-[#6B4F6D]">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#EDE7F1] text-sm  text-[#6B4F6D]">
                 {selectedUser?.ad?.charAt(0)?.toUpperCase()}
               </div>
 
               <div>
-                <h2 className="text-sm font-semibold text-[#222C31]">
+                <h2 className="text-sm  text-[#222C31]">
                   {selectedUser?.ad}
                 </h2>
 
@@ -169,7 +163,7 @@ export default function Chatroom({ id }) {
             </div>
           ) : (
             <div>
-              <h2 className="text-sm font-semibold text-[#222C31]">
+              <h2 className="text-sm  text-[#222C31]">
                 Mesajlar
               </h2>
 
@@ -193,7 +187,7 @@ export default function Chatroom({ id }) {
                 />
               </div>
 
-              <h3 className="mt-4 text-sm font-semibold text-[#222C31]">
+              <h3 className="mt-4 text-sm  text-[#222C31]">
                 Henüz mesaj yok
               </h3>
 
@@ -267,7 +261,7 @@ export default function Chatroom({ id }) {
             <Button
               type="submit"
               disabled={isSending}
-              className="h-11 min-w-[110px] rounded-xl bg-[#6B4F6D] px-5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#4E244D] disabled:cursor-not-allowed disabled:opacity-60"
+              className="h-11 min-w-[110px] rounded-xl bg-[#6B4F6D] px-5 text-sm  text-white shadow-sm transition hover:bg-[#4E244D] disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isSending
                 ? "Gönderiliyor..."

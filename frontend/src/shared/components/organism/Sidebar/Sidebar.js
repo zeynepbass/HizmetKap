@@ -75,7 +75,7 @@ export function Sidebar() {
 
         {open && (
           <div>
-            <p className="mb-3 px-2 text-xs font-semibold uppercase tracking-wider text-gray-400">
+            <p className="mb-3 px-2 text-xs  uppercase tracking-wider text-gray-400">
               Popüler Hizmetler
             </p>
 
@@ -107,7 +107,7 @@ export function Sidebar() {
 
         {!open && (
           <nav>
-            <p className="mb-3 px-2 text-xs font-semibold uppercase tracking-wider text-gray-400">
+            <p className="mb-3 px-2 text-xs  uppercase tracking-wider text-gray-400">
               Menü
             </p>
 
@@ -156,7 +156,7 @@ export function Sidebar() {
 
         {!open && category.length > 0 && (
           <div className="mt-8">
-            <p className="mb-3 px-2 text-xs font-semibold uppercase tracking-wider text-gray-400">
+            <p className="mb-3 px-2 text-xs  uppercase tracking-wider text-gray-400">
               Hizmetler
             </p>
 
