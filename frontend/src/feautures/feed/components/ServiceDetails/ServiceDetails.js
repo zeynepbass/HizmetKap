@@ -3,7 +3,7 @@
 import { Heading } from "@/shared/components/atoms";
 import {Location} from "@/shared/components/organism";
 
-export function ServiceDetails({ data }) {
+export function ServicegetUserDetails({ data }) {
   return (
     <>
       <hr className="text-gray-100" />

@@ -3,7 +3,7 @@ import {useState } from "react";
 import { Rating, Box } from "@mui/material";
 import { useRouter } from "next/navigation";
 import {Button, Heading}from "@/shared/components/atoms"
-import {scoreUpdated,MessageDelete} from "@/services/api"
+import {updateScore,deleteMessage} from "@/features/feed/api"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -16,7 +16,7 @@ export function ChatScore ({ kullaniciId, setOpen,gonderenId,setMessages,setUser
     if (rating === 0) return alert("Lütfen bir yıldız seçin");
 
     try {
-      const response = await scoreUpdated(kullaniciId, rating, comment);
+      const response = await updateScore(kullaniciId, rating, comment);
   
       if (!response) throw new Error("API'den cevap alınamadı");
   
@@ -33,7 +33,7 @@ export function ChatScore ({ kullaniciId, setOpen,gonderenId,setMessages,setUser
   const handleDelete = async (gonderenId, kullaniciId) => {
    
     try {
-      const res = await MessageDelete(gonderenId, kullaniciId);
+      const res = await deleteMessage(gonderenId, kullaniciId);
       if (res) {
 
         

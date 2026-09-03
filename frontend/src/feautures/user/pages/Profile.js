@@ -1,25 +1,29 @@
+
+
 "use client";
 
 import { ToastContainer } from "react-toastify";
+
 import { ProfileForm } from "../components/ProfilForm";
 import { ProfileImage } from "../components/Profilmage";
-import { useProfile } from "./hooks/useProfile";
+import { useAccount } from "./hooks/useAccount";
 
 export default function Profil() {
   const {
-    kullaniciStorage,
     form,
     telefon,
-    setTelefon,
-    preview,
     resim,
+    preview,
+    kullaniciStorage,
+    setTelefon,
     handleChange,
     handleFileChange,
     handleSubmit,
-  } = useProfile();
+    isLoading,
+  } = useAccount();
 
   if (!kullaniciStorage) {
-    return <Kayitol />;
+    return null;
   }
 
   return (
@@ -38,7 +42,9 @@ export default function Profil() {
         setTelefon={setTelefon}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
+        isLoading={isLoading}
       />
     </div>
   );
 }
+

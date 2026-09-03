@@ -1,5 +1,5 @@
 
-import Dataprivacy from "@/features/feed/pages/Dataprivacy"
+import Dataprivacy from "@/feautures/feed/pages/Dataprivacy"
 export default function page() {
   return <Dataprivacy/>
 }

@@ -1,131 +1,79 @@
+
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { ToastContainer, toast } from "react-toastify";
-import { SifremiUnuttum } from "@/shared/services/api";
+
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {Button,Heading,Input} from "@/shared/components/atoms"
-export default function Sifreniunuttum (){
-  const router = useRouter();
-  const [formData, setFormData] = useState({
-    email: "",
-    yeniParola: "",
-    yeniParolaTekrar: ""
-  });
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
-    if (
-      !formData.email ||
-      !formData.yeniParola ||
-      !formData.yeniParolaTekrar
-    ) {
-      toast.error("Lütfen tüm alanları doldurun!", {
-        position: "top-right",
-        autoClose: 3000,
-      });
-      return; 
-    }
-  
+import {
+  Button,
+  Heading,
+  Input,
+} from "@/shared/components/atoms";
 
-    if (formData.yeniParola !== formData.yeniParolaTekrar) {
-      toast.error("Yeni şifreler eşleşmiyor!", {
-        position: "top-right",
-        autoClose: 3000,
-      });
-      return;
-    }
-  
-    try {
-      const res = await SifremiUnuttum(formData);
-  
-      toast.success(res.data?.message || "Şifre başarıyla güncellendi!", {
-        position: "top-right",
-        autoClose: 3000,
-      });
-  
-      localStorage.clear();
-  
-      setTimeout(() => {
-        router.push("/");
-      }, 3000);
-    } catch (err) {
-      console.error(err);
-      toast.error("Sunucu hatası veya güncelleme başarısız!", {
-        position: "top-right",
-        autoClose: 3000,
-      });
-    }
-  };
-  
+import { useForgotPassword } from "../hooks/useForgotPassword";
+
+export default function ForgotPassword() {
+  const {
+    formData,
+    handleChange,
+    handleSubmit,
+    isLoading,
+  } = useForgotPassword();
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-white-50">
       <ToastContainer />
+
       <div className="flex justify-center items-center w-[80%]">
         <div className="w-full max-w-xl">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5 rounded-lg p-10 shadow-lg bg-white">
-            <Heading variant="dark" title="ŞİFRE DEĞİŞTİR" desc="Şifreni güncellemek için lütfen sırasıyla email ve yeni şifreni gir."/>
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-5 rounded-lg p-10 shadow-lg bg-white"
+          >
+            <Heading
+              variant="dark"
+              title="ŞİFRE DEĞİŞTİR"
+              desc="Şifreni güncellemek için lütfen sırasıyla email ve yeni şifreni gir."
+            />
 
-
-            <div>
-
-       
-                          <Input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Email*"
-                className="w-full bg-[rgb(242,247,250)] rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,127,60)]"
-            
- />
-            </div>
-
-            <div>
             <Input
-           type="password"
-           name="yeniParola"
-           value={formData.yeniParola}
-           onChange={handleChange}
-           placeholder="Yeni şifre*"
-           className="w-full bg-[rgb(242,247,250)] rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,127,60)]"
-       
- />
-    
-            </div>
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Email*"
+              className="w-full bg-[rgb(242,247,250)] rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,127,60)]"
+            />
 
-            <div>
- <Input
-             type="password"
-             name="yeniParolaTekrar"
-             value={formData.yeniParolaTekrar}
-             onChange={handleChange}
-             placeholder="Yeni Şifre Tekrar*"
-             className="w-full bg-[rgb(242,247,250)] rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,127,60)]"
-         
- />
-      
-            </div>
+            <Input
+              type="password"
+              name="yeniParola"
+              value={formData.yeniParola}
+              onChange={handleChange}
+              placeholder="Yeni şifre*"
+              className="w-full bg-[rgb(242,247,250)] rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,127,60)]"
+            />
+
+            <Input
+              type="password"
+              name="yeniParolaTekrar"
+              value={formData.yeniParolaTekrar}
+              onChange={handleChange}
+              placeholder="Yeni Şifre Tekrar*"
+              className="w-full bg-[rgb(242,247,250)] rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[rgb(255,127,60)]"
+            />
+
             <Button
-          type="submit"
-          className="w-[50%] rounded-4xl  mx-auto p-3 cursor-pointer  bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:text-gray-50 hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-2"
-        >
-          Güncelle
-</Button>
-     
+              type="submit"
+              disabled={isLoading}
+              className="w-[50%] rounded-4xl mx-auto p-3 cursor-pointer bg-[rgb(78,36,77)] text-[rgb(242,247,250)] hover:text-gray-50 hover:bg-[rgb(255,127,60)] transition-colors duration-300 mt-2"
+            >
+              {isLoading ? "Güncelleniyor..." : "Güncelle"}
+            </Button>
           </form>
         </div>
       </div>
     </div>
   );
-};
-
+}
 

@@ -1,20 +1,20 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Details } from "@/services/api";
+import { getUserDetails } from "@/features/api";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
-export function HesapDetails(){
+export function HesapgetUserDetails(){
   const [data, setData] = useState({});
   const [kullaniciAdi, setKullaniciAdi] = useState(null);
   const router = useRouter();
 
   const fetchData = async (id) => {
     try {
-      const res = await Details(id);
+      const res = await getUserDetails(id);
       setData(res.data);
      
     } catch (error) {

@@ -1,14 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
-import SavedSearchIcon from "@mui/icons-material/SavedSearch";
+import { SearchBar } from "../../atoms/SearchBar";
 import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
 import TextsmsIcon from "@mui/icons-material/Textsms";
-import {Hesapdetay} from "@/feautures/user/components/HesaDetails";
+import {Hesapdetay} from "@/feautures/user/components/HesagetUserDetails";
 import { useRouter } from "next/navigation";
 import {toSlug} from "@/shared/helpers/toSlug"
 import Link from "next/link";
-import { getKategoriler } from "@/services/api";
-import { Input } from "@/shared/atoms";
+import { getCategories } from "@/features/feed/api";
 export function Sidebar() {
   const [open, setOpen] = useState(false);
   const [category, setCategory] = useState([]);
@@ -16,7 +15,7 @@ export function Sidebar() {
   const router = useRouter();
   const fetchCtegory = async () => {
     try {
-      const res = await getKategoriler();
+      const res = await getCategories();
       setCategory(res);
     } catch (error) {
       console.log(error);
@@ -77,18 +76,7 @@ export function Sidebar() {
           </Link>
         </div>
 
-        <div className="flex items-center rounded-full pr-2 bg-[rgb(242,247,250)] shadow-inner focus-within:ring-2 focus-within:ring-[rgb(255,176,73)]">
-     <Input
-           placeholder="Başka bir ihtiyacın?"
-           className="flex-1 p-3 rounded-full bg-transparent text-gray-700 focus:outline-none"
-       
-     />
-
-          <SavedSearchIcon
-            className="cursor-pointer text-[rgb(78,36,77)] mr-3"
-            onClick={() => setOpen(!open)}
-          />
-        </div>
+       <SearchBar setOpen={setOpen} open={open}/>
 
         {open && (
           <div className="rounded-2xl p-5 mt-4 shadow-xl w-full bg-[rgb(78,36,77)]">
