@@ -29,7 +29,7 @@ export function ServiceContactForm({
       <div className="mb-6">
         <Heading
           title="İletişim Bilgilerini ve Konumunu Eklemek İster misin?"
-          className="text-lg font-semibold text-[#222C31]"
+          className="text-lg  text-[#222C31]"
         />
         <p className="mt-2 text-sm text-gray-500">
           Hizmet talebin için iletişim ve konum bilgilerini ekleyebilirsin.
@@ -70,7 +70,7 @@ export function ServiceContactForm({
               <Button
                 type="button"
                 onClick={handleGetLocation}
-                className="w-full rounded-xl bg-[#FFB049] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#FF7F3A] sm:w-auto"
+                className="w-full rounded-xl bg-[#FFB049] px-5 py-2.5 text-sm  text-white transition-colors hover:bg-[#FF7F3A] sm:w-auto"
               >
                 Konum Al
               </Button>
@@ -111,7 +111,7 @@ export function ServiceContactForm({
               <Button
                 type="button"
                 onClick={handleGetPhone}
-                className="w-full rounded-xl bg-[#6B4F6D] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#4E244D] sm:w-auto"
+                className="w-full rounded-xl bg-[#6B4F6D] px-5 py-2.5 text-sm  text-white transition-colors hover:bg-[#4E244D] sm:w-auto"
               >
                 Telefon Ekle
               </Button>
@@ -161,7 +161,7 @@ export function ServiceContactForm({
               <Button
                 type="button"
                 onClick={handleGetCalendar}
-                className="w-full rounded-xl bg-[#C58E95] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#A97179] sm:w-auto"
+                className="w-full rounded-xl bg-[#C58E95] px-5 py-2.5 text-sm  text-white transition-colors hover:bg-[#A97179] sm:w-auto"
               >
                 Bitiş Tarihi Ekle
               </Button>
@@ -174,7 +174,7 @@ export function ServiceContactForm({
           <div className="pt-2">
             <Button
               type="submit"
-              className="w-full rounded-xl bg-[#6B4F6D] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#4E244D]"
+              className="w-full rounded-xl bg-[#6B4F6D] px-5 py-3 text-sm  text-white shadow-sm transition-all duration-200 hover:bg-[#4E244D]"
             >
               Tümünü Kaydet
             </Button>

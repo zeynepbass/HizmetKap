@@ -33,7 +33,7 @@ export function DataAccountOptions({
             >
               <div>
                 <h2
-                  className={`text-sm font-semibold ${
+                  className={`text-sm  ${
                     isOpen ? "text-[#4E244D]" : "text-gray-700"
                   }`}
                 >
@@ -84,7 +84,7 @@ export function DataAccountOptions({
                     />
                   </div>
 
-                  <h3 className="text-lg font-semibold text-gray-800">
+                  <h3 className="text-lg  text-gray-800">
                     {item.baslik}
                   </h3>
 

@@ -4,7 +4,8 @@
 import { Heading } from "@/shared/components/atoms";
 import { Location } from "@/shared/components/organism";
 
-export function ServicegetUserDetails({ data }) {
+export function ServiceDetails({ data }) {
+  console.log(data)
   return (
     <section className="mt-8">
 
@@ -12,21 +13,21 @@ export function ServicegetUserDetails({ data }) {
       <div className="mb-6">
         <Heading
           title="Detaylar"
-          className="text-2xl font-semibold tracking-tight text-[#222C31]"
+          className="text-2xl  tracking-tight text-[#222C31]"
         />
       </div>
 
 
-      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+      <div className="overflow-hidden m-3 rounded-2xl border border-gray-200 bg-white shadow-sm">
 
 
         <div className="border-b border-gray-100 px-5 py-5 md:px-6">
           <span className="text-xs font-medium uppercase tracking-wide text-[#6B4F6D]">
-            Hizmet Kategorisi
+            HİZMET KATEGORİSİ
           </span>
 
-          <p className="mt-2 text-base font-semibold text-[#222C31]">
-            {data?.anaBaslik || "Belirtilmemiş"}
+          <p className="mt-2 text-base  text-[#222C31]">
+            {data?.[0]?.anaBaslik || "Belirtilmemiş"}
           </p>
         </div>
 
@@ -39,8 +40,8 @@ export function ServicegetUserDetails({ data }) {
               Durum
             </span>
 
-            <p className="mt-1 text-sm font-semibold text-[#6B4F6D]">
-              {data?.durum || "Belirtilmemiş"}
+            <p className="mt-1 text-sm  text-[#6B4F6D]">
+              {data?.[0]?.durum || "Belirtilmemiş"}
             </p>
           </div>
 
@@ -50,16 +51,16 @@ export function ServicegetUserDetails({ data }) {
               İlan Tarihi
             </span>
 
-            <p className="mt-1 text-sm font-semibold text-[#222C31]">
-              {data?.baslangicTarihi
-                ? new Date(data.baslangicTarihi).toLocaleDateString("tr-TR")
+            <p className="mt-1 text-sm  text-[#222C31]">
+              {data?.[0]?.baslangicTarihi
+                ? new Date(data?.[0]?.baslangicTarihi).toLocaleDateString("tr-TR")
                 : "Belirtilmemiş"}
 
-              {data?.bitisTarihi && (
+              {data?.[0]?.bitisTarihi && (
                 <span className="text-gray-400">
                   {" "}
                   -{" "}
-                  {new Date(data.bitisTarihi).toLocaleDateString("tr-TR")}
+                  {new Date(data?.[0]?.bitisTarihi).toLocaleDateString("tr-TR")}
                 </span>
               )}
             </p>
@@ -68,7 +69,7 @@ export function ServicegetUserDetails({ data }) {
         </div>
 
 
-        {data?.konum && (
+        {data?.[0]?.konum && (
           <div className="border-t border-gray-100 px-5 py-5 md:px-6">
             <div className="mb-3">
               <span className="text-xs font-medium uppercase tracking-wide text-[#6B4F6D]">
@@ -77,7 +78,7 @@ export function ServicegetUserDetails({ data }) {
             </div>
 
             <div className="rounded-xl border border-gray-100 bg-[#FCFBFD] p-4">
-              <Location konum={data.konum} />
+              <Location konum={data?.[0]?.konum} />
             </div>
           </div>
         )}

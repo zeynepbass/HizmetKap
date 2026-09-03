@@ -79,57 +79,57 @@ JWT ile güvenli oturum yönetimi sağlandı.
 ## Arayüzler
 
 <p align="center">
-  <img src="./frontend/public/screenshots/1758295331142.jpeg" alt="Dashboards" width="900">
+  <img src="./frontend/public/screenshots/1.png" alt="Giriş yap" width="900">
 </p>
 
 <p align="center">
-  <img src="./frontend/public/screenshots/1758295330786.jpeg" alt="Dashboards" width="900">
+  <img src="./frontend/public/screenshots/2.png" alt="Kayıt Ol" width="900">
 </p>
 
 <p align="center">
-  <img src="./frontend/public/screenshots/1758295330775.jpeg" alt="Dashboards" width="900">
+  <img src="./frontend/public/screenshots/4.png" alt="Şifre Değiştir" width="900">
 </p>
 
 <p align="center">
-  <img src="./frontend/public/screenshots/1758295330706.jpeg" alt="Dashboards" width="900">
+  <img src="./frontend/public/screenshots/5.png" alt="Ana Sayfa" width="900">
 </p>
 
 
 <p align="center">
-  <img src="./frontend/public/screenshots/1758295330601.jpeg" alt="Dashboards" width="900">
+  <img src="./frontend/public/screenshots/6.png" alt="Arama" width="900">
 </p>
 
 <p align="center">
-  <img src="./frontend/public/screenshots/1758295330599.jpeg" alt="Dashboards" width="900">
+  <img src="./frontend/public/screenshots/6.1.png" alt="Ekle" width="900">
 </p>
 
 <p align="center">
-  <img src="./frontend/public/screenshots/1758295330554.jpeg" alt="Dashboards" width="900">
+  <img src="./frontend/public/screenshots/7.png" alt="Ekle" width="900">
 </p>
 <p align="center">
-  <img src="./frontend/public/screenshots/1758295330542.jpeg" alt="Dashboards" width="900">
-</p>
-
-<p align="center">
-  <img src="./frontend/public/screenshots/1758295330521.jpeg" alt="Dashboards" width="900">
+  <img src="./frontend/public/screenshots/8.png" alt="Talep" width="900">
 </p>
 
 <p align="center">
-  <img src="./frontend/public/screenshots/1758295330418.jpeg" alt="Dashboards" width="900">
+  <img src="./frontend/public/screenshots/9.png" alt="Ana sayfa" width="900">
 </p>
 
 <p align="center">
-  <img src="./frontend/public/screenshots/1758295330407.jpeg" alt="Dashboards" width="900">
+  <img src="./frontend/public/screenshots/10.png" alt="Detay" width="900">
+</p>
+
+<p align="center">
+  <img src="./frontend/public/screenshots/11.png" alt="Detay ekle" width="900">
 </p>
 <p align="center">
-  <img src="./frontend/public/screenshots/1758295330381.jpeg" alt="Dashboards" width="900">
+  <img src="./frontend/public/screenshots/12.png" alt="Detay" width="900">
 </p>
 <p align="center">
-  <img src="./frontend/public/screenshots/1758295330268.jpeg" alt="Dashboards" width="900">
+  <img src="./frontend/public/screenshots/13.png" alt="Mesaj" width="900">
 </p>
 <p align="center">
-  <img src="./frontend/public/screenshots/1758295330190.jpeg" alt="Giris yap" width="900">
+  <img src="./frontend/public/screenshots/14.png" alt="Profil" width="900">
 </p>
 <p align="center">
-  <img src="./frontend/public/screenshots/1758295330051.jpeg" alt="Kayıt ol" width="900">
+  <img src="./frontend/public/screenshots/15.png" alt="Hesap" width="900">
 </p>

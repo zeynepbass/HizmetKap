@@ -7,10 +7,10 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 import {
   updateActive,
-  getActiveRenovationsgetUserDetails,
-  getUsers,
+  getActiveRenovations,
   getConversations,
 } from "../api/post.api";
+import {  getUsers} from "@/feautures/user/api/user.api"
 
 export function useService (paramsId) {
   const router = useRouter();
@@ -38,7 +38,7 @@ export function useService (paramsId) {
     isLoading: isServiceLoading,
   } = useQuery({
     queryKey: ["active-renovation", id],
-    queryFn: () => getActiveRenovationsgetUserDetails(id),
+    queryFn: () => getActiveRenovations(id),
     enabled: !!id,
   });
 

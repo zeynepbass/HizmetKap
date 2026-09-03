@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 import {
-  getTadilatById,
+  getRenovationById,
   createActiveRenovation,
   updateStatus,
 } from "../api/post.api";
@@ -25,7 +25,7 @@ export function useRequest(id)  {
 
   const { data, isLoading } = useQuery({
     queryKey: ["tadilat", id],
-    queryFn: () => getTadilatById(id),
+    queryFn: () => getRenovationById(id),
     enabled: !!id,
   });
 

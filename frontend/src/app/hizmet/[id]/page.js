@@ -1,5 +1,5 @@
 
-import Service from "@/features/feed/pages/Service";
+import Service from "@/feautures/feed/pages/Service";
 
 export default function page({ params })  {
   const { id } = params;

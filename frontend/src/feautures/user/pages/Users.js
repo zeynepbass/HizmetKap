@@ -79,11 +79,11 @@ export default function Users({ isim }) {
             Hizmetler
           </span>
 
-          <div className="mt-1 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div className="mt-1 flex justify-start">
             <div>
               <Heading
                 title={categoryTitle}
-                className="text-2xl font-semibold tracking-tight text-gray-800 sm:text-3xl"
+                className="text-2xl text-left  tracking-tight text-gray-800 sm:text-3xl"
               />
 
               <p className="mt-2 text-sm text-gray-500">
@@ -125,7 +125,7 @@ export default function Users({ isim }) {
                 </span>
               </div>
 
-              <h2 className="mt-5 text-lg font-semibold text-gray-800">
+              <h2 className="mt-5 text-lg  text-gray-800">
                 Henüz hizmet bulunamadı
               </h2>
 

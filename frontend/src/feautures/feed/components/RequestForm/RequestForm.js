@@ -25,7 +25,7 @@ export function RequestForm({
           Hizmet Talebi
         </span>
 
-        <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#222C31]">
+        <h2 className="mt-2 text-2xl  tracking-tight text-[#222C31]">
           {item.isim}
         </h2>
       </div>
@@ -58,14 +58,14 @@ export function RequestForm({
             Soru {currentStep + 1}
           </span>
 
-          <h3 className="mt-2 text-lg font-semibold leading-7 text-[#222C31]">
-            {currentQuestion.baslik}
+          <h3 className="mt-2 text-lg  leading-7 text-[#222C31]">
+            {currentQuestion?.baslik.baslik}
           </h3>
         </div>
 
      
         <div className="space-y-3">
-          {currentQuestion.secenekler.map((option) => {
+          {currentQuestion?.secenekler.map((option) => {
             const isSelected =
               answers[currentStep]?.secilen === option;
 
@@ -121,7 +121,7 @@ export function RequestForm({
               type="button"
               onClick={handleNext}
               disabled={!answers[currentStep]}
-              className="rounded-xl bg-[#6B4F6D] px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#4E244D] disabled:cursor-not-allowed disabled:opacity-40"
+              className="rounded-xl bg-[#6B4F6D] px-6 py-2.5 text-sm  text-white shadow-sm transition-all duration-200 hover:bg-[#4E244D] disabled:cursor-not-allowed disabled:opacity-40"
             >
               Devam
             </Button>

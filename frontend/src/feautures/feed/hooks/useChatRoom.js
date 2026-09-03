@@ -10,12 +10,11 @@ import {
 import io from "socket.io-client";
 
 import {
-  getUsers,
   getConversations,
   getMessages,
   sendMessage,
 } from "../api/post.api";
-
+import {  getUsers} from "@/feautures/user/api/user.api"
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 const socket = io(baseUrl);

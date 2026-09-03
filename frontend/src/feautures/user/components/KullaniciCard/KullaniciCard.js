@@ -12,7 +12,7 @@ export function KullaniciCard({ slide, onMessage }) {
       <div className="border-b border-gray-100 px-5 py-5">
 
         <div className="mb-4 flex items-center gap-3">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#EDE7F1] text-sm font-semibold text-[#6B4F6D]">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#EDE7F1] text-sm  text-[#6B4F6D]">
             {slide?.ad?.charAt(0)?.toUpperCase()}
           </div>
 
@@ -21,7 +21,7 @@ export function KullaniciCard({ slide, onMessage }) {
               Hizmeti Yayınlayan
             </p>
 
-            <p className="truncate text-sm font-semibold text-[#222C31]">
+            <p className="truncate text-sm  text-[#222C31]">
               {slide?.ad?.toUpperCase()}
             </p>
           </div>
@@ -73,7 +73,7 @@ export function KullaniciCard({ slide, onMessage }) {
               Kategori
             </p>
 
-            <p className="mt-1 text-sm font-semibold text-[#222C31]">
+            <p className="mt-1 text-sm  text-[#222C31]">
               {slide?.kategoriIsim || "Belirtilmemiş"}
             </p>
           </div>
@@ -89,7 +89,7 @@ export function KullaniciCard({ slide, onMessage }) {
             İlan Tarihi
           </p>
 
-          <p className="mt-1 text-sm font-semibold text-[#222C31]">
+          <p className="mt-1 text-sm  text-[#222C31]">
             {slide?.baslangicTarihi && slide?.bitisTarihi
               ? `${new Date(
                   slide.baslangicTarihi
@@ -113,7 +113,7 @@ export function KullaniciCard({ slide, onMessage }) {
                   key={idx}
                   className="rounded-xl border border-gray-100 bg-[#FCFBFD] p-4 transition-colors duration-200 hover:border-[#DCD0E3]"
                 >
-                  <p className="text-sm font-semibold text-[#222C31]">
+                  <p className="text-sm  text-[#222C31]">
                     {veri?.kategoriIsim}
                   </p>
 
@@ -142,7 +142,7 @@ export function KullaniciCard({ slide, onMessage }) {
           <Button
             type="button"
             onClick={onMessage}
-            className="w-full rounded-xl bg-[#6B4F6D] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#4E244D]"
+            className="w-full rounded-xl bg-[#6B4F6D] px-5 py-3 text-sm  text-white shadow-sm transition-all duration-200 hover:bg-[#4E244D]"
           >
             Mesaj Gönder
           </Button>

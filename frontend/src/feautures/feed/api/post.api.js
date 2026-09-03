@@ -19,7 +19,7 @@ export async function getConversations  (aliciId){
 };
 
 
-export async function deleteMessage  (gonderenId, userId){
+export async function deleteMessage(gonderenId, userId){
   const { data } = await apiClient.delete(
     `/${gonderenId}/${userId}`
   );
@@ -86,10 +86,10 @@ export async function updateStatus  (
 };
 
 
-export async function getActiveRenovations  (){
+export async function getActiveRenovations(){
   const { data } = await apiClient.get("/aktifTadilat");
 
-  return data || [];
+  return data;
 };
 
 

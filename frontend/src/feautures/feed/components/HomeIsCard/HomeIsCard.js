@@ -7,7 +7,7 @@ export function HomeIsCard({ item, showText, handleSubmit }) {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col justify-between p-4 bg-white border border-gray-50 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+    <div className="flex flex-col justify-between p-4  bg-white border border-gray-50 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
       
       <form onSubmit={(e) => handleSubmit(e, item._id)}>
         <div className="flex justify-between items-center mb-4">
@@ -68,9 +68,9 @@ export function HomeIsCard({ item, showText, handleSubmit }) {
           <span
             className={
               item.durum === "iptal"
-                ? "text-red-600 font-semibold"
+                ? "text-red-600 "
                 : item.durum === "aktif"
-                ? "text-[rgb(34,44,49)] font-semibold"
+                ? "text-[rgb(34,44,49)] "
                 : item.durum === "pasif"
                 ? "text-[rgb(34,44,49)]"
                 : "text-gray-400"

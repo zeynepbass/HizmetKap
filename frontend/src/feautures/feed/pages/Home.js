@@ -73,7 +73,7 @@ export default function Home({ itemsAktif: initialItems }) {
         {filteredData.length === 0 ? (
           <HomeEmptyState tab={tabs[openIndex]} />
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 h-[40vh]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4 h-[40vh]">
             {[...filteredData].reverse().map((item) => (
               <HomeIsCard
                 key={item._id}

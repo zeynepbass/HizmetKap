@@ -75,7 +75,7 @@ export function RegisterForm({
 
         <Button
           type="submit"
-    className="mx-auto mt-5 w-full rounded-xl bg-[rgb(78,36,77)] p-3 text-sm font-semibold text-[rgb(242,247,250)] transition-colors duration-300 hover:bg-[rgb(34,44,49)] hover:text-white"
+    className="mx-auto mt-5 w-full rounded-xl bg-[rgb(78,36,77)] p-3 text-sm  text-[rgb(242,247,250)] transition-colors duration-300 hover:bg-[rgb(34,44,49)] hover:text-white"
         >
           {kullaniciStorage ? "Kayıt Ol" : "Kaydet"}
         </Button>

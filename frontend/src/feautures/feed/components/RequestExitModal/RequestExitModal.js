@@ -17,7 +17,7 @@ export function RequestExitModal({
 
         <div className="mb-7 text-center">
           <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#EDE7F1]">
-            <span className="text-xl font-semibold text-[#6B4F6D]">
+            <span className="text-xl  text-[#6B4F6D]">
               ?
             </span>
           </div>
@@ -34,7 +34,7 @@ export function RequestExitModal({
 
           <Button
             onClick={onExit}
-            className="w-full rounded-xl bg-[#6B4F6D] py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#4E244D]"
+            className="w-full rounded-xl bg-[#6B4F6D] py-3 text-sm  text-white shadow-sm transition-all duration-200 hover:bg-[#4E244D]"
           >
             Çık
           </Button>
